@@ -1,3 +1,4 @@
+import 'package:attijaria/authentication/codepassword.dart';
 import 'package:attijaria/config/config.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +47,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 40,
                   margin: EdgeInsets.only(top: 47),
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (ctx) => VerificationCode()));
+                    },
                     style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 10.0),
