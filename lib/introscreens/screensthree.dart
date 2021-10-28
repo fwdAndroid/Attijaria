@@ -1,64 +1,77 @@
 import 'package:attijaria/introscreens/components/slandingclipper.dart';
 import 'package:attijaria/introscreens/constants/constants.dart';
+import 'package:attijaria/introscreens/screensthree.dart';
+import 'package:attijaria/introscreens/screenstwo.dart';
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import 'package:flutter/painting.dart';
 
 class OnboardingScreenThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //it will helps to return the size of the screen
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Container(
+        decoration: BoxDecoration(
+            color: Color(0xffDFA600),
+            image: DecorationImage(
+                image: AssetImage('asset/overlay.png'), fit: BoxFit.cover)),
         child: Stack(
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Text(
+                  'Welcome to Atijarria',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 34,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  'The right way to sell your product easily',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 17,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
                 Image(
                   width: size.width,
-                  height: size.height * 0.6,
+                  //  height: size.height * 0.5,
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/onboard3.png'),
+                  image: AssetImage('asset/saly.png'),
                 ),
-                Transform(
-                  alignment: Alignment.center,
-                  transform: Matrix4.rotationY(math.pi),
-                  child: ClipPath(
-                    clipper: SlandingClipper(),
-                    child: Container(
-                      height: size.height * 0.4,
-                      color: yellow,
-                    ),
-                  ),
-                )
               ],
             ),
             Positioned(
-              top: size.height * 0.65,
+              top: size.height * 0.80,
               child: Container(
                 width: size.width,
                 padding: EdgeInsets.all(appPadding),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'DELIVERY',
-                      textAlign: TextAlign.start,
+                      'You can be a buyer or seller',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: white,
-                        fontSize: 30,
+                        fontSize: 22,
                       ),
                     ),
                     SizedBox(
-                      height: size.height * 0.02,
+                      height: size.height * 0.01,
                     ),
                     Text(
-                      'Lorem Ipsum is simply dummy \ntext of the printing and typesetting industry.',
-                      textAlign: TextAlign.start,
+                      'It is up to you to buy the product or sell it \n On the attijaria app you can do both',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 12,
+                        color: white,
                       ),
                     ),
                   ],
@@ -70,69 +83,21 @@ class OnboardingScreenThree extends StatelessWidget {
               left: 0,
               right: 0,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: appPadding / 4),
-                    width: 15,
-                    height: 15,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: black, width: 2),
-                        shape: BoxShape.circle,
-                        color: yellow),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: appPadding / 4),
-                    width: 15,
-                    height: 15,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: black, width: 2),
-                        shape: BoxShape.circle,
-                        color: yellow),
-                  ),
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: appPadding / 4),
-                    width: 15,
-                    height: 15,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: black, width: 2),
-                        shape: BoxShape.circle,
-                        color: white),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: appPadding * 2),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () => print('Skip'),
-                      child: Text(
-                        'Skip',
-                        style: TextStyle(
-                          color: black,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: appPadding),
                     child: FloatingActionButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (c) => AutomaticCalcutions()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => OnboardingScreenThree(),
+                          ),
+                        );
                       },
-                      backgroundColor: Colors.white,
+                      backgroundColor: white,
                       child: Icon(
-                        Icons.done_rounded,
+                        Icons.navigate_next_rounded,
                         color: black,
                         size: 30,
                       ),
@@ -140,7 +105,7 @@ class OnboardingScreenThree extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
