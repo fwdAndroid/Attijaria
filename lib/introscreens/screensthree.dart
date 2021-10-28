@@ -1,3 +1,4 @@
+import 'package:attijaria/authentication/login.dart';
 import 'package:attijaria/introscreens/components/slandingclipper.dart';
 import 'package:attijaria/introscreens/constants/constants.dart';
 import 'package:attijaria/introscreens/screensthree.dart';
@@ -91,7 +92,7 @@ class OnboardingScreenThree extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => OnboardingScreenThree(),
+                            builder: (_) => Login(),
                           ),
                         );
                       },
