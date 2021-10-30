@@ -1,6 +1,7 @@
 import 'package:attijaria/authentication/forgotpassword.dart';
 import 'package:attijaria/authentication/register.dart';
 import 'package:attijaria/config/config.dart';
+import 'package:attijaria/screens/Home/homepage.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -62,7 +63,12 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              GestureDetector(child: Image.asset('asset/button.png')),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (ctx) => HomePage()));
+                  },
+                  child: Image.asset('asset/button.png')),
               Container(
                 margin: EdgeInsets.only(top: 5),
                 child: Row(
