@@ -1,3 +1,4 @@
+import 'package:attijaria/screens/Filters/filters.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -16,37 +17,24 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        title: ListTile(
-          title: Center(
-            child: Text(
-              'Attijjara',
-              style: TextStyle(color: Colors.white, fontSize: 25),
-            ),
-          ),
-          leading: GestureDetector(
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Voiluter()),
-              // );
-            },
-            child: Icon(
-              Icons.settings,
-              color: Colors.white,
-              size: 30,
-            ),
-          ),
-          trailing: Icon(
-            Icons.search,
-            color: Colors.white,
-            size: 30,
-          ),
+        leading: Icon(
+          Icons.settings,
+          color: Colors.white,
+        ),
+        title: Text(
+          'Attijjara',
+          style: TextStyle(color: Colors.white, fontSize: 25),
         ),
         actions: [
-          Icon(
-            Icons.more_vert,
-            color: Colors.white,
-          ),
+          TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (ctx) => Voiture()));
+              },
+              child: Text(
+                'Filters',
+                style: TextStyle(color: Colors.white),
+              ))
         ],
       ),
       body: ListView(
