@@ -1,4 +1,4 @@
-import 'package:attijaria/introscreens/screensone.dart';
+import 'package:attijaria/screens/introscreens/screensone.dart';
 import 'package:flutter/material.dart';
 
 void main() {

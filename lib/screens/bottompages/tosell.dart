@@ -10,6 +10,6 @@ class ToSell extends StatefulWidget {
 class _ToSellState extends State<ToSell> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(backgroundColor: Colors.black);
   }
 }

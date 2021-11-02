@@ -1,4 +1,5 @@
 import 'package:attijaria/screens/Filters/filters.dart';
+import 'package:attijaria/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -12,15 +13,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        leading: Icon(
-          Icons.settings,
-          color: Colors.white,
-        ),
         title: Text(
           'Attijjara',
           style: TextStyle(color: Colors.white, fontSize: 25),

@@ -11,24 +11,6 @@ class Voiture extends StatefulWidget {
 
 class _VoitureState extends State<Voiture> {
   RangeValues _currentRangeValues = RangeValues(0, 100);
-  RangeValues _currentRangeValues1 = RangeValues(0, 100);
-  Widget RangeFunctions(RangeValues currentCal, double mains, double mins) {
-    return RangeSlider(
-      values: _currentRangeValues,
-      min: mains,
-      max: mins,
-      divisions: 5,
-      labels: RangeLabels(
-        currentCal.start.round().toString(),
-        currentCal.end.round().toString(),
-      ),
-      onChanged: (RangeValues values) {
-        setState(() {
-          currentCal = values;
-        });
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {

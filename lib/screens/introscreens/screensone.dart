@@ -1,6 +1,5 @@
-import 'package:attijaria/introscreens/components/slandingclipper.dart';
-import 'package:attijaria/introscreens/constants/constants.dart';
-import 'package:attijaria/introscreens/screenstwo.dart';
+import 'package:attijaria/screens/introscreens/constants/constants.dart';
+import 'package:attijaria/screens/introscreens/screenstwo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 

@@ -1,12 +1,9 @@
-import 'package:attijaria/authentication/login.dart';
-import 'package:attijaria/introscreens/components/slandingclipper.dart';
-import 'package:attijaria/introscreens/constants/constants.dart';
-import 'package:attijaria/introscreens/screensthree.dart';
-import 'package:attijaria/introscreens/screenstwo.dart';
+import 'package:attijaria/screens/introscreens/constants/constants.dart';
+import 'package:attijaria/screens/introscreens/screensthree.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
-class OnboardingScreenThree extends StatelessWidget {
+class OnboardingScreenTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //it will helps to return the size of the screen
@@ -43,7 +40,7 @@ class OnboardingScreenThree extends StatelessWidget {
                   width: size.width,
                   //  height: size.height * 0.5,
                   fit: BoxFit.cover,
-                  image: AssetImage('asset/saly.png'),
+                  image: AssetImage('asset/salt.png'),
                 ),
               ],
             ),
@@ -56,7 +53,7 @@ class OnboardingScreenThree extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'You can be a buyer or seller',
+                      'Publish the images of your article',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -68,7 +65,7 @@ class OnboardingScreenThree extends StatelessWidget {
                       height: size.height * 0.01,
                     ),
                     Text(
-                      'It is up to you to buy the product or sell it \n On the attijaria app you can do both',
+                      'post your items with good prices, \n a clear description and real information',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 12,
@@ -92,7 +89,7 @@ class OnboardingScreenThree extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => Login(),
+                            builder: (_) => OnboardingScreenThree(),
                           ),
                         );
                       },
