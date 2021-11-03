@@ -40,6 +40,7 @@ dependencies:
   hexcolor: ^2.0.5
   material_design_icons_flutter: ^5.0.6295
   flutter_neat_and_clean_calendar: ^0.2.3+11
+  rflutter_alert: ^2.0.4
 
 dev_dependencies:
   flutter_test:

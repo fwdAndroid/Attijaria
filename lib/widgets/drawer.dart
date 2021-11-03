@@ -1,5 +1,7 @@
 import 'package:attijaria/screens/Information/information.dart';
+import 'package:attijaria/screens/bottompages/tosell.dart';
 import 'package:attijaria/screens/config/config.dart';
+import 'package:attijaria/screens/profiles/choselanguage/chooselanguage.dart';
 import 'package:attijaria/screens/profiles/profilescreen.dart';
 import 'package:flutter/material.dart';
 
@@ -118,11 +120,11 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: listTile(
                         title: "Chat",
                         onTap: () {
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute(
-                          //     builder: (ctx) => ReviewCart(),
-                          //   ),
-                          // );
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => ToSell(),
+                            ),
+                          );
                         }),
                   ),
                   Container(
@@ -143,7 +145,14 @@ class _MyDrawerState extends State<MyDrawer> {
                     margin: EdgeInsets.only(
                       left: 14,
                     ),
-                    child: listTile(title: "Language", onTap: () {}),
+                    child: listTile(
+                        title: "Language",
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (xtx) => ChooseLanguage()));
+                        }),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 14),

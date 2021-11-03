@@ -1,8 +1,8 @@
-import 'package:attijaria/screens/Information/information.dart';
-import 'package:attijaria/screens/config/config.dart';
+import 'package:attijaria/screens/profiles/ChangeEmail/changeemail.dart';
+import 'package:attijaria/screens/profiles/ChangePassword/changepassword.dart';
+import 'package:attijaria/screens/profiles/ChangePhone/changephone.dart';
 import 'package:attijaria/screens/profiles/DOB/dob.dart';
 import 'package:attijaria/screens/profiles/Gender/selectgender.dart';
-import 'package:attijaria/screens/profiles/profilescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -107,6 +107,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   InkWell(
+                    focusColor: Colors.yellow,
+                    hoverColor: Colors.black,
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                       child: listTile('Gender', 'Female', MdiIcons.humanFemale,
@@ -123,8 +125,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                       child: listTile('DOB', '21-Dec-2021',
                           Icons.calendar_today, Icons.arrow_forward_ios, () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (ctx) => DOB()));
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (ctx) => DOB()));
                       }),
                     ),
                   ),
@@ -132,29 +134,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                       child: listTile('Email', 'fwd....@gmail.com', Icons.email,
-                          Icons.arrow_forward_ios, () {}),
+                          Icons.arrow_forward_ios, () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => ChangeEmail()));
+                      }),
                     ),
                   ),
                   InkWell(
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: listTile(
-                          'Phone Number',
-                          '0303***3123422',
-                          Icons.mobile_friendly,
-                          Icons.arrow_forward_ios,
-                          () {}),
+                      child: listTile('Phone Number', '0303***3123422',
+                          Icons.mobile_friendly, Icons.arrow_forward_ios, () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => ChangePhone()));
+                      }),
                     ),
                   ),
                   InkWell(
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: listTile(
-                          'Change Password',
-                          '0303***3123422',
-                          Icons.password_outlined,
-                          Icons.arrow_forward_ios,
-                          () {}),
+                      child: listTile('Change Password', '********',
+                          Icons.password_outlined, Icons.arrow_forward_ios, () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (ctx) => ChangePassword()));
+                      }),
                     ),
                   )
                 ],
