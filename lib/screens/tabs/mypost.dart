@@ -43,6 +43,20 @@ class MyPostState extends State<MyPost> {
                 ),
               ),
             ),
+            Container(
+              height: MediaQuery.of(context).size.height,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0,
+                        mainAxisSpacing: 10.0),
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox();
+                    }),
+              ),
+            )
           ],
         ),
       ),
