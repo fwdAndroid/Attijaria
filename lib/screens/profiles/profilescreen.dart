@@ -58,6 +58,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     // ignore: prefer_const_constructors
                     ButtonsTabBar(
+                      contentPadding: EdgeInsets.all(7),
+                      center: true,
+                      height: 44,
                       backgroundColor: Color(0xffF8B800),
                       unselectedBackgroundColor: Colors.grey[300],
                       unselectedLabelStyle: TextStyle(color: Colors.black),
