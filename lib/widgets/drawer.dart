@@ -3,6 +3,8 @@ import 'package:attijaria/screens/accounts/choselanguage/chooselanguage.dart';
 import 'package:attijaria/screens/bottompages/tosell.dart';
 import 'package:attijaria/screens/config/config.dart';
 import 'package:attijaria/screens/profiles/profilescreen.dart';
+import 'package:attijaria/screens/tabs/favourite.dart';
+import 'package:attijaria/screens/tabs/search.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -131,14 +133,20 @@ class _MyDrawerState extends State<MyDrawer> {
                     margin: EdgeInsets.only(left: 14),
                     child: listTile(
                       title: "Favourite",
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (Ctx) => Favourite()));
+                      },
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 14),
                     child: listTile(
                       title: "Search",
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (Ctx) => Search()));
+                      },
                     ),
                   ),
                   Container(
