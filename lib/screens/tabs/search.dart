@@ -11,7 +11,17 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      body: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Image.asset('asset/pic.png'),
+            Text('Save your favourite searches'),
+            Container(child: Image.asset('asset/apply.png')),
+          ],
+        ),
+      ),
     );
   }
 }
