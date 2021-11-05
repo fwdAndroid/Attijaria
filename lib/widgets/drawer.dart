@@ -2,6 +2,7 @@ import 'package:attijaria/screens/Information/information.dart';
 import 'package:attijaria/screens/accounts/choselanguage/chooselanguage.dart';
 import 'package:attijaria/screens/bottompages/tosell.dart';
 import 'package:attijaria/screens/config/config.dart';
+import 'package:attijaria/screens/createpost/createpost.dart';
 import 'package:attijaria/screens/profilesection/profilesection.dart';
 import 'package:attijaria/screens/tabs/favourite.dart';
 import 'package:attijaria/screens/tabs/search.dart';
@@ -103,7 +104,8 @@ class _MyDrawerState extends State<MyDrawer> {
                         onSurface: Colors.grey,
                       ),
                       onPressed: () {
-                        print('Pressed');
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => CreatePost()));
                       },
                     ),
                   ),
