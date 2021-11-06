@@ -3,7 +3,9 @@ import 'package:attijaria/screens/accounts/choselanguage/chooselanguage.dart';
 import 'package:attijaria/screens/bottompages/tosell.dart';
 import 'package:attijaria/screens/config/config.dart';
 import 'package:attijaria/screens/createpost/ads/addrealstatepost.dart';
+import 'package:attijaria/screens/createpost/ads/addshoppremoses.dart';
 import 'package:attijaria/screens/createpost/ads/addvechiclePost.dart';
+import 'package:attijaria/screens/createpost/ads/officetraysadds.dart';
 import 'package:attijaria/screens/createpost/ads/publicationlandsandformsads.dart';
 import 'package:attijaria/screens/profilesection/profilesection.dart';
 import 'package:attijaria/screens/tabs/favourite.dart';
@@ -109,7 +111,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (ctx) => PublicationLandAndFormAds()));
+                                builder: (ctx) => OfficesAndTraysAds()));
                       },
                     ),
                   ),

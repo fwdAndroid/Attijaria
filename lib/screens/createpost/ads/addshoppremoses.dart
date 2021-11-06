@@ -1,18 +1,17 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors
 
-import 'package:attijaria/screens/Filters/rental.dart';
+import 'package:attijaria/screens/Filters/storeshoppremisespostfilter.dart';
 import 'package:attijaria/screens/Filters/vehiclefilters.dart';
 import 'package:flutter/material.dart';
 
-class PublicationLandAndFormAds extends StatefulWidget {
-  const PublicationLandAndFormAds({Key? key}) : super(key: key);
+class StoreshopPremisesPost extends StatefulWidget {
+  const StoreshopPremisesPost({Key? key}) : super(key: key);
 
   @override
-  _PublicationLandAndFormAdsState createState() =>
-      _PublicationLandAndFormAdsState();
+  _StoreshopPremisesPostState createState() => _StoreshopPremisesPostState();
 }
 
-class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
+class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
   RangeValues values = RangeValues(1, 100);
 
   Widget _longDescription(String descrop) {
@@ -82,21 +81,23 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
 
   @override
   Widget build(BuildContext context) {
-    String dropdownValueCategory = "House";
+    String dropdownValueCategory = 'Air Condition';
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
         elevation: 0,
-        title: Text('Land and Farms'),
+        title: Text('Stores, Shops Post'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctc) => LandandFarmsFilters()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctc) => StoreshopPremisesPostFilters()));
                 },
                 child: Text(
                   'Filters',
@@ -119,8 +120,8 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _titleText('Rental'),
-                _textFormFieldFunctionIcon('Rental'),
+                _titleText('Location'),
+                _textFormFieldFunctionIcon('Set Location'),
                 _titleText('Sector'),
                 _textFormFieldFunctionIcon('Sector'),
                 _titleText('Position Type'),
@@ -129,8 +130,7 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                   child: Row(
                     children: [
                       Expanded(
-                          flex: 1,
-                          child: _textFormFieldFunctionIcon('To Sell')),
+                          flex: 1, child: _textFormFieldFunctionIcon('Sell')),
                       Expanded(
                           flex: 1,
                           child: _textFormFieldFunctionIcon('Request')),
@@ -138,6 +138,14 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                   ),
                 ),
                 _titleText('Category'),
+                _textFormFieldFunctionIcon('Category'),
+                _titleText('Address'),
+                _textFormFieldFunctionIcon('Address'),
+                _titleText('Total surface'),
+                _textFormFieldFunctionIcon('Total surface'),
+                _titleText('Loft surface'),
+                _textFormFieldFunctionIcon('Loft surface'),
+                _titleText('Additional Details'),
                 Container(
                     padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                     child: DropdownButtonFormField<String>(
@@ -157,7 +165,7 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                           ),
                           filled: true,
                           hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Category",
+                          hintText: "Additional Details",
                           fillColor: Colors.white),
                       onChanged: (String? newValue) {
                         setState(() {
@@ -165,12 +173,10 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                         });
                       },
                       items: <String>[
-                        'House',
-                        ' Villas',
-                        'Apartment building',
-                        "Agriculture",
-                        "Industrial",
-                        "Service public",
+                        'Air Condition',
+                        'Heating',
+                        'Garage',
+                        "Security",
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -178,19 +184,11 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                         );
                       }).toList(),
                     )),
-                _titleText('Address'),
-                _textFormFieldFunctionIcon('Address'),
-                _titleText('Total Surface'),
-                _textFormFieldFunctionIcon('Total Surface'),
-                _titleText('Zoning'),
-                _textFormFieldFunctionIcon('Zoning'),
-                _titleText('Additional Details'),
-                _textFormFieldFunctionIcon('Additional Details'),
                 _titleText('Title'),
                 _textFormFieldFunctionIcon('Title'),
                 _titleText('Description'),
                 Container(
-                    margin: EdgeInsets.only(left: 15, right: 15, top: 10),
+                    margin: EdgeInsets.only(top: 10, left: 15, right: 15),
                     child: _longDescription('Write Product Description')),
                 Container(
                   margin: EdgeInsets.only(top: 10),

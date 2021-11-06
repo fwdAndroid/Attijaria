@@ -63,8 +63,7 @@ class _AppartmentsFiltersState extends State<AppartmentsFilters> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Appartments Filters',
-              style: TextStyle(color: HexColor("#18191A"))),
+          title: Text('Filters', style: TextStyle(color: HexColor("#18191A"))),
           backgroundColor: HexColor('#FFFFFF'),
           // ignore: prefer_const_constructors
           leading: InkWell(

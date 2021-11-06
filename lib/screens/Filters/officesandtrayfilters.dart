@@ -3,17 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class VehicleFilters extends StatefulWidget {
-  const VehicleFilters({Key? key}) : super(key: key);
+class OfficesAndTraysAdsFilters extends StatefulWidget {
+  const OfficesAndTraysAdsFilters({Key? key}) : super(key: key);
 
   @override
-  _VehicleFiltersState createState() => _VehicleFiltersState();
+  _OfficesAndTraysAdsFiltersState createState() =>
+      _OfficesAndTraysAdsFiltersState();
 }
 
 enum SingingCharacter { Sale, Request }
 
-class _VehicleFiltersState extends State<VehicleFilters> {
+class _OfficesAndTraysAdsFiltersState extends State<OfficesAndTraysAdsFilters> {
   RangeValues _currentRangeValues = RangeValues(0, 100);
+  String dropdownValueCategory = "Appartments";
+  String dropdownValueNews = "Sale";
   //TextFieldws
   Widget _textFormFieldFunctionIcon(
     String Active,
@@ -104,50 +107,91 @@ class _VehicleFiltersState extends State<VehicleFilters> {
                 ),
               ),
               _titleText('Category'),
-              _textFormFieldFunctionIcon('Cars'),
+              Container(
+                  padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                  child: DropdownButtonFormField<String>(
+                    value: dropdownValueCategory,
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(15.0),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.pinkAccent),
+                        ),
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[800]),
+                        hintText: "Category",
+                        fillColor: Colors.white),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValueCategory = newValue!;
+                      });
+                    },
+                    items: <String>[
+                      'Appartments',
+                      ' Houses and Villas',
+                      'Offices and Trays',
+                      "Shops,bussiness and Industrial Premises",
+                      "Land and Farms",
+                      "Vacation Location",
+                      "Room Mates",
+                      "Others"
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )),
               _titleText('City'),
               _textFormFieldFunctionIcon('Enter the city name'),
-              _titleText('Types of Ads'),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: ListTile(
-                      title: Text('Sale'),
-                      leading: Radio<SingingCharacter>(
-                        value: SingingCharacter.Sale,
-                        groupValue: _character,
-                        onChanged: (SingingCharacter? value) {
-                          setState(() {
-                            _character = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: ListTile(
-                      title: Text('Request'),
-                      leading: Radio<SingingCharacter>(
-                        value: SingingCharacter.Request,
-                        groupValue: _character,
-                        onChanged: (SingingCharacter? value) {
-                          setState(() {
-                            _character = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              _titleText('Car Type'),
-              _textFormFieldFunctionIcon('Car Type'),
-              _titleText('Mark'),
-              _textFormFieldFunctionIcon('Mark'),
-              _titleText('Model'),
-              _textFormFieldFunctionIcon('Model'),
+              _titleText('Types of News'),
+              Container(
+                  padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                  child: DropdownButtonFormField<String>(
+                    value: dropdownValueNews,
+                    icon: const Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.black),
+                    decoration: InputDecoration(
+                        enabledBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(15.0),
+                          borderSide: BorderSide(color: Colors.grey),
+                        ),
+                        focusedBorder: new OutlineInputBorder(
+                          borderRadius: new BorderRadius.circular(25.0),
+                          borderSide: BorderSide(color: Colors.pinkAccent),
+                        ),
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[800]),
+                        hintText: "Sale",
+                        fillColor: Colors.white),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValueNews = newValue!;
+                      });
+                    },
+                    items: <String>[
+                      'Sale',
+                      'Location',
+                      'Vacation location',
+                      'Collocation',
+                      'Demand',
+                      'Rent request'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )),
               SizedBox(
                 height: 20,
               ),
@@ -282,9 +326,9 @@ class _VehicleFiltersState extends State<VehicleFilters> {
                     children: [
                       ListTile(
                         contentPadding: EdgeInsets.only(left: 30),
-                        leading: Image.asset('asset/icons/anneemodele.png'),
+                        leading: Image.asset('asset/icons/chambres.png'),
                         title: Text(
-                          'Model Years',
+                          'Number of pieces',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -327,9 +371,6 @@ class _VehicleFiltersState extends State<VehicleFilters> {
                   )
                 ],
               ),
-              SizedBox(height: 10),
-              _titleText('Fuel Type'),
-              _textFormFieldFunctionIcon('Fuel Type'),
               // ignore: prefer_const_constructors
               SizedBox(
                 height: 20,
@@ -348,51 +389,27 @@ class _VehicleFiltersState extends State<VehicleFilters> {
                     children: [
                       ListTile(
                         contentPadding: EdgeInsets.only(left: 30),
-                        leading: Image.asset('asset/icons/kmrange.png'),
-                        title: Text(
-                          'Kilométer (Km)',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        leading: Image.asset('asset/icons/salons.png'),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 50, right: 100),
+                        padding: const EdgeInsets.only(left: 50, right: 120),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('0',
                                   style: TextStyle(
                                     fontSize: 18,
-                                    color: Color(0xffF8B800),
+                                    color: HexColor('#F8B800'),
                                   )),
-                              Text('500000+',
+                              Text('0',
                                   style: TextStyle(
                                     fontSize: 18,
-                                    color: Color(0xffF8B800),
-                                  ))
-                            ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 55, right: 140),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('min',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff9098B1),
-                                  )),
-                              Text('min',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xff9098B1),
+                                    color: HexColor('#F8B800'),
                                   ))
                             ]),
                       ),
                       RangeSlider(
-                        activeColor: Color(0xffF8B800),
+                        activeColor: HexColor('#F8B800'),
                         values: _currentRangeValues,
                         min: 0,
                         max: 100,
@@ -410,8 +427,6 @@ class _VehicleFiltersState extends State<VehicleFilters> {
                   )
                 ],
               ),
-              _titleText('First Hand'),
-              _textFormFieldFunctionIcon('First Hand'),
               SizedBox(
                 height: 10,
               ),
@@ -429,9 +444,9 @@ class _VehicleFiltersState extends State<VehicleFilters> {
                     children: [
                       ListTile(
                         contentPadding: EdgeInsets.only(left: 30),
-                        leading: Image.asset('asset/icons/puissance.png'),
+                        leading: Image.asset('asset/icons/etage.png'),
                         title: Text(
-                          'Tax Power (CV)',
+                          'Stage',
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -491,14 +506,165 @@ class _VehicleFiltersState extends State<VehicleFilters> {
                   )
                 ],
               ),
-              _titleText('Gear Box'),
-              _textFormFieldFunctionIcon('Gear Box'),
-              SizedBox(
-                height: 40,
-              ),
-              _titleText('Color'),
-              _textFormFieldFunctionIcon('Color'),
               SizedBox(height: 10),
+              Stack(
+                children: [
+                  Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      )),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.only(left: 30),
+                        leading: Image.asset('asset/icons/cross.png'),
+                        title: Text(
+                          'Area (m²)',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50, right: 130),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('5',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xffF8B800),
+                                  )),
+                              Text('20+',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xffF8B800),
+                                  ))
+                            ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 55, right: 140),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('min',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Color(0xff9098B1),
+                                  )),
+                              Text('min',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Color(0xff9098B1),
+                                  ))
+                            ]),
+                      ),
+                      RangeSlider(
+                        activeColor: Color(0xffF8B800),
+                        values: _currentRangeValues,
+                        min: 0,
+                        max: 100,
+                        labels: RangeLabels(
+                          _currentRangeValues.start.round().toString(),
+                          _currentRangeValues.end.round().toString(),
+                        ),
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            _currentRangeValues = values;
+                          });
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+
+              SizedBox(
+                height: 10,
+              ),
+              Stack(
+                children: [
+                  Container(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      )),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        contentPadding: EdgeInsets.only(left: 30),
+                        leading: Image.asset('asset/icons/cross.png'),
+                        title: Text(
+                          'Upper surface (m²)',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50, right: 130),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('5',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xffF8B800),
+                                  )),
+                              Text('20+',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xffF8B800),
+                                  ))
+                            ]),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 55, right: 140),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('min',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Color(0xff9098B1),
+                                  )),
+                              Text('min',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Color(0xff9098B1),
+                                  ))
+                            ]),
+                      ),
+                      RangeSlider(
+                        activeColor: Color(0xffF8B800),
+                        values: _currentRangeValues,
+                        min: 0,
+                        max: 100,
+                        labels: RangeLabels(
+                          _currentRangeValues.start.round().toString(),
+                          _currentRangeValues.end.round().toString(),
+                        ),
+                        onChanged: (RangeValues values) {
+                          setState(() {
+                            _currentRangeValues = values;
+                          });
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(height: 10),
+
               _titleText('Additional Details'),
               _textFormFieldFunctionIcon('Additional Details'),
               SizedBox(height: 20),

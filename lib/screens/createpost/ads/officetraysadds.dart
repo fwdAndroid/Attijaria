@@ -1,18 +1,17 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors
 
+import 'package:attijaria/screens/Filters/officesandtrayfilters.dart';
 import 'package:attijaria/screens/Filters/rental.dart';
-import 'package:attijaria/screens/Filters/vehiclefilters.dart';
 import 'package:flutter/material.dart';
 
-class PublicationLandAndFormAds extends StatefulWidget {
-  const PublicationLandAndFormAds({Key? key}) : super(key: key);
+class OfficesAndTraysAds extends StatefulWidget {
+  const OfficesAndTraysAds({Key? key}) : super(key: key);
 
   @override
-  _PublicationLandAndFormAdsState createState() =>
-      _PublicationLandAndFormAdsState();
+  _OfficesAndTraysAdsState createState() => _OfficesAndTraysAdsState();
 }
 
-class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
+class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
   RangeValues values = RangeValues(1, 100);
 
   Widget _longDescription(String descrop) {
@@ -82,21 +81,24 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
 
   @override
   Widget build(BuildContext context) {
-    String dropdownValueCategory = "House";
+    String dropdownValueCategory = "Ground floor";
+    String dropdownValueAdditional = "Elevator";
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
         elevation: 0,
-        title: Text('Land and Farms'),
+        title: Text('Offices And Trays'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctc) => LandandFarmsFilters()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (ctc) => OfficesAndTraysAdsFilters()));
                 },
                 child: Text(
                   'Filters',
@@ -119,8 +121,8 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _titleText('Rental'),
-                _textFormFieldFunctionIcon('Rental'),
+                _titleText('Location'),
+                _textFormFieldFunctionIcon('Location'),
                 _titleText('Sector'),
                 _textFormFieldFunctionIcon('Sector'),
                 _titleText('Position Type'),
@@ -138,6 +140,12 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                   ),
                 ),
                 _titleText('Category'),
+                _textFormFieldFunctionIcon('Category'),
+                _titleText('Address'),
+                _textFormFieldFunctionIcon('Address'),
+                _titleText('Number of pieces'),
+                _textFormFieldFunctionIcon('Number of pieces'),
+                _titleText('Stage'),
                 Container(
                     padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                     child: DropdownButtonFormField<String>(
@@ -157,7 +165,7 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                           ),
                           filled: true,
                           hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Category",
+                          hintText: "Stages",
                           fillColor: Colors.white),
                       onChanged: (String? newValue) {
                         setState(() {
@@ -165,12 +173,15 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                         });
                       },
                       items: <String>[
-                        'House',
-                        ' Villas',
-                        'Apartment building',
-                        "Agriculture",
-                        "Industrial",
-                        "Service public",
+                        'Ground floor',
+                        '1',
+                        '2',
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        'Other',
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -178,14 +189,12 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                         );
                       }).toList(),
                     )),
-                _titleText('Address'),
-                _textFormFieldFunctionIcon('Address'),
                 _titleText('Total Surface'),
                 _textFormFieldFunctionIcon('Total Surface'),
-                _titleText('Zoning'),
-                _textFormFieldFunctionIcon('Zoning'),
-                _titleText('Additional Details'),
-                _textFormFieldFunctionIcon('Additional Details'),
+                _titleText('Loft Surface'),
+                _textFormFieldFunctionIcon('Loft Surface'),
+                _titleText('Trustee fees / month'),
+                _textFormFieldFunctionIcon('Trustee fees / month'),
                 _titleText('Title'),
                 _textFormFieldFunctionIcon('Title'),
                 _titleText('Description'),
@@ -215,6 +224,48 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
                     ],
                   ),
                 ),
+                _titleText('Additional Details'),
+                Container(
+                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                    child: DropdownButtonFormField<String>(
+                      value: dropdownValueAdditional,
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                          enabledBorder: new OutlineInputBorder(
+                            borderRadius: new BorderRadius.circular(15.0),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: new OutlineInputBorder(
+                            borderRadius: new BorderRadius.circular(25.0),
+                            borderSide: BorderSide(color: Colors.pinkAccent),
+                          ),
+                          filled: true,
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          hintText: "Stages",
+                          fillColor: Colors.white),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownValueAdditional = newValue!;
+                        });
+                      },
+                      items: <String>[
+                        'Elevator',
+                        'Air conditioner',
+                        'Security',
+                        "Heating",
+                        "Balcony",
+                        "Garage",
+                        "Telephone wiring",
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    )),
                 SizedBox(
                   height: 10,
                 ),
