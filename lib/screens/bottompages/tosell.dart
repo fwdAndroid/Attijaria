@@ -12,6 +12,10 @@ class _ToSellState extends State<ToSell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.black,
+      ),
       backgroundColor: Colors.black,
       body: ListView(children: [
         Container(

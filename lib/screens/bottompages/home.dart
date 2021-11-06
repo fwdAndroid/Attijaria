@@ -27,6 +27,7 @@ class _HomeState extends State<Home> {
         children: [
           Column(
             children: [
+              Image.asset('asset/ads.png'),
               Container(
                 margin: EdgeInsets.only(left: 20, top: 20),
                 child: Row(
@@ -70,7 +71,7 @@ class _HomeState extends State<Home> {
                             child: Container(
                               height: 140,
                               width: 100,
-                              child: Image.network(''),
+                              child: Image.asset('asset/watch.png'),
                             ),
                           ),
                           Expanded(
