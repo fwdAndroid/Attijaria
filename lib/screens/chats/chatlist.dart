@@ -1,3 +1,5 @@
+import 'package:attijaria/widgets/bottomchat.dart';
+import 'package:attijaria/widgets/chatbubble.dart';
 import 'package:flutter/material.dart';
 
 class ChatList extends StatefulWidget {
@@ -11,6 +13,7 @@ class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        bottomNavigationBar: BottomChatClass(),
         backgroundColor: Colors.white,
         body: ListView(
           children: [
@@ -27,20 +30,61 @@ class _ChatListState extends State<ChatList> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width * 1,
+              height: 50,
+              width: MediaQuery.of(context).size.width,
               child: ListTile(
-                leading: Expanded(
-                  flex: 1,
-                  child: Row(
+                leading: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('asset/profilepic.png'),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: AssetImage('asset/profilepic.png'),
+                    ),
+                  ],
+                ),
+                trailing: Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundImage: AssetImage('asset/profilepic.png'),
-                      )
+                      Text('Fawad'),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text('Sadiq'),
                     ],
                   ),
                 ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Text(
+                  '30 May 2021',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ChatBubble(
+                text: 'Hi,How are you, We can not meet long time ago',
+                isCurrentUser: true,
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: ChatBubble(
+                text: 'Yes Let make a time',
+                isCurrentUser: false,
               ),
             )
           ],
