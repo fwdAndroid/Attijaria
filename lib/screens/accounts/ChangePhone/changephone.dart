@@ -28,7 +28,8 @@ class _ChangePhoneState extends State<ChangePhone> {
                 topLeft: const Radius.circular(40.0),
                 topRight: const Radius.circular(40.0),
               )),
-          child: ListView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 margin: EdgeInsets.only(left: 10, top: 20),
@@ -65,29 +66,22 @@ class _ChangePhoneState extends State<ChangePhone> {
                   ),
                 ),
               ),
+              Spacer(),
               Container(
-                margin: EdgeInsets.only(top: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 50,
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color(0xffF8B800),
-                          onPrimary: Colors.white,
-                          onSurface: Colors.grey,
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Save',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
+                height: 60,
+                width: 260,
+                margin: EdgeInsets.all(20),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xffF8B800),
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ],

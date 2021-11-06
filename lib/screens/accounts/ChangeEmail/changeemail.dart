@@ -29,7 +29,8 @@ class _ChangeEmailState extends State<ChangeEmail> {
                 topLeft: const Radius.circular(40.0),
                 topRight: const Radius.circular(40.0),
               )),
-          child: ListView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 margin: EdgeInsets.only(left: 10, top: 20),
@@ -42,6 +43,7 @@ class _ChangeEmailState extends State<ChangeEmail> {
                 ),
               ),
               Container(
+                margin: EdgeInsets.only(top: 20),
                 width: 320,
                 padding: EdgeInsets.all(10.0),
                 child: TextField(
@@ -66,29 +68,25 @@ class _ChangeEmailState extends State<ChangeEmail> {
                   ),
                 ),
               ),
+              Spacer(),
               Container(
-                margin: EdgeInsets.only(top: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                      height: 50,
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color(0xffF8B800),
-                          onPrimary: Colors.white,
-                          onSurface: Colors.grey,
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          'Save',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                height: 60,
+                width: 260,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xffF8B800),
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Save',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ],
