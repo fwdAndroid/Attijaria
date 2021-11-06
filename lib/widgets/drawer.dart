@@ -5,6 +5,7 @@ import 'package:attijaria/screens/config/config.dart';
 import 'package:attijaria/screens/createpost/ads/addrealstatepost.dart';
 import 'package:attijaria/screens/createpost/ads/addshoppremoses.dart';
 import 'package:attijaria/screens/createpost/ads/addvechiclePost.dart';
+import 'package:attijaria/screens/createpost/ads/housesandvilasads.dart';
 import 'package:attijaria/screens/createpost/ads/officetraysadds.dart';
 import 'package:attijaria/screens/createpost/ads/publicationlandsandformsads.dart';
 import 'package:attijaria/screens/profilesection/profilesection.dart';
@@ -111,7 +112,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (ctx) => OfficesAndTraysAds()));
+                                builder: (ctx) => HousesAndVilas()));
                       },
                     ),
                   ),
