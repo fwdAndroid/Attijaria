@@ -1,4 +1,4 @@
-import 'package:attijaria/screens/Filters/filters.dart';
+import 'package:attijaria/screens/Filters/vehicleFilters.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -22,17 +22,6 @@ class _HomeState extends State<Home> {
           'Attijjara',
           style: TextStyle(color: Colors.white, fontSize: 25),
         ),
-        actions: [
-          TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (ctx) => Voiture()));
-              },
-              child: Text(
-                'Filters',
-                style: TextStyle(color: Colors.white),
-              ))
-        ],
       ),
       body: ListView(
         children: [
