@@ -70,8 +70,7 @@ class _HomeState extends State<Home> {
                             child: Container(
                               height: 140,
                               width: 100,
-                              child: Image.network(
-                                  'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/42-alu-silver-sport-white-nc-s3-grid?wid=540&hei=550&fmt=jpeg&qlt=80&.v=1594259786000'),
+                              child: Image.network(''),
                             ),
                           ),
                           Expanded(
