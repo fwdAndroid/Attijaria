@@ -1,69 +1,119 @@
 import 'package:flutter/material.dart';
 
 class Favourite extends StatefulWidget {
-  const Favourite({Key? key}) : super(key: key);
-
   @override
-  FavouriteState createState() => FavouriteState();
+  State<Favourite> createState() => _FavouriteState();
 }
 
-class FavouriteState extends State<Favourite> {
+class _FavouriteState extends State<Favourite> {
+  ScrollController controller = ScrollController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.addListener(_scrollListener);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Container(
-        height: MediaQuery.of(context).size.height * 0.81,
-        margin: EdgeInsets.only(top: 11),
+        margin: EdgeInsets.only(left: 10, right: 10),
+        width: MediaQuery.of(context).size.width / 1,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: new BorderRadius.only(
               topLeft: const Radius.circular(40.0),
               topRight: const Radius.circular(40.0),
             )),
-        child: ListView(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10.0,
-                      mainAxisSpacing: 10.0),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        Stack(
-                          alignment: Alignment.topRight,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ClipRRect(
-                                child: Image.asset(
-                                  'asset/comp.png',
-                                  height: 150,
-                                  width: 100,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                                borderRadius: new BorderRadius.circular(8.0),
-                              ),
-                            ),
-                            Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            )
-                          ],
+        child: GridView.builder(
+          controller: controller,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200,
+              childAspectRatio: 3 / 4,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 15),
+          itemCount: 6,
+          itemBuilder: (BuildContext ctx, index) {
+            return Stack(
+              children: [
+                GridTile(
+                  child: Image.asset(
+                    'asset/comp.png',
+                  ),
+                  footer: Card(
+                    elevation: 4,
+                    child: GridTileBar(
+                      backgroundColor: Colors.white,
+                      title: Container(
+                        margin: EdgeInsets.only(top: 5, left: 10),
+                        child: Text(
+                          '700 HD',
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.start,
                         ),
-                      ],
-                    );
-                  },
+                      ),
+                      subtitle: Row(
+                        children: [
+                          Icon(Icons.location_pin, color: Colors.grey),
+                          Text(
+                            'Lahore',
+                            style: TextStyle(color: Colors.black),
+                            textAlign: TextAlign.start,
+                          )
+                        ],
+                      ),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.timer,
+                            color: Colors.grey,
+                          ),
+                          Text('9:30 PM')
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            )
-          ],
+                Positioned(
+                  top: 60,
+                  left: 125,
+                  child: Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
+  }
+
+  void _scrollListener() {
+    if (controller.offset >= controller.position.maxScrollExtent &&
+        !controller.position.outOfRange) {
+      setState(() {
+        String message = "reach the bottom";
+        print(message);
+      });
+    }
+    if (controller.offset <= controller.position.minScrollExtent &&
+        !controller.position.outOfRange) {
+      setState(() {
+        String message = "reach the top";
+        print(message);
+      });
+    }
   }
 }
