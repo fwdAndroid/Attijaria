@@ -1,6 +1,7 @@
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/girdviewlist.dart';
 import 'package:attijaria/widgets/listviewgrid.dart';
+import 'package:attijaria/widgets/sliderlist.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.black,
         drawer: MyDrawer(),
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -44,35 +46,70 @@ class _HomeState extends State<Home> {
           return ListView(
             controller: _controller,
             children: [
-              Image.asset('asset/ads.png'),
               Container(
-                margin: EdgeInsets.only(left: 20, top: 20),
-                child: Row(
+                  margin: EdgeInsets.only(bottom: 10),
+                  child: Image.asset('asset/ads.png')),
+              Container(
+                height: 200,
+                color: Colors.black,
+                child: SliderList(),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(40.0),
+                      topRight: const Radius.circular(40.0),
+                    )),
+                child: Column(
                   children: [
-                    Image.asset('asset/group.png'),
-                    Text(
-                      'Premium Ads',
-                      style: TextStyle(
-                          fontStyle: FontStyle.normal,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w900,
-                          color: Color.fromRGBO(93, 85, 180, 1)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Card(
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: Image.asset('asset/frame.png'),
+                          ),
+                        ),
+                        Card(
+                          child: TextButton.icon(
+                            label: Text(
+                              'Tier',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            onPressed: () {},
+                            icon: Image.asset('asset/swap.png'),
+                          ),
+                        ),
+                        Card(
+                          child: TextButton.icon(
+                            label: Text(
+                              'Filters',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            onPressed: () {},
+                            icon: Image.asset('asset/filter.png'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Gridviewlist(
+                      controller: _controller,
+                    ),
+                    Image.asset(
+                      'asset/long.png',
+                    ),
+                    ListViewGrid(
+                      controller: _controller,
+                    ),
+                    Gridviewlist(
+                      controller: _controller,
                     ),
                   ],
                 ),
-              ),
-              Gridviewlist(
-                controller: _controller,
-              ),
-              Image.asset(
-                'asset/long.png',
-              ),
-              ListViewGrid(
-                controller: _controller,
-              ),
-              Gridviewlist(
-                controller: _controller,
-              ),
+              )
             ],
           );
         }));
