@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:attijaria/screens/config/config.dart';
+import 'package:attijaria/screens/payment/paymentmethod.dart';
 import 'package:flutter/material.dart';
 
 enum SingingCharacter {
@@ -601,7 +602,12 @@ class _PaymentsState extends State<Payments> {
                       children: [
                         // Rounded Button
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (ctx) => PaymentMethod()));
+                          },
                           style: ElevatedButton.styleFrom(
                               fixedSize: Size(300, 60),
                               shape: RoundedRectangleBorder(

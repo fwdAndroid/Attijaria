@@ -1,3 +1,4 @@
+import 'package:attijaria/screens/accounmenrs/iphone.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/girdviewlist.dart';
 import 'package:attijaria/widgets/listviewgrid.dart';
@@ -95,8 +96,14 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    Gridviewlist(
-                      controller: _controller,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (xtc) => Iphone()));
+                      },
+                      child: Gridviewlist(
+                        controller: _controller,
+                      ),
                     ),
                     Image.asset(
                       'asset/long.png',
