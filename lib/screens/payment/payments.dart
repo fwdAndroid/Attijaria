@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:attijaria/screens/config/config.dart';
 import 'package:flutter/material.dart';
 
 enum SingingCharacter {
@@ -23,36 +24,60 @@ class _PaymentsState extends State<Payments> {
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController _controller = ScrollController();
+    void _scrollListener() {
+      if (_controller.offset >= _controller.position.maxScrollExtent &&
+          !_controller.position.outOfRange) {
+        setState(() {
+          String message = "reach the bottom";
+          print(message);
+        });
+      }
+      if (_controller.offset <= _controller.position.minScrollExtent &&
+          !_controller.position.outOfRange) {
+        setState(() {
+          String message = "reach the top";
+          print(message);
+        });
+      }
+    }
+
+    @override
+    void initState() {
+      _controller.addListener(_scrollListener);
+
+      super.initState();
+    }
+
+    @override
+    void dispose() {
+      // TODO: implement dispose
+      super.dispose();
+      _controller.dispose();
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: Colors.white,
-          size: 15,
-        ),
         title: Text(
           'Sell faster',
           style: TextStyle(color: Colors.white, fontSize: 17),
         ),
-        // automaticallyImplyLeading: false,
       ),
-      body: ListView(
-        children: [
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return ListView(children: [
           Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  bottomLeft: Radius.circular(15)),
-            ),
-            height: MediaQuery.of(context).size.height,
-            width: 100,
-            child: SingleChildScrollView(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30)),
+              ),
               child: Column(
-                cssAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     padding: EdgeInsets.only(left: 20, top: 5),
@@ -106,16 +131,15 @@ class _PaymentsState extends State<Payments> {
                         ),
                       )),
                   Container(
-                    margin: EdgeInsets.only(left: 30, right: 30, top: 20),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 10),
                     height: 60,
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.grey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12)),
                     child: ListTile(
                       leading: Text('24 DH'),
                       trailing: Row(
@@ -274,7 +298,7 @@ class _PaymentsState extends State<Payments> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top: 20, left: 20),
+                    padding: EdgeInsets.only(top: 10, left: 20),
                     child: ListTile(
                         leading: Image.asset('asset/set.png'),
                         title: Text(
@@ -568,27 +592,33 @@ class _PaymentsState extends State<Payments> {
                       ),
                     ),
                   ),
-                  Center(
-                    child: ElevatedButton(
-                      child: const Text('Carry on ssasa'),
-                      onPressed: () {
-                        //  Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) =>  Booster()),
-                        // );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.amber,
-                          textStyle: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold)),
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Rounded Button
+                        ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: Size(300, 60),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              primary: Color(0xffF8B800)),
+                          child: Text(
+                            "Continue",
+                            style: TextStyle(color: Colors.white, fontSize: 24),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                  )
                 ],
-              ),
-            ),
-          ),
-        ],
-      ),
+              ))
+        ]);
+      }),
     );
   }
 }
