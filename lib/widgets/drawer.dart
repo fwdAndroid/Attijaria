@@ -2,13 +2,8 @@ import 'package:attijaria/screens/Information/information.dart';
 import 'package:attijaria/screens/accounts/choselanguage/chooselanguage.dart';
 import 'package:attijaria/screens/bottompages/tosell.dart';
 import 'package:attijaria/screens/config/config.dart';
-import 'package:attijaria/screens/createpost/ads/addrealstatepost.dart';
-import 'package:attijaria/screens/createpost/ads/addshoppremoses.dart';
-import 'package:attijaria/screens/createpost/ads/addvechiclePost.dart';
-import 'package:attijaria/screens/createpost/ads/housesandvilasads.dart';
-import 'package:attijaria/screens/createpost/ads/officetraysadds.dart';
-import 'package:attijaria/screens/createpost/ads/publicationlandsandformsads.dart';
 import 'package:attijaria/screens/createpost/adscategory.dart';
+import 'package:attijaria/screens/payment/payments.dart';
 import 'package:attijaria/screens/profilesection/profilesection.dart';
 import 'package:attijaria/screens/tabs/favourite.dart';
 import 'package:attijaria/screens/tabs/search.dart';
@@ -110,10 +105,8 @@ class _MyDrawerState extends State<MyDrawer> {
                         onSurface: Colors.grey,
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) => AdsCategory()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => AdsCategory()));
                       },
                     ),
                   ),
@@ -185,6 +178,18 @@ class _MyDrawerState extends State<MyDrawer> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (Ctx) => Information()));
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: 14,
+                    ),
+                    child: listTile(
+                      title: "Payment",
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (Ctx) => Payments()));
                       },
                     ),
                   ),
