@@ -1,6 +1,7 @@
 import 'package:attijaria/screens/accounts/ChangeEmail/changeemail.dart';
 import 'package:attijaria/screens/accounts/ChangePassword/changepassword.dart';
 import 'package:attijaria/screens/accounts/ChangePhone/changephone.dart';
+import 'package:attijaria/screens/accounts/DOB/dob.dart';
 import 'package:attijaria/screens/accounts/Gender/selectgender.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -124,8 +125,8 @@ class _AccountPageState extends State<AccountPage> {
                       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
                       child: listTile('DOB', '21-Dec-2021',
                           Icons.calendar_today, Icons.arrow_forward_ios, () {
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (ctx) => DOB()));
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (ctx) => DOB()));
                       }),
                     ),
                   ),
