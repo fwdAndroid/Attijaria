@@ -3,6 +3,7 @@ import 'package:attijaria/screens/createpost/ads/addrealstatepost.dart';
 import 'package:attijaria/screens/createpost/ads/addshoppremoses.dart';
 import 'package:attijaria/screens/createpost/ads/addvechiclePost.dart';
 import 'package:attijaria/screens/createpost/ads/adsagriculture.dart';
+import 'package:attijaria/screens/createpost/ads/adsholidayrental.dart';
 import 'package:attijaria/screens/createpost/ads/housesandvilasads.dart';
 import 'package:attijaria/screens/createpost/ads/officetraysadds.dart';
 import 'package:attijaria/screens/createpost/ads/publicationlandsandformsads.dart';
@@ -295,6 +296,87 @@ class _AdsCategoryState extends State<AdsCategory> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (ctx) => MotoAds()));
+                                }),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  ///Agriculture Engine
+                  Column(
+                    children: [
+                      Card(
+                        elevation: 4,
+                        child: Column(
+                          children: [
+                            Container(
+                                height: 150,
+                                width: 150,
+                                child: Image.asset(
+                                  'asset/engine.png',
+                                  fit: BoxFit.fill,
+                                )),
+                            MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0))),
+                                elevation: 5.0,
+                                color: Color(0xFF801E48),
+                                child: new Text(
+                                  'Agriculture Product',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (ctx) => AdsAgriculture()));
+                                }),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            ////HOLIDAY
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Card(
+                        elevation: 4,
+                        child: Column(
+                          children: [
+                            Container(
+                                height: 150,
+                                width: 150,
+                                child: Image.asset(
+                                  'asset/holiday.png',
+                                  fit: BoxFit.fill,
+                                )),
+                            MaterialButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(20.0))),
+                                elevation: 5.0,
+                                color: Color(0xFF801E48),
+                                child: new Text(
+                                  'Holiday Rental',
+                                  style: TextStyle(
+                                      fontSize: 12, color: Colors.white),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (ctx) => AdsHoliday()));
                                 }),
                           ],
                         ),
