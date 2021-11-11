@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors
 
+import 'package:attijaria/screens/Filters/holidayfilters.dart';
 import 'package:attijaria/screens/Filters/vehiclefilters.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,20 @@ class AdsHoliday extends StatefulWidget {
 }
 
 class _AdsHolidayState extends State<AdsHoliday> {
+  TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
+
+  void _selectTime() async {
+    final TimeOfDay? newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
   RangeValues values = RangeValues(1, 100);
   String dropDownHolidayMews = "Sale";
   String dropDownHolidayBed = "1";
@@ -20,6 +35,7 @@ class _AdsHolidayState extends State<AdsHoliday> {
   String dropDownHolidayCaution = "1 month";
   String dropDownHolidayAge = "Nine";
   String dropDownHolidayFurniture = "Furniture";
+  String dropDownHolidayAdditional = "Elevator";
   Widget _longDescription(String descrop) {
     return Container(
 
@@ -100,7 +116,7 @@ class _AdsHolidayState extends State<AdsHoliday> {
             child: TextButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (ctc) => VehicleFilters()));
+                      MaterialPageRoute(builder: (ctc) => HolidaysFilters()));
                 },
                 child: Text(
                   'Filters',
@@ -458,13 +474,98 @@ class _AdsHolidayState extends State<AdsHoliday> {
                       }).toList(),
                     )),
                 _titleText('Capacity (people)'),
-                _textFormFieldFunctionIcon('Colors'),
+                _textFormFieldFunctionIcon('Capacity (people)'),
+                _titleText('Arrival Time'),
+                Container(
+                  margin: EdgeInsets.only(top: 20, left: 25, right: 25),
+                  width: 350,
+                  height: 60,
+                  child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                      ),
+                      onPressed: _selectTime,
+                      child: Text(
+                        'Arrival Time',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      )),
+                ),
+                _titleText('Departure Time'),
+                Container(
+                  margin: EdgeInsets.only(top: 20, left: 25, right: 25),
+                  width: 350,
+                  height: 60,
+                  child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                      ),
+                      onPressed: _selectTime,
+                      child: Text(
+                        'Departure Time',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      )),
+                ),
                 _titleText('Additional Details'),
-                _textFormFieldFunctionIcon('Additional Details'),
+                Container(
+                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+                    child: DropdownButtonFormField<String>(
+                      value: dropDownHolidayAdditional,
+                      icon: const Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: const TextStyle(color: Colors.black),
+                      decoration: InputDecoration(
+                          enabledBorder: new OutlineInputBorder(
+                            borderRadius: new BorderRadius.circular(15.0),
+                            borderSide: BorderSide(color: Colors.grey),
+                          ),
+                          focusedBorder: new OutlineInputBorder(
+                            borderRadius: new BorderRadius.circular(25.0),
+                            borderSide: BorderSide(color: Colors.pinkAccent),
+                          ),
+                          filled: true,
+                          hintStyle: TextStyle(color: Colors.grey[800]),
+                          hintText: "Additional Details",
+                          fillColor: Colors.white),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropDownHolidayAdditional = newValue!;
+                        });
+                      },
+                      items: <String>[
+                        'Elevator',
+                        'Balcony',
+                        'Terrace',
+                        "Furniture",
+                        "Air conditioner",
+                        "Heater",
+                        "Equipped kitchen",
+                        "Concierge",
+                        "Security",
+                        "Duplex",
+                        "Garage"
+                      ].map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    )),
                 _titleText('Title'),
                 _textFormFieldFunctionIcon('Title'),
-                _titleText('Description'),
-                _longDescription('Write Product Description'),
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: _longDescription('Product Description')),
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Row(
@@ -515,6 +616,24 @@ class _AdsHolidayState extends State<AdsHoliday> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      children: [
+                        Radio(
+                          value: 1,
+                          groupValue: 2,
+                          activeColor: Color(0xffF8B800),
+                          onChanged: (val) {
+                            //  setSelectedRadio(val);
+                          },
+                        ),
+                        Text(
+                          'Do not Display Ads',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
                     Row(
                       children: [
                         Radio(

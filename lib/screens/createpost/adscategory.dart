@@ -2,6 +2,7 @@ import 'package:attijaria/screens/createpost/ads/addmoto.dart';
 import 'package:attijaria/screens/createpost/ads/addrealstatepost.dart';
 import 'package:attijaria/screens/createpost/ads/addshoppremoses.dart';
 import 'package:attijaria/screens/createpost/ads/addvechiclePost.dart';
+import 'package:attijaria/screens/createpost/ads/adsNew.dart';
 import 'package:attijaria/screens/createpost/ads/adsagriculture.dart';
 import 'package:attijaria/screens/createpost/ads/adsholidayrental.dart';
 import 'package:attijaria/screens/createpost/ads/housesandvilasads.dart';
@@ -384,7 +385,7 @@ class _AdsCategoryState extends State<AdsCategory> {
                     ],
                   ),
 
-                  ///Agriculture Engine
+                  ///Ads Engine
                   Column(
                     children: [
                       Card(
@@ -395,7 +396,7 @@ class _AdsCategoryState extends State<AdsCategory> {
                                 height: 150,
                                 width: 150,
                                 child: Image.asset(
-                                  'asset/engine.png',
+                                  'asset/telephone.png',
                                   fit: BoxFit.fill,
                                 )),
                             MaterialButton(
@@ -405,7 +406,7 @@ class _AdsCategoryState extends State<AdsCategory> {
                                 elevation: 5.0,
                                 color: Color(0xFF801E48),
                                 child: new Text(
-                                  'Agriculture Product',
+                                  'Telephone',
                                   style: TextStyle(
                                       fontSize: 12, color: Colors.white),
                                 ),
@@ -413,7 +414,7 @@ class _AdsCategoryState extends State<AdsCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (ctx) => AdsAgriculture()));
+                                          builder: (ctx) => AdsNews()));
                                 }),
                           ],
                         ),
