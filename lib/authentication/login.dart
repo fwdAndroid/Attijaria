@@ -1,8 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:attijaria/authentication/forgotpassword.dart';
 import 'package:attijaria/authentication/register.dart';
 import 'package:attijaria/config/config.dart';
 import 'package:attijaria/screens/Home/homepage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -12,6 +16,21 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController emailLoginCont = TextEditingController();
+  TextEditingController passwordLoginCont = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (builder) => HomePage()));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,8 +51,8 @@ class _LoginState extends State<Login> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              _textFormFieldFunction('E-mail'),
-              _textFormFieldFunctionPassword('Password'),
+              _textFormFieldFunction('E-mail', emailLoginCont),
+              _textFormFieldFunctionPassword('Password', passwordLoginCont),
               Padding(
                 padding: const EdgeInsets.only(right: 30),
                 child: Align(
@@ -63,24 +82,57 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (ctx) => HomePage()));
-                  },
-                  child: Image.asset('asset/button.png')),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(300, 50),
+                  primary: Colors.white, // background
+                  onPrimary: Colors.black, // foreground
+                ),
+                onPressed: () async {
+                  var finalResult =
+                      await signIn(emailLoginCont.text, passwordLoginCont.text);
+                  if (finalResult) {
+                    Fluttertoast.showToast(
+                        msg: "This is Center Short Toast",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (xtc) => HomePage()));
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "This is Center Short Toast",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  }
+                },
+                child: Text(
+                  'Login',
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
               Container(
                 margin: EdgeInsets.only(top: 5),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // ignore: prefer_const_constructors
                     Text(
                       'Not a member yet?',
+                      // ignore: prefer_const_constructors
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         letterSpacing: -0.24,
+                        // ignore: prefer_const_literals_to_create_immutables
                         shadows: [
                           BoxShadow(
                             color: Color(0xff000000),
@@ -96,12 +148,14 @@ class _LoginState extends State<Login> {
                         Navigator.of(context).push(
                             MaterialPageRoute(builder: (ctx) => Register()));
                       },
+                      // ignore: prefer_const_constructors
                       child: Text(
                         'Register Now',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           letterSpacing: -0.24,
+                          // ignore: prefer_const_literals_to_create_immutables
                           shadows: [
                             BoxShadow(
                               color: Color(0xff000000),
@@ -118,12 +172,14 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(height: 30),
+              // ignore: prefer_const_constructors
               Text(
                 'Or Connect With',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,
                   letterSpacing: -0.24,
+                  // ignore: prefer_const_literals_to_create_immutables
                   shadows: [
                     BoxShadow(
                       color: Color(0xff000000),
@@ -135,7 +191,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+                margin: EdgeInsets.only(left: 10, right: 10, top: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,7 +199,25 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       width: 10,
                     ),
-                    Image.asset('asset/facebook.png')
+                    // Image.asset('asset/facebook.png')
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff50442c), // background
+                        onPrimary: Colors.white, // foreground
+                      ),
+                      icon: Image.asset('asset/google.png'),
+                      onPressed: () {},
+                      label: Text(''),
+                    ),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff50442c), // background
+                        onPrimary: Colors.white, // foreground
+                      ),
+                      icon: Image.asset('asset/face.png'),
+                      onPressed: () {},
+                      label: Text(''),
+                    ),
                   ],
                 ),
               )
@@ -154,7 +228,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  _textFormFieldFunction(String s) {
+  _textFormFieldFunction(String s, TextEditingController controller) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
@@ -162,6 +236,7 @@ class _LoginState extends State<Login> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Colors.white),
           contentPadding: EdgeInsets.symmetric(horizontal: 50),
@@ -174,7 +249,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  _textFormFieldFunctionPassword(String s) {
+  _textFormFieldFunctionPassword(String s, TextEditingController controller) {
     return Container(
       margin: EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
@@ -182,6 +257,7 @@ class _LoginState extends State<Login> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
+        controller: controller,
         obscureText: true,
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 50),
@@ -191,5 +267,18 @@ class _LoginState extends State<Login> {
             hintStyle: TextStyle(color: Colors.white)),
       ),
     );
+  }
+
+  signIn(String email, String password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
   }
 }

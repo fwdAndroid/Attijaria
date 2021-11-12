@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "472304485850",
+    "project_id": "attijaria-a1c55",
+    "storage_bucket": "attijaria-a1c55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472304485850:android:3ba5e43e5926814668ace3",
+        "android_client_info": {
+          "package_name": "com.example.attijaria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472304485850-gvour3l13p3u3nr34m9p5iihe6eu14r8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAe2socfeTWt4RV5tdr5nVHOR_QvfOGJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472304485850-gvour3l13p3u3nr34m9p5iihe6eu14r8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

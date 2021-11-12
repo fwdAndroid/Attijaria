@@ -1,3 +1,4 @@
+import 'package:attijaria/authentication/login.dart';
 import 'package:attijaria/screens/Information/information.dart';
 import 'package:attijaria/screens/accounts/choselanguage/chooselanguage.dart';
 import 'package:attijaria/screens/bottompages/tosell.dart';
@@ -7,6 +8,7 @@ import 'package:attijaria/screens/payment/payments.dart';
 import 'package:attijaria/screens/profilesection/profilesection.dart';
 import 'package:attijaria/screens/tabs/favourite.dart';
 import 'package:attijaria/screens/tabs/search.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -201,18 +203,25 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
             ),
             Divider(height: 1, color: Colors.black),
-            Container(
-              margin: EdgeInsets.only(left: 14),
-              child: ListTile(
-                leading: Text(
-                  'Logout',
-                  style: TextStyle(
+            InkWell(
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (builder) => Login()));
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 14),
+                child: ListTile(
+                  leading: Text(
+                    'Logout',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  trailing: Icon(
+                    Icons.logout,
                     color: Colors.black,
                   ),
-                ),
-                trailing: Icon(
-                  Icons.logout,
-                  color: Colors.black,
                 ),
               ),
             )

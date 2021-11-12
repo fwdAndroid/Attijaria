@@ -209,7 +209,7 @@ class _ToSellState extends State<ToSell> {
                       height: MediaQuery.of(context).size.height * 1,
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
-                        itemCount: 8,
+                        itemCount: 4,
                         itemBuilder: (_, i) => InkWell(
                           focusColor: Colors.grey,
                           hoverColor: Colors.grey,
