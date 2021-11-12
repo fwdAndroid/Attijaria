@@ -55,7 +55,8 @@ class _RegisterState extends State<Register> {
                     child: ElevatedButton(
                       onPressed: () async {
                         dynamic mas = await createAccount(
-                            emailController.text, passController.text);
+                            emailController.text.trim(),
+                            passController.text.trim());
 
                         if (mas != null) {
                           Fluttertoast.showToast(

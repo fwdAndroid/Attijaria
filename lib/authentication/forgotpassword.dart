@@ -1,6 +1,9 @@
 import 'package:attijaria/authentication/codepassword.dart';
+import 'package:attijaria/authentication/login.dart';
 import 'package:attijaria/config/config.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -32,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Container(
                 margin: EdgeInsets.only(top: 20),
                 child: Text(
-                  'You will recive a verification code',
+                  'You will an Email to reset password',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -41,15 +45,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              _textFormFieldFunction('Your email or phone'),
+              _textFormFieldFunction('Your email', controller),
               Container(
                   width: 300,
-                  height: 40,
+                  height: 60,
                   margin: EdgeInsets.only(top: 47),
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => VerificationCode()));
+                    onPressed: () async {
+                      await FirebaseAuth.instance
+                          .sendPasswordResetEmail(email: controller.text);
+                      Fluttertoast.showToast(
+                          msg: "Email Sent",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (builder) => Login()));
                     },
                     style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(
@@ -58,7 +73,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             borderRadius: BorderRadius.circular(10.0)),
                         primary: Colors.white),
                     child: Text(
-                      "Send",
+                      "Sent Request",
                       style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   )),
@@ -69,7 +84,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
-  _textFormFieldFunction(String s) {
+  _textFormFieldFunction(String s, TextEditingController controller) {
     return Container(
       margin: EdgeInsets.only(top: 3),
       decoration: BoxDecoration(
@@ -77,6 +92,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Colors.white),
           contentPadding: EdgeInsets.symmetric(horizontal: 50),

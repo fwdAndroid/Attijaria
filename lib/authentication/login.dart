@@ -90,16 +90,16 @@ class _LoginState extends State<Login> {
                 ),
                 onPressed: () async {
                   var finalResult =
-                      await signIn(emailLoginCont.text, passwordLoginCont.text);
+                      await signIn(emailLoginCont.text.trim(), passwordLoginCont.text.trim());
+                  Fluttertoast.showToast(
+                      msg: "Login Complete",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
                   if (finalResult) {
-                    Fluttertoast.showToast(
-                        msg: "This is Center Short Toast",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (xtc) => HomePage()));
                   } else {
