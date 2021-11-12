@@ -79,6 +79,28 @@ class _StoreshopPremisesPostFiltersState
             ),
           ),
         ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(MediaQuery.of(context).size.width, 50),
+                    primary: Color(0xffF8B800), // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Apply',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -639,22 +661,6 @@ class _StoreshopPremisesPostFiltersState
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Container(
-                      alignment: AlignmentDirectional.center,
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color(0xffF8B800)),
-                      child: Text(
-                        'Apply',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
                   ),
                 ],
               ),

@@ -13,6 +13,28 @@ class _AgricultureFiltersState extends State<AgricultureFilters> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(MediaQuery.of(context).size.width, 50),
+                  primary: Color(0xffF8B800), // background
+                  onPrimary: Colors.white, // foreground
+                ),
+                onPressed: () {},
+                child: Text(
+                  'Apply',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
         appBar: AppBar(
           title: Text('Agriculture Filters',
               style: TextStyle(color: HexColor("#18191A"))),
@@ -486,26 +508,7 @@ class _AgricultureFiltersState extends State<AgricultureFilters> {
                   Text('Ads with prices'),
                 ],
               ),
-              SizedBox(height: 20),
-              GestureDetector(
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Container(
-                    alignment: AlignmentDirectional.center,
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: HexColor('#F8B800'),
-                    ),
-                    child: Text(
-                      'Saved',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
+              
             ],
           ),
         ])));

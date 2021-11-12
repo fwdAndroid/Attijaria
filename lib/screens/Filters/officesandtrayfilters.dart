@@ -63,6 +63,28 @@ class _OfficesAndTraysAdsFiltersState extends State<OfficesAndTraysAdsFilters> {
     SingingCharacter? _character = SingingCharacter.Sale;
 
     return Scaffold(
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(MediaQuery.of(context).size.width, 50),
+                    primary: Color(0xffF8B800), // background
+                    onPrimary: Colors.white, // foreground
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Apply',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: Text('Filters', style: TextStyle(color: HexColor("#18191A"))),
           backgroundColor: HexColor('#FFFFFF'),
@@ -708,22 +730,6 @@ class _OfficesAndTraysAdsFiltersState extends State<OfficesAndTraysAdsFilters> {
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Container(
-                      alignment: AlignmentDirectional.center,
-                      width: MediaQuery.of(context).size.width / 1.1,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color(0xffF8B800)),
-                      child: Text(
-                        'Apply',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
                   ),
                 ],
               ),
