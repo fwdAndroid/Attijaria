@@ -1,4 +1,3 @@
-import 'package:attijaria/orientation.dart';
 import 'package:attijaria/screens/accounmenrs/iphone.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/girdviewlist.dart';
@@ -14,6 +13,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool isLoading = false;
+  String postOrientation = "grid";
+
   final ScrollController _controller = ScrollController();
   @override
   void initState() {
@@ -32,7 +34,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         drawer: MyDrawer(),
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -59,25 +61,58 @@ class _HomeState extends State<Home> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(40.0),
-                      topRight: const Radius.circular(40.0),
-                    )),
                 child: Column(
                   children: [
-                    SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 400,
-                        child: Orientatiosn()),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Card(
+                          child: IconButton(
+                            onPressed: () => setPostOrientation("grid"),
+                            icon: Image.asset('asset/frame.png'),
+                          ),
+                        ),
+                        Card(
+                          child: TextButton.icon(
+                            label: Text(
+                              'Tier',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            onPressed: () => setPostOrientation("list"),
+                            icon: Image.asset('asset/swap.png'),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Container(
+                      height: MediaQuery.of(context).size.height,
+                      child: SingleChildScrollView(
+                        child: buildProfilePost(),
+                      ),
+                    ),
+
+                    // Container(
+                    //     margin: EdgeInsets.only(top: 20),
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.only(
+                    //           topRight: Radius.circular(10.0),
+                    //           bottomRight: Radius.circular(10.0)),
+                    //       color: Colors.white,
+                    //     ),
+                    //     width: MediaQuery.of(context).size.width,
+                    //     height: MediaQuery.of(context).size.height,
+                    //     child: Orientatiosn()),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (xtc) => Iphone()));
                       },
-                      child: Image.asset(
-                        'asset/long.png',
+                      child: Container(
+                        margin: EdgeInsets.only(top: 20),
+                        child: Image.asset(
+                          'asset/long.png',
+                        ),
                       ),
                     ),
                     ListViewGrid(
@@ -92,6 +127,31 @@ class _HomeState extends State<Home> {
             ],
           );
         }));
+  }
+
+  //Setting Orientation of post
+  setPostOrientation(String postOrientation) {
+    setState(() {
+      this.postOrientation = postOrientation;
+    });
+  }
+
+  buildProfilePost() {
+    if (isLoading) {
+      return CircularProgressIndicator();
+    }
+    //Oreientation show post as grid or list
+    else if (postOrientation == "grid") {
+      //Showing Profile Images In GridView Style
+      return Gridviewlist(
+        controller: _controller,
+      );
+    } else if (postOrientation == "list") {
+      //Show post as List
+      return ListViewGrid(
+        controller: _controller,
+      );
+    }
   }
 
   void _scrollListener() {
