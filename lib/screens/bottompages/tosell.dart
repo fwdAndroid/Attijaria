@@ -210,8 +210,6 @@ class _ToSellState extends State<ToSell> {
                       child: ListView.builder(
                         itemCount: 4,
                         itemBuilder: (_, i) => InkWell(
-                          focusColor: Colors.grey,
-                          hoverColor: Colors.grey,
                           onTap: () {
                             Navigator.push(
                                 context,

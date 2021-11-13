@@ -11,6 +11,7 @@ class OnboardingScreenThree extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
+        height: size.height,
         decoration: BoxDecoration(
             color: Color(0xffDFA600),
             image: DecorationImage(

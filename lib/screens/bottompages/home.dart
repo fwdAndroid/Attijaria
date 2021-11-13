@@ -46,6 +46,7 @@ class _HomeState extends State<Home> {
         body: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
           return ListView(
+            scrollDirection: Axis.vertical,
             controller: _controller,
             children: [
               Container(
@@ -68,19 +69,16 @@ class _HomeState extends State<Home> {
                   children: [
                     SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height,
+                        height: 400,
                         child: Orientatiosn()),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (xtc) => Iphone()));
                       },
-                      child: Gridviewlist(
-                        controller: _controller,
+                      child: Image.asset(
+                        'asset/long.png',
                       ),
-                    ),
-                    Image.asset(
-                      'asset/long.png',
                     ),
                     ListViewGrid(
                       controller: _controller,

@@ -1,3 +1,4 @@
+import 'package:attijaria/screens/accounmenrs/iphone.dart';
 import 'package:attijaria/widgets/girdviewlist.dart';
 import 'package:attijaria/widgets/listviewgrid.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,8 @@ class _OrientatiosnState extends State<Orientatiosn> {
             buildTogglePostOrientation(),
 
             //Showing Profile Post
-            buildProfilePost()
+            buildProfilePost(),
+            //   buildCompletePost()
           ],
         );
       }),
@@ -90,6 +92,31 @@ class _OrientatiosnState extends State<Orientatiosn> {
     }
   }
 
+  buildCompletePost() {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (xtc) => Iphone()));
+          },
+          child: Gridviewlist(
+            controller: scrollController,
+          ),
+        ),
+        Image.asset(
+          'asset/long.png',
+        ),
+        ListViewGrid(
+          controller: scrollController,
+        ),
+        Gridviewlist(
+          controller: scrollController,
+        ),
+      ],
+    );
+  }
+
 //Changing Post View
   buildTogglePostOrientation() {
     return Row(
@@ -101,7 +128,6 @@ class _OrientatiosnState extends State<Orientatiosn> {
             icon: Image.asset('asset/frame.png'),
           ),
         ),
-
         Card(
           child: TextButton.icon(
             label: Text(
@@ -112,40 +138,7 @@ class _OrientatiosnState extends State<Orientatiosn> {
             icon: Image.asset('asset/swap.png'),
           ),
         ),
-        // IconButton(
-        //   onPressed: () => setPostOrientation("list"),
-        //   icon: Icon(Icons.list,
-        //       color: postOrientation == "list"
-        //           ? Theme.of(context).primaryColor
-        //           : Colors.grey),
-        // ),
       ],
     );
   }
 }
-//  Row(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       children: [
-                       
-                        // Card(
-                        //   child: TextButton.icon(
-                        //     label: Text(
-                        //       'Tier',
-                        //       style: TextStyle(color: Colors.grey),
-                        //     ),
-                        //     onPressed: () {},
-                        //     icon: Image.asset('asset/swap.png'),
-                        //   ),
-//                         ),
-//                         Card(
-//                           child: TextButton.icon(
-//                             label: Text(
-//                               'Filters',
-//                               style: TextStyle(color: Colors.grey),
-//                             ),
-//                             onPressed: () {},
-//                             icon: Image.asset('asset/filter.png'),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
