@@ -1,3 +1,4 @@
+import 'package:attijaria/orientation.dart';
 import 'package:attijaria/screens/accounmenrs/iphone.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/girdviewlist.dart';
@@ -65,37 +66,10 @@ class _HomeState extends State<Home> {
                     )),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Card(
-                          child: IconButton(
-                            onPressed: () {},
-                            icon: Image.asset('asset/frame.png'),
-                          ),
-                        ),
-                        Card(
-                          child: TextButton.icon(
-                            label: Text(
-                              'Tier',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onPressed: () {},
-                            icon: Image.asset('asset/swap.png'),
-                          ),
-                        ),
-                        Card(
-                          child: TextButton.icon(
-                            label: Text(
-                              'Filters',
-                              style: TextStyle(color: Colors.grey),
-                            ),
-                            onPressed: () {},
-                            icon: Image.asset('asset/filter.png'),
-                          ),
-                        ),
-                      ],
-                    ),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: Orientatiosn()),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(context,
