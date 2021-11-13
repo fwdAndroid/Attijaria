@@ -38,19 +38,44 @@ class _FavouriteState extends State<Favourite> {
           controller: controller,
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
-              childAspectRatio: 3 / 4,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 15),
-          itemCount: 6,
+              childAspectRatio: 13 / 16,
+              crossAxisSpacing: 40,
+              mainAxisSpacing: 30),
+          itemCount: 2 ,
           itemBuilder: (BuildContext ctx, index) {
             return Stack(
               children: [
                 GridTile(
-                  child: Image.asset(
-                    'asset/comp.png',
+                  child: Container(
+                    width: 100,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 0,
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      image: DecorationImage(
+                        image: AssetImage("asset/comp.png"),
+                        fit: BoxFit.fitWidth,
+                        alignment: Alignment.topCenter,
+                      ),
+                    ),
                   ),
-                  footer: Card(
-                    elevation: 4,
+                  footer: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 0,
+                          blurRadius: 1,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
                     child: GridTileBar(
                       backgroundColor: Colors.white,
                       title: Container(
@@ -85,7 +110,7 @@ class _FavouriteState extends State<Favourite> {
                   ),
                 ),
                 Positioned(
-                  top: 60,
+                  top: 10,
                   left: 125,
                   child: Icon(
                     Icons.favorite,

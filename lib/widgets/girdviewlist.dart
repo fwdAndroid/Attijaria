@@ -27,14 +27,14 @@ class _GridviewlistState extends State<Gridviewlist> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: EdgeInsets.only(left: 10, right: 10, top: 20),
       width: MediaQuery.of(context).size.width / 1,
       height: MediaQuery.of(context).size.height / 1,
       child: GridView.builder(
         controller: controller,
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
-            childAspectRatio: 3 / 4,
+            childAspectRatio: 13 / 16,
             crossAxisSpacing: 16,
             mainAxisSpacing: 15),
         itemCount: 6,
@@ -42,44 +42,72 @@ class _GridviewlistState extends State<Gridviewlist> {
           return Stack(
             children: [
               GridTile(
-                child: Image.asset(
-                  'asset/comp.png',
-                ),
-                footer: GridTileBar(
-                  backgroundColor: Colors.white,
-                  title: Container(
-                    margin: EdgeInsets.only(top: 5, left: 10),
-                    child: Text(
-                      '700 HD',
-                      style: TextStyle(color: Colors.black),
-                      textAlign: TextAlign.start,
+                child: Container(
+                  width: 100,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    image: DecorationImage(
+                      image: AssetImage("asset/comp.png"),
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
                     ),
                   ),
-                  subtitle: Row(
-                    children: [
-                      Icon(Icons.location_pin, color: Colors.grey),
-                      Text(
-                        'Lahore',
-                        style: TextStyle(color: Colors.black),
-                        textAlign: TextAlign.start,
-                      )
+                ),
+                footer: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0,
+                        blurRadius: 1,
+                        offset: Offset(0, 3),
+                      ),
                     ],
                   ),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.timer,
-                        color: Colors.grey,
+                  child: GridTileBar(
+                    backgroundColor: Colors.white,
+                    title: Container(
+                      margin: EdgeInsets.only(top: 5, left: 10),
+                      child: Text(
+                        '700 HD',
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.start,
                       ),
-                      Text('9:30 PM')
-                    ],
+                    ),
+                    subtitle: Row(
+                      children: [
+                        Icon(Icons.location_pin, color: Colors.grey),
+                        Text(
+                          'Lahore',
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.start,
+                        )
+                      ],
+                    ),
+                    trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.timer,
+                          color: Colors.grey,
+                        ),
+                        Text('9:30 PM')
+                      ],
+                    ),
                   ),
                 ),
               ),
               Positioned(
-                top: 50,
-                left: 125,
+                top: 10,
+                left: 130,
                 child: Icon(
                   Icons.favorite_border_outlined,
                   color: Colors.red,

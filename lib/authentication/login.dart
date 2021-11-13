@@ -7,6 +7,7 @@ import 'package:attijaria/screens/Home/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -89,8 +90,8 @@ class _LoginState extends State<Login> {
                   onPrimary: Colors.black, // foreground
                 ),
                 onPressed: () async {
-                  var finalResult =
-                      await signIn(emailLoginCont.text.trim(), passwordLoginCont.text.trim());
+                  var finalResult = await signIn(emailLoginCont.text.trim(),
+                      passwordLoginCont.text.trim());
                   Fluttertoast.showToast(
                       msg: "Login Complete",
                       toastLength: Toast.LENGTH_SHORT,
@@ -206,7 +207,15 @@ class _LoginState extends State<Login> {
                         onPrimary: Colors.white, // foreground
                       ),
                       icon: Image.asset('asset/google.png'),
-                      onPressed: () {},
+                      onPressed: () async {
+                        await googleSignUp(context).then(
+                          (value) => Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          ),
+                        );
+                      },
                       label: Text(''),
                     ),
                     ElevatedButton.icon(
@@ -280,5 +289,30 @@ class _LoginState extends State<Login> {
         print('Wrong password provided for that user.');
       }
     }
+  }
+
+  googleSignUp(BuildContext context) async {
+    try {
+      final GoogleSignIn _googleSignIn = GoogleSignIn(
+        scopes: ['email'],
+      );
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final User? user = (await _auth.signInWithCredential(credential)).user;
+
+      print("signed in " + user!.email.toString());
+
+      return user;
+      // ignore: empty_catches
+    } catch (e) {}
   }
 }

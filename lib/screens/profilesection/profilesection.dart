@@ -35,72 +35,40 @@ class _ProfileSectionState extends State<ProfileSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text(
-          'Attijjara',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
-        ),
+    return DefaultTabController(
+      initialIndex: 1,
+      length: 3,
+      child: Scaffold(
         backgroundColor: Colors.black,
-      ),
-      body: DefaultTabController(
-        length: 3,
-        child: Column(
-          children: [
-            Container(
-              width: 400,
-              margin: EdgeInsets.only(left: 10, top: 10),
-              child:
-                  // ignore: prefer_const_constructors
-                  ButtonsTabBar(
-                contentPadding: EdgeInsets.all(7),
-                center: true,
-                height: 44,
-                radius: 9,
-                backgroundColor: Color(0xffF8B800),
-                unselectedBackgroundColor: Colors.grey[300],
-                unselectedLabelStyle: TextStyle(color: Colors.black),
-                labelStyle:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                tabs: [
-                  Tab(
-                    text: "My Post",
-                  ),
-                  Tab(
-                    text: "Favourite",
-                  ),
-                  Tab(
-                    text: "Saved Search",
-                  ),
-                ],
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text(
+            'Attijjara',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
+          ),
+          bottom: ButtonsTabBar(
+            backgroundColor: Color(0xffF8B800),
+            unselectedBackgroundColor: Colors.grey[300],
+            unselectedLabelStyle: TextStyle(color: Colors.black),
+            labelStyle:
+                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            tabs: [
+              Tab(
+                text: 'Post',
               ),
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.81,
-              margin: EdgeInsets.only(top: 11),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: new BorderRadius.only(
-                    topLeft: const Radius.circular(40.0),
-                    topRight: const Radius.circular(40.0),
-                  )),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: TabBarView(
-                      children: <Widget>[
-                        MyPost(),
-                        Favourite(),
-                        Search(),
-                      ],
-                    ),
-                  ),
-                ],
+              Tab(
+                text: 'Favourite',
               ),
-            ),
-          ],
+              Tab(
+                text: 'Deactivate',
+              ),
+            ],
+          ),
+        ),
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        body: TabBarView(
+          children: [MyPost(), Favourite(), Search()],
         ),
       ),
     );

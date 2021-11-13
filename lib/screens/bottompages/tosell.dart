@@ -10,37 +10,37 @@ class ToSell extends StatefulWidget {
 }
 
 class _ToSellState extends State<ToSell> {
-  final ScrollController _controller = ScrollController();
-  @override
-  void initState() {
-    _controller.addListener(_scrollListener);
+  // final ScrollController _controller = ScrollController();
+  // @override
+  // void initState() {
+  //   _controller.addListener(_scrollListener);
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _controller.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   super.dispose();
+  //   _controller.dispose();
+  // }
 
-  void _scrollListener() {
-    if (_controller.offset >= _controller.position.maxScrollExtent &&
-        !_controller.position.outOfRange) {
-      setState(() {
-        String message = "reach the bottom";
-        print(message);
-      });
-    }
-    if (_controller.offset <= _controller.position.minScrollExtent &&
-        !_controller.position.outOfRange) {
-      setState(() {
-        String message = "reach the top";
-        print(message);
-      });
-    }
-  }
+  // void _scrollListener() {
+  //   if (_controller.offset >= _controller.position.maxScrollExtent &&
+  //       !_controller.position.outOfRange) {
+  //     setState(() {
+  //       String message = "reach the bottom";
+  //       print(message);
+  //     });
+  //   }
+  //   if (_controller.offset <= _controller.position.minScrollExtent &&
+  //       !_controller.position.outOfRange) {
+  //     setState(() {
+  //       String message = "reach the top";
+  //       print(message);
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class _ToSellState extends State<ToSell> {
             ),
             body: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
-              return ListView(controller: _controller, children: [
+              return ListView(children: [
                 Container(
                   height: 320,
                   width: MediaQuery.of(context).size.width,
@@ -146,7 +146,7 @@ class _ToSellState extends State<ToSell> {
                       Container(
                         height: 150,
                         child: ListView.builder(
-                          controller: _controller,
+                          // controller: _controller,
                           scrollDirection: Axis.horizontal,
                           itemCount: 4,
                           itemBuilder: (_, i) => Row(
@@ -206,9 +206,8 @@ class _ToSellState extends State<ToSell> {
                       ),
                     ),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 1,
+                      height: 300,
                       child: ListView.builder(
-                        scrollDirection: Axis.vertical,
                         itemCount: 4,
                         itemBuilder: (_, i) => InkWell(
                           focusColor: Colors.grey,
