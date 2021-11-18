@@ -85,7 +85,7 @@ class _MotoAdsState extends State<MotoAds> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         child: Row(
           children: <Widget>[
             Container(
@@ -113,20 +113,6 @@ class _MotoAdsState extends State<MotoAds> {
         centerTitle: true,
         elevation: 0,
         title: Text('MotoCycle Ads'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctc) => MotoFilters()));
-                },
-                child: Text(
-                  'Filters',
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -471,7 +457,6 @@ class _MotoAdsState extends State<MotoAds> {
                     ),
                   ],
                 ),
-               
               ],
             ),
           ),

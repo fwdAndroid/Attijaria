@@ -132,20 +132,6 @@ class _AdsHolidayState extends State<AdsHoliday> {
         centerTitle: true,
         elevation: 0,
         title: Text('Holiday Rental Ads'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctc) => HolidaysFilters()));
-                },
-                child: Text(
-                  'Filters',
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(

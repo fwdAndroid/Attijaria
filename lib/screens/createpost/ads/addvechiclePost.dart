@@ -109,20 +109,6 @@ class _CreatePostState extends State<CreatePost> {
         centerTitle: true,
         elevation: 0,
         title: Text('New Vehicle Ads'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (ctc) => VehicleFilters()));
-                },
-                child: Text(
-                  'Filters',
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(

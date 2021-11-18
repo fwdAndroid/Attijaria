@@ -111,22 +111,6 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
         centerTitle: true,
         elevation: 0,
         title: Text('Stores, Shops Post'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (ctc) => StoreshopPremisesPostFilters()));
-                },
-                child: Text(
-                  'Filters',
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(

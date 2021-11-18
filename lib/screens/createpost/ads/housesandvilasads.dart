@@ -114,22 +114,6 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
         centerTitle: true,
         elevation: 0,
         title: Text('Houses And Vilas'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (ctc) => LandandFarmsFilters()));
-                },
-                child: Text(
-                  'Filters',
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(

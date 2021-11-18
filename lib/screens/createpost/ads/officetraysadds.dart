@@ -112,22 +112,6 @@ class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
         centerTitle: true,
         elevation: 0,
         title: Text('Offices And Trays'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (ctc) => OfficesAndTraysAdsFilters()));
-                },
-                child: Text(
-                  'Filters',
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(

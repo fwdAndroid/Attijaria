@@ -83,7 +83,7 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
   Widget build(BuildContext context) {
     String dropdownValueCategory = 'Air Condition';
     return Scaffold(
-       bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         child: Row(
           children: <Widget>[
             Container(
@@ -111,22 +111,6 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
         centerTitle: true,
         elevation: 0,
         title: Text('Agriculure Products'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (ctc) => AgricultureFilters()));
-                },
-                child: Text(
-                  'Filters',
-                  style: TextStyle(color: Colors.white),
-                )),
-          )
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -260,7 +244,6 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
                     ),
                   ],
                 ),
-                
               ],
             ),
           ),
