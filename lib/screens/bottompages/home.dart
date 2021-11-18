@@ -89,7 +89,7 @@ class _HomeState extends State<Home> {
                               style: TextStyle(color: Colors.grey),
                             ),
                             onPressed: () => setPostOrientation("list"),
-                            icon: Image.asset('asset/swap.png'),
+                            icon: Image.asset('asset/filters.png'),
                           ),
                         ),
                       ],
