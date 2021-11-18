@@ -82,6 +82,16 @@ class _HomeState extends State<Home> {
                             icon: Image.asset('asset/swap.png'),
                           ),
                         ),
+                        Card(
+                          child: TextButton.icon(
+                            label: Text(
+                              'Filters',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            onPressed: () => setPostOrientation("list"),
+                            icon: Image.asset('asset/swap.png'),
+                          ),
+                        ),
                       ],
                     ),
 
