@@ -52,8 +52,11 @@ class _HomeState extends State<Home> {
             scrollDirection: Axis.vertical,
             controller: _controller,
             children: [
-              Container(
-                  margin: EdgeInsets.only(bottom: 10),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => Iphone()));
+                  },
                   child: Image.asset('asset/ads.png')),
               Container(
                 height: 200,
