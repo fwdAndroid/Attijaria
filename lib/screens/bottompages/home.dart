@@ -1,3 +1,4 @@
+import 'package:attijaria/screens/Filters/filteration.dart';
 import 'package:attijaria/screens/accounmenrs/iphone.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/girdviewlist.dart';
@@ -88,7 +89,10 @@ class _HomeState extends State<Home> {
                               'Filters',
                               style: TextStyle(color: Colors.grey),
                             ),
-                            onPressed: () => setPostOrientation("list"),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (builder) => Filteration())),
                             icon: Image.asset('asset/swap.png'),
                           ),
                         ),
