@@ -379,123 +379,132 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                     ),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: Row(children: [
-                        Stack(
-                          children: [
-                            Container(
-                              width: 155,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  padding: EdgeInsets.only(top: 20),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: HexColor("#F6F7F8"),
+                                  )),
+                              Column(
                                 children: [
-                                  Container(
-                                    height: 140,
-                                    // width: 100,
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      image: DecorationImage(
-                                        image:
-                                            AssetImage("asset/rectangles.png"),
-                                        fit: BoxFit.fitWidth,
-                                        alignment: Alignment.topCenter,
-                                      ),
-                                    ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
                                     child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.all(10),
-                                          child: Icon(
-                                            Icons.favorite_border_outlined,
-                                            color: Colors.redAccent,
+                                        Card(
+                                          margin: EdgeInsets.only(left: 10),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 100,
-                                    child: Card(
-                                      
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                        
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            
-                                            padding: EdgeInsets.all(10),
-                                            child: Text(
-                                              '40.90 DH ',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                          Row(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                children: [
-                                                  Icon(Icons.place,
-                                                      size: 10,
-                                                      color:
-                                                          HexColor('#9098B1')),
-                                                  Text('Casablanca',
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: HexColor(
-                                                              '#9098B1')))
-                                                ],
+                                              Container(
+                                                height: 200,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.4,
+                                                child: Stack(
+                                                  children: [
+                                                    Container(
+                                                      height: 200,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        child: Image.network(
+                                                            'https://media.istockphoto.com/photos/colorful-carnival-or-party-frame-of-balloons-streamers-and-confetti-picture-id911842696?b=1&k=20&m=911842696&s=170667a&w=0&h=VXKcc0dRb1xKNQjS_P4A5Tum-OMDU6W8jdo58Dllyks=',
+                                                            fit: BoxFit
+                                                                .fitHeight),
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                      top: 10,
+                                                      right: 20,
+                                                      child: Icon(
+                                                        Icons.favorite,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                               SizedBox(
-                                                width: 10,
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                '700,90 DH',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
                                               ),
                                               Row(
                                                 children: [
-                                                  Icon(Icons.lock_clock,
-                                                      size: 10,
+                                                  Icon(
+                                                    Icons.location_city,
+                                                    size: 10,
+                                                    color: HexColor('#9098B1'),
+                                                  ),
+                                                  Text(
+                                                    'Casablanca',
+                                                    style: TextStyle(
                                                       color:
-                                                          HexColor('#9098B1')),
+                                                          HexColor('#9098B1'),
+                                                      fontSize: 12,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 50,
+                                                  ),
+                                                  Icon(
+                                                    Icons.lock_clock,
+                                                    size: 10,
+                                                    color: HexColor('#9098B1'),
+                                                  ),
                                                   Text(
                                                     '14:17',
                                                     style: TextStyle(
-                                                        color:
-                                                            HexColor('#9098B1'),
-                                                        fontSize: 12),
-                                                    overflow: TextOverflow.clip,
+                                                      color:
+                                                          HexColor('#9098B1'),
+                                                      fontSize: 12,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
+                                              Text(
+                                                'Livre Mac',
+                                                style: TextStyle(
+                                                  color: HexColor('#9098B1'),
+                                                  fontSize: 12,
+                                                ),
+                                              ),
                                             ],
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 15, top: 5),
-                                            child: Text('Les plantes',
-                                                style: TextStyle(
-                                                    color: HexColor('#9098B1'),
-                                                    fontSize: 12)),
-                                          )
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
-                            ),
-                          ],
-                        ),
-                      ]),
+                            ],
+                          ),
+                        ],
+                      ),
                     )
                   ]),
                 ]),
               ),
               Positioned(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 2.2,
                   // top: 170,
                   // left: 100,
                   child: Row(
