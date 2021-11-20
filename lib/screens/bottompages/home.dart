@@ -54,8 +54,10 @@ class _HomeState extends State<Home> {
             children: [
               GestureDetector(
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => Iphone()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (builder) => MotoAnnounce()));
                   },
                   child: Image.asset('asset/ads.png')),
               Container(
@@ -122,8 +124,10 @@ class _HomeState extends State<Home> {
                     //     child: Orientatiosn()),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (xtc) => Iphone()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (xtc) => MotoAnnounce()));
                       },
                       child: Container(
                         margin: EdgeInsets.only(top: 20),

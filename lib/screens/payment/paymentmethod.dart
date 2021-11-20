@@ -16,6 +16,26 @@ class _PaymentMethodState extends State<PaymentMethod> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (builder) => Bankcard()));
+            },
+            style: ElevatedButton.styleFrom(
+                fixedSize: Size(MediaQuery.of(context).size.width, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                primary: Color(0xffF8B800)),
+            child: Text(
+              "Continue",
+              style: TextStyle(color: Colors.white, fontSize: 24),
+            ),
+          ),
+        ),
+      ),
       backgroundColor: Colors.black,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -303,33 +323,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.all(15),
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Rounded Button
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (ctx) => Bankcard()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            fixedSize:
-                                Size(MediaQuery.of(context).size.width, 50),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0)),
-                            primary: Color(0xffF8B800)),
-                        child: Text(
-                          "Continue",
-                          style: TextStyle(color: Colors.white, fontSize: 24),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
               ],
             ),
           ],

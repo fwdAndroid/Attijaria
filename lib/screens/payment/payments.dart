@@ -39,30 +39,23 @@ class _PaymentsState extends State<Payments> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(300, 50),
-                  primary: Color(0xffF8B800), // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (builder) => PaymentMethod()));
-                },
-                child: Text(
-                  'Continue',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => PaymentMethod()));
+            },
+            style: ElevatedButton.styleFrom(
+                fixedSize: Size(MediaQuery.of(context).size.width, 60),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                primary: Color(0xffF8B800)),
+            child: Text(
+              "Continue",
+              style: TextStyle(color: Colors.white, fontSize: 24),
             ),
-          ],
+          ),
         ),
       ),
       appBar: AppBar(
