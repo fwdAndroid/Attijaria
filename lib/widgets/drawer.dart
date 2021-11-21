@@ -1,5 +1,6 @@
 import 'package:attijaria/authentication/login.dart';
 import 'package:attijaria/screens/Information/information.dart';
+import 'package:attijaria/screens/accounments/accoucmentslist.dart';
 import 'package:attijaria/screens/accounts/choselanguage/chooselanguage.dart';
 import 'package:attijaria/screens/bottompages/tosell.dart';
 import 'package:attijaria/screens/config/config.dart';
@@ -192,6 +193,18 @@ class _MyDrawerState extends State<MyDrawer> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (Ctx) => Payments()));
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: 14,
+                    ),
+                    child: listTile(
+                      title: "Accouncements",
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (Ctx) => AccouncmentsList()));
                       },
                     ),
                   ),

@@ -2,14 +2,14 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class MotoAnnounce extends StatefulWidget {
-  const MotoAnnounce({Key? key}) : super(key: key);
+class LandAccouncements extends StatefulWidget {
+  const LandAccouncements({Key? key}) : super(key: key);
 
   @override
-  _MotoAnnounceState createState() => _MotoAnnounceState();
+  _LandAccouncementsState createState() => _LandAccouncementsState();
 }
 
-class _MotoAnnounceState extends State<MotoAnnounce> {
+class _LandAccouncementsState extends State<LandAccouncements> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +46,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                           borderRadius: BorderRadius.circular(20)),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
-                        child: Image.asset('asset/moto.png',
+                        child: Image.asset('asset/lands.png',
                             height: 200, fit: BoxFit.fitWidth),
                       ),
                     ),
@@ -83,10 +83,19 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                       padding: const EdgeInsets.all(14.0),
                       child: Column(
                         children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 12),
+                            child: Container(
+                              margin: new EdgeInsetsDirectional.only(
+                                  start: 12.0, end: 12.0),
+                              height: 2.0,
+                              color: Colors.black,
+                            ),
+                          ),
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              '     Moto',
+                              '     Lands',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),
@@ -142,20 +151,6 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                       padding: const EdgeInsets.all(14.0),
                       child: Column(
                         children: [
-                          Row(children: [
-                            Image.asset('asset/diseal.png'),
-                            SizedBox(width: 10),
-                            Text('Diesel'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackkm.png'),
-                            SizedBox(width: 10),
-                            Text('8CV'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackcalender.png'),
-                            SizedBox(width: 10),
-                            Text('2021'),
-                          ]),
-                          SizedBox(height: 10),
                           Row(
                             children: [
                               Text(
@@ -164,7 +159,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
                               Text(
-                                'Phone , Sale',
+                                'Lands and farms , Sale',
                                 style: TextStyle(fontSize: 17),
                               )
                             ],
@@ -187,12 +182,13 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                           Row(
                             children: [
                               Text(
-                                'Origine',
+                                'Total Surface:',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
+                              SizedBox(width: 10),
                               Text(
-                                ' WW au Maroc',
+                                '104m²',
                                 style: TextStyle(fontSize: 17),
                               )
                             ],
@@ -201,19 +197,20 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                           Row(
                             children: [
                               Text(
-                                'Premiére main',
+                                'Zoning:',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
+                              SizedBox(width: 10),
                               Text(
-                                ' Oui',
+                                ' Maison',
                                 style: TextStyle(fontSize: 17),
                               )
                             ],
                           ),
                           SizedBox(height: 10),
                           ListTile(
-                              title: Text('Afficher plus de détails',
+                              title: Text('Show me more details',
                                   style: TextStyle(color: Colors.amber)),
                               trailing: Icon(Icons.arrow_drop_down_outlined,
                                   color: Colors.amber))
@@ -248,63 +245,6 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Container(
-                            margin: new EdgeInsetsDirectional.only(
-                                start: 20.0, end: 20.0),
-                            height: 2.0,
-                            color: Colors.black,
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 10),
-                            child: Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Text('Equipements',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Column(
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('asset/mask.png'),
-                                    SizedBox(width: 10),
-                                    Text('ouvrant',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(width: 30),
-                                    Image.asset('asset/mdi_car-seat.png'),
-                                    SizedBox(width: 10),
-                                    Text('Siéges cuir',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ]),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('asset/ic_baseline-radar.png'),
-                                    SizedBox(width: 10),
-                                    Text('Radar de recul',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(width: 30),
-                                    Image.asset('asset/zmdi_camera-add.png'),
-                                    SizedBox(width: 10),
-                                    Text('Caméra de recul',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ]),
-                            ],
-                          ),
                         ],
                       ),
                     ),
@@ -594,6 +534,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                   dotsCount: 3,
                   position: 0.0,
                   decorator: DotsDecorator(
+                    color: Colors.yellow,
                     size: const Size.square(9.0),
                     activeSize: const Size(18.0, 9.0),
                     activeShape: RoundedRectangleBorder(
@@ -602,9 +543,6 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                 ),
               )
             ]),
-            Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Image.asset('asset/ads.png')),
           ],
         ),
       ),

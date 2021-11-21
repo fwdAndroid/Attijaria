@@ -1,7 +1,5 @@
 import 'package:attijaria/screens/Filters/filteration.dart';
-import 'package:attijaria/screens/accounmenrs/iphone.dart';
-import 'package:attijaria/screens/accounmenrs/iphone.dart';
-import 'package:attijaria/screens/accounmenrs/iphone.dart';
+import 'package:attijaria/screens/accounments/motoaccouncements.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/girdviewlist.dart';
 import 'package:attijaria/widgets/listviewgrid.dart';
