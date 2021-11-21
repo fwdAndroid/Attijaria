@@ -61,7 +61,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                           color: Colors.white,
                         ),
                         child: Icon(
-                          Icons.favorite_border_outlined,
+                          Icons.favorite_border,
                           color: Colors.red,
                         ),
                       ),
@@ -377,133 +377,182 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                         ],
                       ),
                     ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  padding: EdgeInsets.only(top: 20),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: HexColor("#F6F7F8"),
-                                  )),
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Row(
+                    Container(
+                      height: 300,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 5,
+                          itemBuilder: (index, context) {
+                            return Row(
+                              children: [
+                                Stack(
+                                  children: [
+                                    Container(
+                                        padding: EdgeInsets.only(top: 20),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: HexColor("#F6F7F8"),
+                                        )),
+                                    Column(
                                       children: [
-                                        Card(
-                                          margin: EdgeInsets.only(left: 10),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          child: Row(
                                             children: [
-                                              Container(
-                                                height: 200,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    2.4,
-                                                child: Stack(
+                                              Card(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                ),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Container(
                                                       height: 200,
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        child: Image.network(
-                                                            'https://media.istockphoto.com/photos/colorful-carnival-or-party-frame-of-balloons-streamers-and-confetti-picture-id911842696?b=1&k=20&m=911842696&s=170667a&w=0&h=VXKcc0dRb1xKNQjS_P4A5Tum-OMDU6W8jdo58Dllyks=',
-                                                            fit: BoxFit
-                                                                .fitHeight),
+                                                      width: MediaQuery.of(
+                                                                  this.context)
+                                                              .size
+                                                              .width /
+                                                          2.4,
+                                                      child: Stack(
+                                                        children: [
+                                                          Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Colors
+                                                                        .white
+                                                                        .withOpacity(
+                                                                            0.8),
+                                                                    spreadRadius:
+                                                                        5,
+                                                                    blurRadius:
+                                                                        5,
+                                                                    offset: Offset(
+                                                                        0,
+                                                                        7), // changes
+                                                                  )
+                                                                ]),
+                                                            height: 200,
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              child: Image.asset(
+                                                                  'asset/rectangles.png',
+                                                                  fit: BoxFit
+                                                                      .fitHeight),
+                                                            ),
+                                                          ),
+                                                          Positioned(
+                                                            top: 10,
+                                                            right: 10,
+                                                            child: Icon(
+                                                              Icons
+                                                                  .favorite_border,
+                                                              color: Colors.red,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
-                                                    Positioned(
-                                                      top: 10,
-                                                      right: 20,
-                                                      child: Icon(
-                                                        Icons.favorite,
-                                                        color: Colors.red,
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 10),
+                                                      child: Text(
+                                                        '700,90 DH',
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      left: 5),
+                                                              child: Icon(
+                                                                Icons
+                                                                    .location_pin,
+                                                                size: 14,
+                                                                color: HexColor(
+                                                                    '#9098B1'),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              'Casablanca',
+                                                              style: TextStyle(
+                                                                color: HexColor(
+                                                                    '#9098B1'),
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Icon(
+                                                              Icons.lock_clock,
+                                                              size: 14,
+                                                              color: HexColor(
+                                                                  '#9098B1'),
+                                                            ),
+                                                            Text(
+                                                              '14:17',
+                                                              style: TextStyle(
+                                                                color: HexColor(
+                                                                    '#9098B1'),
+                                                                fontSize: 14,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          left: 8,
+                                                          top: 5,
+                                                          bottom: 8),
+                                                      child: Text(
+                                                        'Livre Mac',
+                                                        style: TextStyle(
+                                                          color: HexColor(
+                                                              '#9098B1'),
+                                                          fontSize: 12,
+                                                        ),
                                                       ),
                                                     ),
                                                   ],
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(
-                                                '700,90 DH',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Icon(
-                                                    Icons.location_city,
-                                                    size: 10,
-                                                    color: HexColor('#9098B1'),
-                                                  ),
-                                                  Text(
-                                                    'Casablanca',
-                                                    style: TextStyle(
-                                                      color:
-                                                          HexColor('#9098B1'),
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 50,
-                                                  ),
-                                                  Icon(
-                                                    Icons.lock_clock,
-                                                    size: 10,
-                                                    color: HexColor('#9098B1'),
-                                                  ),
-                                                  Text(
-                                                    '14:17',
-                                                    style: TextStyle(
-                                                      color:
-                                                          HexColor('#9098B1'),
-                                                      fontSize: 12,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text(
-                                                'Livre Mac',
-                                                style: TextStyle(
-                                                  color: HexColor('#9098B1'),
-                                                  fontSize: 12,
-                                                ),
-                                              ),
+                                              )
                                             ],
                                           ),
                                         )
                                       ],
                                     ),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                                  ],
+                                ),
+                              ],
+                            );
+                          }),
                     )
                   ]),
                 ]),
               ),
               Positioned(
+                  top: 160,
                   width: MediaQuery.of(context).size.width,
                   // top: 170,
                   // left: 100,
