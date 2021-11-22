@@ -1,6 +1,6 @@
 import 'package:attijaria/screens/bottompages/account.dart';
 import 'package:attijaria/screens/bottompages/home.dart';
-import 'package:attijaria/screens/bottompages/notificatios.dart';
+import 'package:attijaria/screens/bottompages/noti.dart';
 import 'package:attijaria/screens/bottompages/tosell.dart';
 import 'package:flutter/material.dart';
 
