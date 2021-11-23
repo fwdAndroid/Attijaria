@@ -62,10 +62,10 @@ class _NotificationsState extends State<Notifications> {
                             ],
                           ),
                         ),
-                        Expanded(flex: 1, child: Text('Buy the cup')),
-                        Image.network(
-                          'https://cdn.luxe.digital/media/2020/12/15110747/fastest-cars-world-2021-luxe-digital%402x.jpg',
-                        ),
+                        Text('Buy the cup'),
+                        ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network('https://picsum.photos/200'))
                       ],
                     ),
                     shape: RoundedRectangleBorder(

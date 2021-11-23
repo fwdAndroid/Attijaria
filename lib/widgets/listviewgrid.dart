@@ -59,71 +59,72 @@ class _ListViewGridState extends State<ListViewGrid> {
               child: Column(
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          height: 140,
-                          width: 100,
-                          child: Image.asset('asset/watch.png'),
-                        ),
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        height: 140,
+                        width: 100,
+                        child: Image.asset('asset/watch.png'),
                       ),
-                      Expanded(
-                        flex: 2,
-                        child: ListTile(
-                          title: Column(
-                            children: [
-                              Container(
-                                  margin: EdgeInsets.only(top: 10, left: 10),
-                                  child: Text('Apple Watch')),
-                              TextButton.icon(
+                      Container(
+                        child: Column(
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(top: 10, left: 10),
+                                child: Text('Apple Watch')),
+                            TextButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.location_pin,
+                                color: Colors.grey,
+                              ),
+                              label: Text(
+                                'Lahore \n DHA ',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              child: TextButton.icon(
                                 onPressed: () {},
                                 icon: Icon(
-                                  Icons.location_pin,
+                                  Icons.timer,
                                   color: Colors.grey,
                                 ),
                                 label: Text(
-                                  'Lahore \n DHA ',
+                                  '2:30 PM ',
                                   style: TextStyle(
                                     color: Colors.grey,
                                   ),
                                 ),
                               ),
-                              Container(
-                                child: TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.timer,
-                                    color: Colors.grey,
-                                  ),
-                                  label: Text(
-                                    '2:30 PM ',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          trailing: Container(
-                            height: MediaQuery.of(context).size.height * 1,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Icon(
-                                  Icons.favorite_outline_outlined,
-                                  color: Colors.red,
-                                )
-                              ],
                             ),
-                          ),
+                          ],
                         ),
                       ),
+                      Container(
+                        margin: EdgeInsets.only(right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.move_to_inbox,
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Icon(
+                              Icons.favorite_outline_outlined,
+                              color: Colors.red,
+                            ),
+                          ],
+                        ),
+                      )
                     ],
-                  ),
+                  )
                 ],
               ),
             );

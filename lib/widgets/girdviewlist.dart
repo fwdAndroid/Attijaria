@@ -29,16 +29,15 @@ class _GridviewlistState extends State<Gridviewlist> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-          margin: EdgeInsets.only(left: 10, right: 10, top: 20),
-          width: MediaQuery.of(context).size.width / 1,
+          width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: GridView.builder(
               controller: controller,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 200,
                   childAspectRatio: 13 / 18,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 7),
+                  crossAxisSpacing: 7,
+                  mainAxisSpacing: 3),
               itemCount: 6,
               itemBuilder: (BuildContext ctx, index) {
                 return Row(

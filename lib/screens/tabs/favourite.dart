@@ -1,4 +1,6 @@
+import 'package:attijaria/widgets/girdviewlist.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Favourite extends StatefulWidget {
   @override
@@ -24,105 +26,173 @@ class _FavouriteState extends State<Favourite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        margin: EdgeInsets.only(left: 10, right: 10),
-        width: MediaQuery.of(context).size.width / 1,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: new BorderRadius.only(
-              topLeft: const Radius.circular(40.0),
-              topRight: const Radius.circular(40.0),
-            )),
-        child: GridView.builder(
-          controller: controller,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 13 / 16,
-              crossAxisSpacing: 40,
-              mainAxisSpacing: 30),
-          itemCount: 2 ,
-          itemBuilder: (BuildContext ctx, index) {
-            return Stack(
-              children: [
-                GridTile(
-                  child: Container(
-                    width: 100,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 0,
-                          blurRadius: 5,
-                          offset: Offset(0, 3),
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Container(
+              margin: EdgeInsets.only(left: 10, right: 10, top: 20),
+              width: MediaQuery.of(context).size.width / 1,
+              height: MediaQuery.of(context).size.height,
+              child: GridView.builder(
+                  controller: controller,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                      childAspectRatio: 13 / 18,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 7),
+                  itemCount: 4,
+                  itemBuilder: (BuildContext ctx, index) {
+                    return Row(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                                padding: EdgeInsets.only(top: 15),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: HexColor("#F6F7F8"),
+                                )),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      children: [
+                                        Card(
+                                          margin: EdgeInsets.only(left: 10),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: 174,
+                                                width:
+                                                    MediaQuery.of(this.context)
+                                                            .size
+                                                            .width /
+                                                        2.4,
+                                                child: Stack(
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                      0.8),
+                                                              spreadRadius: 5,
+                                                              blurRadius: 5,
+                                                              offset: Offset(0,
+                                                                  7), // changes
+                                                            )
+                                                          ]),
+                                                      height: 174,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        child: Image.asset(
+                                                            'asset/rectangles.png',
+                                                            fit: BoxFit
+                                                                .fitHeight),
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                      top: 10,
+                                                      right: 10,
+                                                      child: Icon(
+                                                        Icons.favorite_border,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text(
+                                                  '700,90 DH',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                              Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets.only(
+                                                            left: 5),
+                                                        child: Icon(
+                                                          Icons.location_pin,
+                                                          size: 14,
+                                                          color: HexColor(
+                                                              '#9098B1'),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        'Casablanca',
+                                                        style: TextStyle(
+                                                          color: HexColor(
+                                                              '#9098B1'),
+                                                          fontSize: 14,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Icon(
+                                                        Icons.lock_clock,
+                                                        size: 14,
+                                                        color:
+                                                            HexColor('#9098B1'),
+                                                      ),
+                                                      Text(
+                                                        '14:17',
+                                                        style: TextStyle(
+                                                          color: HexColor(
+                                                              '#9098B1'),
+                                                          fontSize: 14,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                              Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 8, top: 2, bottom: 8),
+                                                child: Text(
+                                                  'Livre Mac',
+                                                  style: TextStyle(
+                                                    color: HexColor('#9098B1'),
+                                                    fontSize: 12,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      image: DecorationImage(
-                        image: AssetImage("asset/comp.png"),
-                        fit: BoxFit.fitWidth,
-                        alignment: Alignment.topCenter,
-                      ),
-                    ),
-                  ),
-                  footer: Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 0,
-                          blurRadius: 1,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: GridTileBar(
-                      backgroundColor: Colors.white,
-                      title: Container(
-                        margin: EdgeInsets.only(top: 5, left: 10),
-                        child: Text(
-                          '700 HD',
-                          style: TextStyle(color: Colors.black),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                      subtitle: Row(
-                        children: [
-                          Icon(Icons.location_pin, color: Colors.grey),
-                          Text(
-                            'Lahore',
-                            style: TextStyle(color: Colors.black),
-                            textAlign: TextAlign.start,
-                          )
-                        ],
-                      ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.timer,
-                            color: Colors.grey,
-                          ),
-                          Text('9:30 PM')
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 10,
-                  left: 125,
-                  child: Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
-                )
-              ],
-            );
-          },
-        ),
-      ),
-    );
+                    );
+                  })),
+        ));
   }
 
   void _scrollListener() {
