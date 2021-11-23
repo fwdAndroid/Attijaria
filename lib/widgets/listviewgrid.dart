@@ -33,7 +33,7 @@ class _ListViewGridState extends State<ListViewGrid> {
         }
         if (controller.offset <= controller.position.minScrollExtent &&
             !controller.position.outOfRange) {
-          setState(() {
+          setState(() {  
             String message = "reach the top";
             print(message);
           });
@@ -67,8 +67,7 @@ class _ListViewGridState extends State<ListViewGrid> {
                         width: 100,
                         child: Image.asset('asset/watch.png'),
                       ),
-                      Container(
-                        child: Column(
+                      Column(
                           children: [
                             Container(
                                 margin: EdgeInsets.only(top: 10, left: 10),
@@ -103,11 +102,10 @@ class _ListViewGridState extends State<ListViewGrid> {
                             ),
                           ],
                         ),
-                      ),
+                      
                       Container(
                         margin: EdgeInsets.only(right: 20),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Icon(
                               Icons.move_to_inbox,

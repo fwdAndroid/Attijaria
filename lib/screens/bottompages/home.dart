@@ -79,8 +79,7 @@ class _HomeState extends State<Home> {
                               color: Colors.black,
                               child: SliderList(),
                             ),
-                            Column(
-                              children: [
+                         
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -118,8 +117,7 @@ class _HomeState extends State<Home> {
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                             
                             buildProfilePost(),
                             Container(
                               margin: EdgeInsets.only(top: 5, bottom: 0),
