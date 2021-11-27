@@ -47,7 +47,7 @@ class _HouseAnnouncementState extends State<HouseAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/houses.png',
-                            height: 200, fit: BoxFit.fitWidth),
+                            height: 200, fit: BoxFit.fill),
                       ),
                     ),
                     Positioned(
@@ -151,15 +151,27 @@ class _HouseAnnouncementState extends State<HouseAnnouncement> {
                       padding: const EdgeInsets.all(14.0),
                       child: Column(
                         children: [
-                          Row(children: [
-                            Image.asset('asset/blackshower.png'),
-                            SizedBox(width: 10),
-                            Text('2'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackdir.png'),
-                            SizedBox(width: 10),
-                            Text('350 m²'),
-                          ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackshower.png'),
+                                  label: Text('2',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackdir.png'),
+                                  label: Text('350 m²',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold)),
+                                ),
+                              ]),
+                          SizedBox(height: 10),
                           Row(
                             children: [
                               Text(

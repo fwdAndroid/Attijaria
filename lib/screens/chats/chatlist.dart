@@ -14,7 +14,6 @@ class _ChatListState extends State<ChatList> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomChatClass(),
-        backgroundColor: Colors.white,
         body: ListView(
           children: [
             Container(
@@ -40,17 +39,13 @@ class _ChatListState extends State<ChatList> {
                       radius: 30,
                       backgroundImage: AssetImage('asset/profilepic.png'),
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
                     CircleAvatar(
                       radius: 30,
                       backgroundImage: AssetImage('asset/profilepic.png'),
                     ),
                   ],
                 ),
-                trailing: Expanded(
-                  child: Column(
+                trailing:Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('Fawad'),

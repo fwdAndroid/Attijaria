@@ -47,7 +47,7 @@ class _VilaAnnouncementState extends State<VilaAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/vila.png',
-                            height: 200, fit: BoxFit.fitWidth),
+                            height: 200, fit: BoxFit.fill),
                       ),
                     ),
                     Positioned(
@@ -148,19 +148,42 @@ class _VilaAnnouncementState extends State<VilaAnnouncement> {
                       padding: const EdgeInsets.all(14.0),
                       child: Column(
                         children: [
-                          Row(children: [
-                            Image.asset('asset/blackbed.png'),
-                            SizedBox(width: 10),
-                            Text('3'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackshower.png'),
-                            SizedBox(width: 10),
-                            Text('2'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackdir.png'),
-                            SizedBox(width: 10),
-                            Text('350 m²'),
-                          ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackbed.png'),
+                                  label: Text(
+                                    '3',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackshower.png'),
+                                  label: Text(
+                                    '2',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackdir.png'),
+                                  label: Text(
+                                    '350 m²',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ]),
                           SizedBox(height: 10),
                           Row(
                             children: [
@@ -274,58 +297,63 @@ class _VilaAnnouncementState extends State<VilaAnnouncement> {
                           SizedBox(
                             height: 20,
                           ),
-                          Column(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 37),
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                          'asset/map_furniture-store.png'),
-                                      SizedBox(width: 10),
-                                      Text('Furniture',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(width: 30),
-                                      Image.asset(
-                                          'asset/mdi_air-conditioner.png'),
-                                      SizedBox(width: 10),
-                                      Text('AC',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold))
-                                    ]),
+                              Column(
+                                children: [
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Image.asset(
+                                        'asset/map_furniture-store.png'),
+                                    label: Text('Furniture',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Image.asset('asset/oi_fire.png'),
+                                    label: Text('Heater',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Image.asset('asset/se.png'),
+                                    label: Text('Security',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                  ),
+                                ],
                               ),
                               SizedBox(
-                                height: 10,
+                                width: 10,
                               ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('asset/oi_fire.png'),
-                                    SizedBox(width: 10),
-                                    Text('Heater',
+                              Column(
+                                children: [
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Image.asset(
+                                        'asset/mdi_air-conditioner.png'),
+                                    label: Text('AC',
                                         style: TextStyle(
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold)),
-                                    SizedBox(width: 30),
-                                    Image.asset('asset/fe_kitchen-cooker.png'),
-                                    SizedBox(width: 10),
-                                    Text('Equiped Kitchen',
+                                  ),
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Image.asset(
+                                        'asset/fe_kitchen-cooker.png'),
+                                    label: Text('Equiped Kitchen',
                                         style: TextStyle(
+                                            color: Colors.black,
                                             fontWeight: FontWeight.bold)),
-                                  ]),
-                              SizedBox(
-                                height: 10,
+                                  ),
+                                ],
                               ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Image.asset('asset/se.png'),
-                                    SizedBox(width: 10),
-                                    Text('Security',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ]),
                             ],
                           ),
                         ],

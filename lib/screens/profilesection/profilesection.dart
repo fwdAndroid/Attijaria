@@ -47,6 +47,7 @@ class _ProfileSectionState extends State<ProfileSection> {
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
           ),
           bottom: ButtonsTabBar(
+            physics: NeverScrollableScrollPhysics(),
             backgroundColor: Color(0xffF8B800),
             unselectedBackgroundColor: Colors.grey[300],
             unselectedLabelStyle: TextStyle(color: Colors.black),

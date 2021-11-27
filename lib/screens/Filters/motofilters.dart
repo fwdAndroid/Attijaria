@@ -659,7 +659,7 @@ class _MotoFiltersState extends State<MotoFilters> {
                 children: [
                   ListTile(
                     contentPadding: EdgeInsets.only(left: 30),
-                    leading: Image.asset('assets/icons/hauteur.png'),
+                    leading: Image.asset('asset/icons/hauteur.png'),
                     title: Text(
                       'Hauteur de selle (cm) ',
                       style: TextStyle(
@@ -669,7 +669,7 @@ class _MotoFiltersState extends State<MotoFilters> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 50, right: 130),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -30,10 +30,16 @@ class _NotificationsState extends State<Notifications> {
             itemCount: 10,
             itemBuilder: (index, context) {
               return Container(
+                color: Color(0xffFFFFFF),
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 height: 100,
                 child: SizedBox(
                   width: double.infinity,
                   child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    elevation: 8,
                     semanticContainer: true,
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: Row(
@@ -45,7 +51,7 @@ class _NotificationsState extends State<Notifications> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Fawad Kaleem',
+                                'Marouene Kh',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold),
@@ -62,17 +68,12 @@ class _NotificationsState extends State<Notifications> {
                             ],
                           ),
                         ),
-                        Text('Buy the cup'),
+                        Expanded(child: Text('A enregistré votre publication')),
                         ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.network('https://picsum.photos/200'))
                       ],
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 5,
-                    margin: EdgeInsets.all(10),
                   ),
                 ),
               );

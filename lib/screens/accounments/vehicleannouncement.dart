@@ -47,11 +47,11 @@ class _VehicleAnnouncementState extends State<VehicleAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/cars.png',
-                            height: 200, fit: BoxFit.fitWidth),
+                            height: 200, fit: BoxFit.fill),
                       ),
                     ),
                     Positioned(
-                      top: 20,
+                      top: 0,
                       right: 20,
                       child: Container(
                         height: 50,
@@ -148,19 +148,42 @@ class _VehicleAnnouncementState extends State<VehicleAnnouncement> {
                       padding: const EdgeInsets.all(14.0),
                       child: Column(
                         children: [
-                          Row(children: [
-                            Image.asset('asset/diseal.png'),
-                            SizedBox(width: 10),
-                            Text('Diesel'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackkm.png'),
-                            SizedBox(width: 10),
-                            Text('8CV'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackcalender.png'),
-                            SizedBox(width: 10),
-                            Text('2021'),
-                          ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/diseal.png'),
+                                  label: Text(
+                                    'Diesel',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackkm.png'),
+                                  label: Text(
+                                    '8CV',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackcalender.png'),
+                                  label: Text(
+                                    '2021',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ]),
                           SizedBox(height: 10),
                           Row(
                             children: [

@@ -142,19 +142,36 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                       padding: const EdgeInsets.all(14.0),
                       child: Column(
                         children: [
-                          Row(children: [
-                            Image.asset('asset/diseal.png'),
-                            SizedBox(width: 10),
-                            Text('Diesel'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackkm.png'),
-                            SizedBox(width: 10),
-                            Text('8CV'),
-                            SizedBox(width: 10),
-                            Image.asset('asset/blackcalender.png'),
-                            SizedBox(width: 10),
-                            Text('2021'),
-                          ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/blackc.png'),
+                                  label: Text(
+                                    '2021',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/paint.png'),
+                                  label: Text(
+                                    '5 000',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Image.asset('asset/chain.png'),
+                                  label: Text(
+                                    '49',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
+                              ]),
                           SizedBox(height: 10),
                           Row(
                             children: [
@@ -273,35 +290,31 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Image.asset('asset/mask.png'),
-                                    SizedBox(width: 10),
-                                    Text('ouvrant',
+                                    TextButton.icon(
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                          'asset/mdi_bag-personal.png'),
+                                      label: Text(
+                                        'Bag',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(width: 30),
-                                    Image.asset('asset/mdi_car-seat.png'),
-                                    SizedBox(width: 10),
-                                    Text('Siéges cuir',
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    TextButton.icon(
+                                      onPressed: () {},
+                                      icon: Image.asset(
+                                          'asset/clarity_no-access-solid.png'),
+                                      label: Text(
+                                        'Anti-thief',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ]),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset('asset/ic_baseline-radar.png'),
-                                    SizedBox(width: 10),
-                                    Text('Radar de recul',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                    SizedBox(width: 30),
-                                    Image.asset('asset/zmdi_camera-add.png'),
-                                    SizedBox(width: 10),
-                                    Text('Caméra de recul',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
                                   ]),
                             ],
                           ),

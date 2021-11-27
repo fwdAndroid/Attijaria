@@ -30,144 +30,176 @@ class _HomePageState extends State<HomePage> {
         bucket: bucket,
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Color(0xffF8B800),
         child: Icon(
           Icons.camera_alt_rounded,
-          color: Colors.black,
+          color: Colors.white,
         ),
         onPressed: () {},
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 10,
-        child: Container(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      bottomNavigationBar: Container(
+        
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(40),
+            topLeft: Radius.circular(40),
+            bottomLeft: Radius.circular(40),
+            bottomRight: Radius.circular(40),
+          ),
+          boxShadow: [
+            BoxShadow(color: Colors.white38, spreadRadius: 0, blurRadius: 10),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
+          ),
+          child: BottomAppBar(
+            shape: CircularNotchedRectangle(),
+            notchMargin: 10,
+            child: Container(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            Home(); // if user taps on this dashboard tab will be active
-                        currentTab = 0;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.home,
-                          color: currentTab == 0 ? Colors.yellow : Colors.grey,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(() {
+                            currentScreen =
+                                Home(); // if user taps on this dashboard tab will be active
+                            currentTab = 0;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.home,
+                              color: currentTab == 0
+                                  ? Color(0xffF8B800)
+                                  : Colors.grey,
+                            ),
+                            Text(
+                              'Advertisement',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: currentTab == 0
+                                    ? Color(0xffF8B800)
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          'Advertisement',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color:
-                                currentTab == 0 ? Colors.yellow : Colors.black,
-                          ),
+                      ),
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(() {
+                            currentScreen =
+                                AccountPage(); // if user taps on this dashboard tab will be active
+                            currentTab = 1;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.person,
+                              color: currentTab == 1
+                                  ? Color(0xffF8B800)
+                                  : Colors.black,
+                            ),
+                            Text(
+                              'Account',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: currentTab == 1
+                                    ? Color(0xffF8B800)
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            AccountPage(); // if user taps on this dashboard tab will be active
-                        currentTab = 1;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.person,
-                          color: currentTab == 1 ? Colors.yellow : Colors.black,
+
+                  // Right Tab bar icons
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(() {
+                            currentScreen =
+                                ToSell(); // if user taps on this dashboard tab will be active
+                            currentTab = 2;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.mail,
+                              color: currentTab == 2
+                                  ? Color(0xffF8B800)
+                                  : Colors.black,
+                            ),
+                            Text(
+                              'Chat',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: currentTab == 2
+                                    ? Color(0xffF8B800)
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          'Account',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color:
-                                currentTab == 1 ? Colors.yellow : Colors.black,
-                          ),
+                      ),
+                      MaterialButton(
+                        minWidth: 40,
+                        onPressed: () {
+                          setState(() {
+                            currentScreen =
+                                Notifications(); // if user taps on this dashboard tab will be active
+                            currentTab = 3;
+                          });
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.notifications,
+                              color: currentTab == 3
+                                  ? Color(0xffF8B800)
+                                  : Colors.black,
+                            ),
+                            Text(
+                              'Notification',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: currentTab == 3
+                                    ? Color(0xffF8B800)
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      )
+                    ],
                   )
                 ],
               ),
-
-              // Right Tab bar icons
-
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            ToSell(); // if user taps on this dashboard tab will be active
-                        currentTab = 2;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.mail,
-                          color: currentTab == 2 ? Colors.yellow : Colors.black,
-                        ),
-                        Text(
-                          'Chat',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color:
-                                currentTab == 2 ? Colors.yellow : Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MaterialButton(
-                    minWidth: 40,
-                    onPressed: () {
-                      setState(() {
-                        currentScreen =
-                            Notifications(); // if user taps on this dashboard tab will be active
-                        currentTab = 3;
-                      });
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(
-                          Icons.notifications,
-                          color: currentTab == 3 ? Colors.yellow : Colors.black,
-                        ),
-                        Text(
-                          'Notification',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color:
-                                currentTab == 3 ? Colors.yellow : Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
+            ),
           ),
         ),
       ),

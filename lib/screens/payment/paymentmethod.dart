@@ -208,6 +208,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           margin: EdgeInsets.only(left: 20, top: 10),
@@ -229,12 +230,9 @@ class _PaymentMethodState extends State<PaymentMethod> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 35,
-                          ),
+                          margin: EdgeInsets.symmetric(horizontal: 30),
                           child: Text(
                             'please choose your payment method',
-                            textAlign: TextAlign.start,
                             style: TextStyle(
                               color: Colors.amber,
                               fontSize: 15,
