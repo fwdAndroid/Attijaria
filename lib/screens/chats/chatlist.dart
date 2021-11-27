@@ -45,16 +45,15 @@ class _ChatListState extends State<ChatList> {
                     ),
                   ],
                 ),
-                trailing:Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('Fawad'),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text('Sadiq'),
-                    ],
-                  ),
+                trailing: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Fawad'),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text('Sadiq'),
+                  ],
                 ),
               ),
             ),
