@@ -39,119 +39,170 @@ class _LoginState extends State<Login> {
         body: Container(
           decoration: dec,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                'Sign into your Account',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 30,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              _textFormFieldFunction('E-mail', emailLoginCont),
-              _textFormFieldFunctionPassword('Password', passwordLoginCont),
-              Padding(
-                padding: const EdgeInsets.only(right: 30),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                    child: Text(
-                      'Forgot your password',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        letterSpacing: -0.24,
-                        shadows: [
-                          BoxShadow(
-                            color: Color(0xff000000),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
+              Expanded(
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sign into your \nAccount',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 34,
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (ctx) => ForgotPassword()));
-                    },
+                      Container(
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                        child: _textFormFieldFunction('E-mail', emailLoginCont),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 20,
+                        ),
+                        child: _textFormFieldFunctionPassword(
+                            'Password', passwordLoginCont),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 30),
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: TextButton(
+                            child: Text(
+                              'Forgot your password',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                letterSpacing: -0.24,
+                                shadows: [
+                                  BoxShadow(
+                                    color: Color(0xff000000),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (ctx) => ForgotPassword()));
+                            },
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            fixedSize: Size(343, 50),
+                            primary: Colors.white, // background
+                            onPrimary: Colors.black, // foreground
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            )),
+                        onPressed: () async {
+                          var finalResult = await signIn(
+                              emailLoginCont.text.trim(),
+                              passwordLoginCont.text.trim());
+                          Fluttertoast.showToast(
+                              msg: "Login Complete",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                          if (finalResult) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (xtc) => HomePage()));
+                          } else {
+                            Fluttertoast.showToast(
+                                msg: "This is Center Short Toast",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0);
+                          }
+                        },
+                        child: Text(
+                          'Login',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // ignore: prefer_const_constructors
+                            Text(
+                              'Not a member yet?',
+                              // ignore: prefer_const_constructors
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                letterSpacing: -0.24,
+                                // ignore: prefer_const_literals_to_create_immutables
+                                shadows: [
+                                  BoxShadow(
+                                    color: Color(0xff000000),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (ctx) => Register()));
+                              },
+                              // ignore: prefer_const_constructors
+                              child: Text(
+                                'Register Now',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  letterSpacing: -0.24,
+                                  // ignore: prefer_const_literals_to_create_immutables
+                                  shadows: [
+                                    BoxShadow(
+                                      color: Color(0xff000000),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: Offset(
+                                          0, 3), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(300, 50),
-                  primary: Colors.white, // background
-                  onPrimary: Colors.black, // foreground
-                ),
-                onPressed: () async {
-                  var finalResult = await signIn(emailLoginCont.text.trim(),
-                      passwordLoginCont.text.trim());
-                  Fluttertoast.showToast(
-                      msg: "Login Complete",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
-                  if (finalResult) {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (xtc) => HomePage()));
-                  } else {
-                    Fluttertoast.showToast(
-                        msg: "This is Center Short Toast",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.red,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  }
-                },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
               Container(
-                margin: EdgeInsets.only(top: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                margin: EdgeInsets.only(bottom: 20),
+                child: Column(
                   children: [
-                    // ignore: prefer_const_constructors
-                    Text(
-                      'Not a member yet?',
-                      // ignore: prefer_const_constructors
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        letterSpacing: -0.24,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        shadows: [
-                          BoxShadow(
-                            color: Color(0xff000000),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (ctx) => Register()));
-                      },
-                      // ignore: prefer_const_constructors
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 20),
                       child: Text(
-                        'Register Now',
+                        'Or Connect With',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -169,68 +220,40 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30),
-              // ignore: prefer_const_constructors
-              Text(
-                'Or Connect With',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  letterSpacing: -0.24,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  shadows: [
-                    BoxShadow(
-                      color: Color(0xff000000),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-              ),
-
-              Container(
-                margin: EdgeInsets.only(left: 10, right: 10, top: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    // Image.asset('asset/facebook.png')
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xff50442c), // background
-                        onPrimary: Colors.white, // foreground
-                      ),
-                      icon: Image.asset('asset/google.png'),
-                      onPressed: () async {
-                        await googleSignUp(context).then(
-                          (value) => Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xff50442c), // background
+                            onPrimary: Colors.white, // foreground
                           ),
-                        );
-                      },
-                      label: Text(''),
-                    ),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xff50442c), // background
-                        onPrimary: Colors.white, // foreground
-                      ),
-                      icon: Image.asset('asset/face.png'),
-                      onPressed: () {},
-                      label: Text(''),
+                          icon: Image.asset('asset/google.png'),
+                          onPressed: () async {
+                            await googleSignUp(context).then(
+                              (value) => Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) => HomePage(),
+                                ),
+                              ),
+                            );
+                          },
+                          label: Text(''),
+                        ),
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xff50442c), // background
+                            onPrimary: Colors.white, // foreground
+                          ),
+                          icon: Image.asset('asset/face.png'),
+                          onPressed: () {},
+                          label: Text(''),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -240,17 +263,17 @@ class _LoginState extends State<Login> {
 
   _textFormFieldFunction(String s, TextEditingController controller) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 12),
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('asset/background.png')),
-        borderRadius: BorderRadius.circular(20),
+        color: Color(0xff9d8f67),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Colors.white),
           contentPadding: EdgeInsets.symmetric(horizontal: 50),
-          fillColor: Colors.blueAccent,
+          fillColor: Colors.white,
           hintText: s,
           hintStyle: TextStyle(color: Colors.white),
           border: InputBorder.none,
@@ -263,8 +286,8 @@ class _LoginState extends State<Login> {
     return Container(
       margin: EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('asset/background.png')),
-        borderRadius: BorderRadius.circular(20),
+        color: Color(0xff9d8f67),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
         controller: controller,

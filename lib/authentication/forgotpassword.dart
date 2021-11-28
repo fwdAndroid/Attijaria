@@ -45,11 +45,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              _textFormFieldFunction('Your email', controller),
               Container(
-                  width: 300,
-                  height: 60,
-                  margin: EdgeInsets.only(top: 47),
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: _textFormFieldFunction('Your email', controller),
+              ),
+              Container(
+                  margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     onPressed: () async {
                       await FirebaseAuth.instance
@@ -67,8 +68,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           MaterialPageRoute(builder: (builder) => Login()));
                     },
                     style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 10.0),
+                        fixedSize: Size(343, 50),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0)),
                         primary: Colors.white),
@@ -88,8 +88,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return Container(
       margin: EdgeInsets.only(top: 3),
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('asset/background.png')),
-        borderRadius: BorderRadius.circular(20),
+        color: Color(0xff9d8f67),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
         controller: controller,
