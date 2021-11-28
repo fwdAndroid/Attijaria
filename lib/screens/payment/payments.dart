@@ -36,7 +36,7 @@ class _PaymentsState extends State<Payments> {
                     MaterialPageRoute(builder: (builder) => PaymentMethod()));
               },
               style: ElevatedButton.styleFrom(
-                  fixedSize: Size(MediaQuery.of(context).size.width, 60),
+                  fixedSize: Size(343, 61),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)),
                   primary: Color(0xffF8B800)),

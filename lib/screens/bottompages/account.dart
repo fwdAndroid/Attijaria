@@ -111,7 +111,10 @@ class _AccountPageState extends State<AccountPage> {
                     hoverColor: Colors.black,
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: listTile('Gender', 'Female', MdiIcons.humanFemale,
+                      child: listTile(
+                          'Gender',
+                          'Female',
+                          MdiIcons.genderMaleFemale,
                           Icons.arrow_forward_ios, () {
                         Navigator.push(
                             context,

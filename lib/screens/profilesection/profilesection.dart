@@ -46,11 +46,23 @@ class _ProfileSectionState extends State<ProfileSection> {
             'Attijjara',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
           ),
+          centerTitle: true,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.search),
+            )
+          ],
           bottom: ButtonsTabBar(
+            radius: 5,
+            decoration: BoxDecoration(
+              color: Color(0xffF8B800),
+            ),
+            center: true,
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
             physics: NeverScrollableScrollPhysics(),
-            backgroundColor: Color(0xffF8B800),
-            unselectedBackgroundColor: Colors.grey[300],
-            unselectedLabelStyle: TextStyle(color: Colors.black),
+            unselectedBackgroundColor: Color(0xff9098B1),
+            unselectedLabelStyle: TextStyle(color: Colors.white),
             labelStyle:
                 TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
             tabs: [

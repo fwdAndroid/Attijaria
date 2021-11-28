@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class SliderList extends StatefulWidget {
   const SliderList({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class SliderList extends StatefulWidget {
 }
 
 class _SliderListState extends State<SliderList> {
+  final String bootImage = 'asset/paint.svg';
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

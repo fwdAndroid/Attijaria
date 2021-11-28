@@ -57,22 +57,25 @@ class _ChangePhoneState extends State<ChangePhone> {
                     fillColor: Colors.white70,
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      borderSide: BorderSide(color: Colors.yellow, width: 2),
+                      borderSide: BorderSide(color: Colors.grey, width: 2),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                      borderSide: BorderSide(color: Colors.yellow, width: 2),
+                      borderSide:
+                          BorderSide(color: Color(0xffF8B800), width: 2),
                     ),
                   ),
                 ),
               ),
               Spacer(),
               Container(
-                height: 60,
-                width: 260,
-                margin: EdgeInsets.all(20),
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0),
+                    ),
+                    fixedSize: Size(343, 64),
                     primary: Color(0xffF8B800),
                     onPrimary: Colors.white,
                     onSurface: Colors.grey,

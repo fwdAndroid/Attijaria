@@ -191,11 +191,13 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
+              
+              
               Container(
                 margin: EdgeInsets.only(left: 10, right: 10, top: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     SizedBox(
                       width: 10,

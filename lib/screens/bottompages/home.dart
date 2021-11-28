@@ -53,10 +53,22 @@ class _HomeState extends State<Home> {
               },
               child: Image.asset('asset/ads.png')),
           Container(
-            padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+            padding: EdgeInsets.symmetric(horizontal: 10),
             alignment: Alignment.topLeft,
             color: Colors.black,
-            child: Image.asset('asset/adsd.png'),
+            child: TextButton.icon(
+                onPressed: () {},
+                icon: Image.asset(
+                  'asset/adsd.png',
+                  height: 18,
+                ),
+                label: Text(
+                  'Annonces premium',
+                  style: TextStyle(
+                      color: Color(0xff5D55B4),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900),
+                )),
           ),
           Container(
             height: 150,
@@ -79,7 +91,10 @@ class _HomeState extends State<Home> {
                     style: TextStyle(color: Colors.grey),
                   ),
                   onPressed: () => setPostOrientation("list"),
-                  icon: Image.asset('asset/swap.png'),
+                  icon: Image.asset(
+                    'asset/swap.png',
+                    height: 20,
+                  ),
                 ),
               ),
               Card(
@@ -90,7 +105,7 @@ class _HomeState extends State<Home> {
                   ),
                   onPressed: () => Navigator.push(context,
                       MaterialPageRoute(builder: (builder) => Filteration())),
-                  icon: Image.asset('asset/swap.png'),
+                  icon: Image.asset('asset/filter.png', height: 20),
                 ),
               ),
             ],

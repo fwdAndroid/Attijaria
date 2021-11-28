@@ -55,11 +55,11 @@ class _SelectGenderState extends State<SelectGender> {
                 decoration: InputDecoration(
                     enabledBorder: new OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(15.0),
-                      borderSide: BorderSide(color: Colors.yellow),
+                      borderSide: BorderSide(color: Color(0xffF8B800)),
                     ),
                     focusedBorder: new OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.pinkAccent),
+                      borderSide: BorderSide(color: Color(0xffF8B800)),
                     ),
                     filled: true,
                     hintStyle: TextStyle(color: Colors.grey[800]),
@@ -80,11 +80,13 @@ class _SelectGenderState extends State<SelectGender> {
               )),
           Spacer(),
           Container(
-            width: 260,
-            height: 60,
-            margin: EdgeInsets.all(20),
+            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(10.0),
+                ),
+                fixedSize: Size(343, 64),
                 primary: Color(0xffF8B800),
                 onPrimary: Colors.white,
                 onSurface: Colors.grey,

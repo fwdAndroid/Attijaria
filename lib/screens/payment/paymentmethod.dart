@@ -25,12 +25,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   context, MaterialPageRoute(builder: (builder) => Bankcard()));
             },
             style: ElevatedButton.styleFrom(
-                fixedSize: Size(MediaQuery.of(context).size.width, 60),
+                fixedSize: Size(343, 61),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 primary: Color(0xffF8B800)),
             child: Text(
-              "Continue",
+              "Carry On",
               style: TextStyle(color: Colors.white, fontSize: 24),
             ),
           ),
@@ -252,7 +252,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: ListTile(
-                            leading: Image.asset('asset/card.png'),
+                            leading: Image.asset('asset/card.png', height: 36),
                             title: Text('Bank card'),
                             trailing: Radio<SingingCharacter>(
                               value: SingingCharacter.OneDay,
@@ -278,7 +278,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: ListTile(
-                            leading: Image.asset('asset/cash.png'),
+                            leading: Image.asset(
+                              'asset/cash.png',
+                              height: 36,
+                            ),
                             title: Text('Cash in branch'),
                             trailing: Radio<SingingCharacter>(
                               value: SingingCharacter.TwoDay,
@@ -304,7 +307,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: ListTile(
-                            leading: Image.asset('asset/sms.png'),
+                            leading: Image.asset(
+                              'asset/sms.png',
+                              height: 36,
+                            ),
                             title: Text('SMS'),
                             trailing: Radio<SingingCharacter>(
                               value: SingingCharacter.three,

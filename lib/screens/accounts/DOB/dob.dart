@@ -105,14 +105,13 @@ class _DOBState extends State<DOB> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                height: 60,
-                width: 260,
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0),
+                    ),
+                    fixedSize: Size(343, 64),
                     primary: Color(0xffF8B800),
                     onPrimary: Colors.white,
                     onSurface: Colors.grey,
