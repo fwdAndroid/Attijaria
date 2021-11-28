@@ -36,32 +36,26 @@ class _ProfileSectionState extends State<ProfileSection> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      initialIndex: 1,
       length: 3,
+      initialIndex: 1,
       child: Scaffold(
-        backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
           title: Text(
             'Attijjara',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w300),
           ),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.search),
-            )
-          ],
           bottom: ButtonsTabBar(
-            radius: 5,
-            decoration: BoxDecoration(
-              color: Color(0xffF8B800),
-            ),
-            center: true,
             contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xffF8B800),
+                shape: BoxShape.rectangle),
+            unselectedDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Color(0xffF9098B1),
+                shape: BoxShape.rectangle),
             physics: NeverScrollableScrollPhysics(),
-            unselectedBackgroundColor: Color(0xff9098B1),
             unselectedLabelStyle: TextStyle(color: Colors.white),
             labelStyle:
                 TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -78,8 +72,6 @@ class _ProfileSectionState extends State<ProfileSection> {
             ],
           ),
         ),
-        extendBody: true,
-        extendBodyBehindAppBar: true,
         body: TabBarView(
           children: [MyPost(), Favourite(), Search()],
         ),
