@@ -43,6 +43,7 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: ListView(
+          controller: _scrollController,
           children: [
             GestureDetector(
               onTap: () {
