@@ -43,7 +43,6 @@ class _HomeState extends State<Home> {
           ),
         ),
         body: ListView(
-          controller: _scrollController,
           children: [
             GestureDetector(
               onTap: () {
@@ -74,10 +73,7 @@ class _HomeState extends State<Home> {
                         fontWeight: FontWeight.w900),
                   )),
             ),
-            Container(
-                color: Colors.black,
-                height: 150,
-                child: Expanded(child: SliderList())),
+            Container(color: Colors.black, height: 150, child: SliderList()),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -115,7 +111,7 @@ class _HomeState extends State<Home> {
             ),
             buildProfilePost(),
             Container(
-              margin: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+              margin: EdgeInsets.only(top: 5, bottom: 0),
               child: Image.asset(
                 'asset/long.png',
               ),
@@ -123,7 +119,7 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
               child: ListView.builder(
-                itemCount: 6,
+                itemCount: 4,
                 itemBuilder: (context, index) {
                   return Card(
                     shape: RoundedRectangleBorder(
@@ -201,7 +197,7 @@ class _HomeState extends State<Home> {
                   );
                 },
               ),
-            ),
+            )
           ],
         ));
   }
@@ -239,7 +235,7 @@ class _HomeState extends State<Home> {
                   crossAxisSpacing: 2,
                   mainAxisSpacing: 2,
                   childAspectRatio: itemWidth / itemHeight),
-              itemCount: 6,
+              itemCount: 4,
               itemBuilder: (BuildContext ctx, index) {
                 return Row(
                   children: [
@@ -392,7 +388,7 @@ class _HomeState extends State<Home> {
           },
           child: ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: 6,
+            itemCount: 4,
             itemBuilder: (context, index) {
               return Card(
                 shape: RoundedRectangleBorder(
