@@ -47,7 +47,7 @@ class _VehicleAnnouncementState extends State<VehicleAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/cars.png',
-                            height: 200, fit: BoxFit.fill),
+                            height: 250, fit: BoxFit.fitWidth),
                       ),
                     ),
                     Positioned(
@@ -70,7 +70,7 @@ class _VehicleAnnouncementState extends State<VehicleAnnouncement> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 190),
+                padding: const EdgeInsets.only(top: 240),
                 child: Stack(children: [
                   Container(
                     decoration: BoxDecoration(
@@ -578,7 +578,7 @@ class _VehicleAnnouncementState extends State<VehicleAnnouncement> {
                 ]),
               ),
               Positioned(
-                  top: 160,
+                  top: 220,
                   width: MediaQuery.of(context).size.width,
                   // top: 170,
                   // left: 100,
@@ -615,7 +615,7 @@ class _VehicleAnnouncementState extends State<VehicleAnnouncement> {
                   )),
               Positioned(
                 width: MediaQuery.of(context).size.width,
-                top: 130,
+                top: 190,
                 child: DotsIndicator(
                   dotsCount: 3,
                   position: 0.0,
