@@ -48,7 +48,7 @@ class _AgricultureAnnouncementState extends State<AgricultureAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/tractor.png',
-                            height: 200, fit: BoxFit.fill),
+                            height: 250, fit: BoxFit.fitWidth),
                       ),
                     ),
                     Positioned(
