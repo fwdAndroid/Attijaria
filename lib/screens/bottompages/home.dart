@@ -114,8 +114,11 @@ class _HomeState extends State<Home> {
               ],
             ),
             buildProfilePost(),
-            Image.asset(
-              'asset/long.png',
+            Container(
+              margin: EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+              child: Image.asset(
+                'asset/long.png',
+              ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
