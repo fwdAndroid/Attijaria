@@ -42,169 +42,165 @@ class _HomeState extends State<Home> {
             style: TextStyle(color: Colors.white, fontSize: 25),
           ),
         ),
-        body: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          return ListView(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (builder) => MotoAnnounce(),
-                    ),
-                  );
-                },
-                child: Image.asset('asset/ads.png'),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                alignment: Alignment.topLeft,
+        body: ListView(
+          controller: _scrollController,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (builder) => MotoAnnounce(),
+                  ),
+                );
+              },
+              child: Image.asset('asset/ads.png'),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              alignment: Alignment.topLeft,
+              color: Colors.black,
+              child: TextButton.icon(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'asset/adsd.png',
+                    height: 18,
+                  ),
+                  label: Text(
+                    'Annonces premium',
+                    style: TextStyle(
+                        color: Color(0xff5D55B4),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900),
+                  )),
+            ),
+            Container(
                 color: Colors.black,
-                child: TextButton.icon(
-                    onPressed: () {},
-                    icon: Image.asset(
-                      'asset/adsd.png',
-                      height: 18,
-                    ),
-                    label: Text(
-                      'Annonces premium',
-                      style: TextStyle(
-                          color: Color(0xff5D55B4),
-                          fontSize: 18,
-                          fontWeight: FontWeight.w900),
-                    )),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                    child: IconButton(
-                      onPressed: () => setPostOrientation("grid"),
-                      icon: Image.asset('asset/frame.png'),
-                    ),
+                height: 150,
+                child: Expanded(child: SliderList())),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Card(
+                  child: IconButton(
+                    onPressed: () => setPostOrientation("grid"),
+                    icon: Image.asset('asset/frame.png'),
                   ),
-                  Card(
-                    child: TextButton.icon(
-                      label: Text(
-                        'Tier',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      onPressed: () => setPostOrientation("list"),
-                      icon: Image.asset(
-                        'asset/swap.png',
-                        height: 20,
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: TextButton.icon(
-                      label: Text(
-                        'Filters',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => Filteration())),
-                      icon: Image.asset('asset/filter.png', height: 20),
-                    ),
-                  ),
-                ],
-              ),
-              buildProfilePost(),
-              Container(
-                margin: EdgeInsets.only(top: 5, bottom: 0),
-                child: Image.asset(
-                  'asset/long.png',
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 2,
-                child: ListView.builder(
-                  itemCount: 6,
-                  itemBuilder: (context, index) {
-                    return Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      elevation: 4,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 10),
-                                height: 140,
-                                width: 100,
-                                child: Image.asset('asset/watch.png'),
-                              ),
-                              Column(
-                                children: [
-                                  Container(
-                                      margin:
-                                          EdgeInsets.only(top: 10, left: 10),
-                                      child: Text('Apple Watch')),
-                                  TextButton.icon(
+                Card(
+                  child: TextButton.icon(
+                    label: Text(
+                      'Tier',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    onPressed: () => setPostOrientation("list"),
+                    icon: Image.asset(
+                      'asset/swap.png',
+                      height: 20,
+                    ),
+                  ),
+                ),
+                Card(
+                  child: TextButton.icon(
+                    label: Text(
+                      'Filters',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => Filteration())),
+                    icon: Image.asset('asset/filter.png', height: 20),
+                  ),
+                ),
+              ],
+            ),
+            buildProfilePost(),
+            Image.asset(
+              'asset/long.png',
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 2,
+              child: ListView.builder(
+                itemCount: 6,
+                itemBuilder: (context, index) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    elevation: 4,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(left: 10),
+                              height: 140,
+                              width: 100,
+                              child: Image.asset('asset/watch.png'),
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.only(top: 10, left: 10),
+                                    child: Text('Apple Watch')),
+                                TextButton.icon(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.location_pin,
+                                    color: Colors.grey,
+                                  ),
+                                  label: Text(
+                                    'Lahore \n DHA ',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  child: TextButton.icon(
                                     onPressed: () {},
                                     icon: Icon(
-                                      Icons.location_pin,
+                                      Icons.timer,
                                       color: Colors.grey,
                                     ),
                                     label: Text(
-                                      'Lahore \n DHA ',
+                                      '2:30 PM ',
                                       style: TextStyle(
                                         color: Colors.grey,
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    child: TextButton.icon(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.timer,
-                                        color: Colors.grey,
-                                      ),
-                                      label: Text(
-                                        '2:30 PM ',
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(right: 20),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.more_vert_outlined,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                  ),
+                                  Icon(
+                                    Icons.favorite_outline_outlined,
+                                    color: Colors.red,
                                   ),
                                 ],
                               ),
-                              Container(
-                                margin: EdgeInsets.only(right: 20),
-                                child: Column(
-                                  children: [
-                                    Icon(
-                                      Icons.more_vert_outlined,
-                                      color: Colors.grey,
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Icon(
-                                      Icons.favorite_outline_outlined,
-                                      color: Colors.red,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                },
               ),
-            ],
-          );
-        }));
+            ),
+          ],
+        ));
   }
 
   //Setting Orientation of post
@@ -240,7 +236,7 @@ class _HomeState extends State<Home> {
                   crossAxisSpacing: 2,
                   mainAxisSpacing: 2,
                   childAspectRatio: itemWidth / itemHeight),
-              itemCount: 117,
+              itemCount: 6,
               itemBuilder: (BuildContext ctx, index) {
                 return Row(
                   children: [
