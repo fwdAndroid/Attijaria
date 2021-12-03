@@ -48,7 +48,7 @@ class _AgricultureAnnouncementState extends State<AgricultureAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/tractor.png',
-                            height: 200, fit: BoxFit.fill),
+                            height: 250, fit: BoxFit.fitWidth),
                       ),
                     ),
                     Positioned(
@@ -71,7 +71,7 @@ class _AgricultureAnnouncementState extends State<AgricultureAnnouncement> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 190),
+                padding: const EdgeInsets.only(top: 240),
                 child: Stack(children: [
                   Container(
                     decoration: BoxDecoration(
@@ -489,7 +489,7 @@ class _AgricultureAnnouncementState extends State<AgricultureAnnouncement> {
                 ]),
               ),
               Positioned(
-                  top: 160,
+                  top: 210,
                   width: MediaQuery.of(context).size.width,
                   // top: 170,
                   // left: 100,
@@ -526,7 +526,7 @@ class _AgricultureAnnouncementState extends State<AgricultureAnnouncement> {
                   )),
               Positioned(
                 width: MediaQuery.of(context).size.width,
-                top: 130,
+                top: 180,
                 child: DotsIndicator(
                   dotsCount: 3,
                   position: 0.0,

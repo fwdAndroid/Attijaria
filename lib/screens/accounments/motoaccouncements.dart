@@ -47,7 +47,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/moto.png',
-                            height: 200, fit: BoxFit.fitWidth),
+                            height: 250, fit: BoxFit.fitWidth),
                       ),
                     ),
                     Positioned(
@@ -70,7 +70,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 190),
+                padding: const EdgeInsets.only(top: 220),
                 child: Stack(children: [
                   Container(
                     decoration: BoxDecoration(
@@ -565,7 +565,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                 ]),
               ),
               Positioned(
-                  top: 160,
+                  top: 190,
                   width: MediaQuery.of(context).size.width,
                   // top: 170,
                   // left: 100,
@@ -602,7 +602,7 @@ class _MotoAnnounceState extends State<MotoAnnounce> {
                   )),
               Positioned(
                 width: MediaQuery.of(context).size.width,
-                top: 130,
+                top: 170,
                 child: DotsIndicator(
                   dotsCount: 3,
                   position: 0.0,

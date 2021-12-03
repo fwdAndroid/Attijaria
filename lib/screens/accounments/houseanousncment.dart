@@ -47,7 +47,7 @@ class _HouseAnnouncementState extends State<HouseAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/houses.png',
-                            height: 200, fit: BoxFit.fill),
+                            height: 250, fit: BoxFit.fill),
                       ),
                     ),
                     Positioned(
@@ -70,7 +70,7 @@ class _HouseAnnouncementState extends State<HouseAnnouncement> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 190),
+                padding: const EdgeInsets.only(top: 230),
                 child: Stack(children: [
                   Container(
                     decoration: BoxDecoration(
@@ -513,7 +513,7 @@ class _HouseAnnouncementState extends State<HouseAnnouncement> {
                 ]),
               ),
               Positioned(
-                  top: 160,
+                  top: 200,
                   width: MediaQuery.of(context).size.width,
                   // top: 170,
                   // left: 100,
@@ -550,7 +550,7 @@ class _HouseAnnouncementState extends State<HouseAnnouncement> {
                   )),
               Positioned(
                 width: MediaQuery.of(context).size.width,
-                top: 130,
+                top: 180,
                 child: DotsIndicator(
                   dotsCount: 3,
                   position: 0.0,

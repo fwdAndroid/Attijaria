@@ -47,7 +47,7 @@ class _LandAccouncementsState extends State<LandAccouncements> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/lands.png',
-                            height: 200, fit: BoxFit.fitWidth),
+                            height: 250, fit: BoxFit.fill),
                       ),
                     ),
                     Positioned(
@@ -70,7 +70,7 @@ class _LandAccouncementsState extends State<LandAccouncements> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 190),
+                padding: const EdgeInsets.only(top: 230),
                 child: Stack(children: [
                   Container(
                     decoration: BoxDecoration(
@@ -492,7 +492,7 @@ class _LandAccouncementsState extends State<LandAccouncements> {
                 ]),
               ),
               Positioned(
-                  top: 160,
+                  top: 200,
                   width: MediaQuery.of(context).size.width,
                   // top: 170,
                   // left: 100,
@@ -529,7 +529,7 @@ class _LandAccouncementsState extends State<LandAccouncements> {
                   )),
               Positioned(
                 width: MediaQuery.of(context).size.width,
-                top: 130,
+                top: 180,
                 child: DotsIndicator(
                   dotsCount: 3,
                   position: 0.0,

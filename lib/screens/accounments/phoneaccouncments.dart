@@ -47,7 +47,7 @@ class _PhoneAnnouncementState extends State<PhoneAnnouncement> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset('asset/m.png',
-                            height: 200, fit: BoxFit.fitWidth),
+                            height: 250, fit: BoxFit.fitWidth),
                       ),
                     ),
                     Positioned(
@@ -70,7 +70,7 @@ class _PhoneAnnouncementState extends State<PhoneAnnouncement> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 200),
+                padding: const EdgeInsets.only(top: 250),
                 child: Stack(children: [
                   Container(
                     decoration: BoxDecoration(
@@ -492,7 +492,7 @@ class _PhoneAnnouncementState extends State<PhoneAnnouncement> {
                 ]),
               ),
               Positioned(
-                  top: 175,
+                  top: 225,
                   width: MediaQuery.of(context).size.width,
                   // top: 170,
                   // left: 100,
