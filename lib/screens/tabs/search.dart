@@ -10,6 +10,8 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
@@ -19,28 +21,48 @@ class _SearchState extends State<Search> {
                 topLeft: const Radius.circular(40.0),
                 topRight: const Radius.circular(40.0),
               )),
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height * 1,
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: 4,
-              itemBuilder: (_, i) => Card(
-                margin: EdgeInsets.only(top: 20, left: 10, right: 10),
-                elevation: 5,
-                child: ListTile(
-                  leading: Image.asset('asset/laptop.png'),
-                  title: Text(
-                    'Laptop in Laptops',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  subtitle: Text(
-                    'All of morocco',
-                    style: TextStyle(color: Colors.black, fontSize: 10),
-                  ),
-                  trailing: Image.asset('asset/delete.png'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                width: size.width,
+                fit: BoxFit.cover,
+                image: AssetImage(
+                  'asset/pic.png',
                 ),
               ),
-            ),
+              Container(
+                margin: EdgeInsets.symmetric(
+                  vertical: 30,
+                ),
+                child: Text(
+                  'Save your most interesting searches',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 30),
+                child: ElevatedButton(
+                  child: Text('Search'),
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(243, 57),
+                    primary: Color.fromRGBO(248, 184, 0, 1),
+                    textStyle: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(15.0),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           )),
     );
   }

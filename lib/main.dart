@@ -1,5 +1,3 @@
-import 'package:attijaria/screens/bottompages/tosell.dart';
-import 'package:attijaria/screens/introscreens/screensone.dart';
 import 'package:attijaria/screens/introscreens/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

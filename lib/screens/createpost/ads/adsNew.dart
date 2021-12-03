@@ -27,12 +27,12 @@ class _AdsNewsState extends State<AdsNews> {
         filled: true,
         fillColor: Colors.white70,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
           borderSide: BorderSide(color: Colors.grey, width: 2),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          borderSide: BorderSide(color: Colors.yellow, width: 2),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderSide: BorderSide(color: Colors.grey, width: 2),
         ),
       ),
     ));
@@ -67,12 +67,12 @@ class _AdsNewsState extends State<AdsNews> {
           filled: true,
           fillColor: Colors.white70,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(color: Colors.yellow, width: 2),
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
         ),
       ),
@@ -108,8 +108,15 @@ class _AdsNewsState extends State<AdsNews> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
+        leading: Icon(Icons.settings),
         elevation: 0,
-        title: Text('Telephone Ads'),
+        title: Text('Actuators'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.search),
+          )
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(

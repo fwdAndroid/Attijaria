@@ -57,18 +57,18 @@ class _VerificationCodeState extends State<VerificationCode> {
               Container(
                 margin: const EdgeInsets.only(top: 55),
                 // ignore: prefer_const_constructors
-                child: Text('Enter The Code that you have recieved',
+                child: Text('Enter The Code That\n You Have Recieved',
                     // ignore: prefer_const_constructors
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400),
                     textAlign: TextAlign.center),
               ),
               Container(
                 margin: const EdgeInsets.only(top: 10),
                 padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 60),
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 58),
                 child: PinCodeTextField(
                   appContext: context,
                   pastedTextStyle: TextStyle(

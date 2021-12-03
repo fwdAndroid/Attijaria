@@ -34,17 +34,14 @@ class _SetPasswordState extends State<SetPassword> {
               _textFormFieldFunction('New Password'),
               _textFormFieldFunction('Confrim Password'),
               Container(
-                width: 300,
-                height: 40,
-                margin: EdgeInsets.only(top: 17),
+                margin: EdgeInsets.only(top: 20),
                 child: ElevatedButton(
                   onPressed: () {
                     // Navigator.of(context).push(
                     //     MaterialPageRoute(builder: (tx) => SetPassword()));
                   },
                   style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10.0),
+                      fixedSize: Size(345, 50),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0)),
                       primary: Colors.white),
@@ -63,10 +60,11 @@ class _SetPasswordState extends State<SetPassword> {
 
   _textFormFieldFunction(String s) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      height: 50,
+      margin: EdgeInsets.only(top: 10, left: 20, right: 20),
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('asset/background.png')),
-        borderRadius: BorderRadius.circular(20),
+        color: Color(0xff9d8f67),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: TextFormField(
         decoration: InputDecoration(

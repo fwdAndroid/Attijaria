@@ -36,10 +36,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Container(
                 margin: EdgeInsets.only(top: 20),
                 child: Text(
-                  'You will an Email to reset password',
+                  'You will receive a verification code',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Color.fromRGBO(255, 255, 255, 1),
                     fontSize: 15,
                   ),
                   textAlign: TextAlign.center,
@@ -47,25 +47,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: _textFormFieldFunction('Your email', controller),
+                child:
+                    _textFormFieldFunction('Your email or Phone', controller),
               ),
               Container(
                   margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
-                    onPressed: () async {
-                      await FirebaseAuth.instance
-                          .sendPasswordResetEmail(email: controller.text);
-                      Fluttertoast.showToast(
-                          msg: "Email Sent",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (builder) => Login()));
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => VerificationCode()));
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(343, 50),
@@ -73,7 +65,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             borderRadius: BorderRadius.circular(10.0)),
                         primary: Colors.white),
                     child: Text(
-                      "Sent Request",
+                      "Send",
                       style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   )),

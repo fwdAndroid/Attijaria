@@ -30,12 +30,12 @@ class _MotoAdsState extends State<MotoAds> {
         filled: true,
         fillColor: Colors.white70,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
           borderSide: BorderSide(color: Colors.grey, width: 2),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          borderSide: BorderSide(color: Colors.yellow, width: 2),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderSide: BorderSide(color: Colors.grey, width: 2),
         ),
       ),
     ));
@@ -70,12 +70,12 @@ class _MotoAdsState extends State<MotoAds> {
           filled: true,
           fillColor: Colors.white70,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(color: Colors.yellow, width: 2),
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
         ),
       ),
@@ -111,356 +111,425 @@ class _MotoAdsState extends State<MotoAds> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
+        leading: Icon(Icons.settings),
         elevation: 0,
-        title: Text('MotoCycle Ads'),
+        title: Text('Actuators'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.search),
+          )
+        ],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(30.0),
-            topRight: const Radius.circular(30.0),
-          ),
-        ),
-        height: MediaQuery.of(context).size.height * 1,
-        child: ListView(children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            color: Colors.black,
+            child: Row(
               children: [
-                _titleText('Location'),
-                _textFormFieldFunctionIcon('Set Location'),
-                _titleText('Sector'),
-                _textFormFieldFunctionIcon('Sector'),
-                _titleText('Type of Pole'),
-                Row(
-                  children: [
-                    Expanded(
-                        flex: 1, child: _textFormFieldFunctionIcon('I come')),
-                    Expanded(
-                        flex: 1, child: _textFormFieldFunctionIcon('Demander')),
-                  ],
+                Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
                 ),
-                _titleText('Category'),
-                _textFormFieldFunctionIcon('Category'),
-                _titleText('Mark'),
-                Container(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                    child: DropdownButtonFormField<String>(
-                      value: dropdownValueCategoryMotorcycleModel,
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                          enabledBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(15.0),
-                            borderSide: BorderSide(color: Colors.yellow),
-                          ),
-                          focusedBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.pinkAccent),
-                          ),
-                          filled: true,
-                          hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Type of Model",
-                          fillColor: Colors.white),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueCategoryMotorcycleModel = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'APRILIA',
-                        'BENELLI',
-                        'BMW',
-                        "CAN-AM",
-                        "CF MOTO",
-                        "DUCATI",
-                        "E-MOTO",
-                        'EI-HEI',
-                        'FB MONDIAL',
-                        'HARLEY-DAVIDSON',
-                        "HONDA",
-                        "KAWASAKI",
-                        "KTM",
-                        'KYMCO',
-                        'MASH',
-                        'MOTO GUZZI',
-                        "OBA MOTORS",
-                        "PEUGEOT",
-                        "PHOENIX",
-                        'PIAGGIO',
-                        'ROYAL ENFIELD',
-                        'SUZUKI',
-                        "SYM",
-                        "TAKADO",
-                        "TGB",
-                        "VESPA",
-                        "VOGE",
-                        "YADEA",
-                        "YAMAHA",
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )),
-                _titleText('Color'),
-                Container(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                    child: DropdownButtonFormField<String>(
-                      value: dropdownValueCategoryMotorcycleColor,
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                          enabledBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(15.0),
-                            borderSide: BorderSide(color: Colors.yellow),
-                          ),
-                          focusedBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.pinkAccent),
-                          ),
-                          filled: true,
-                          hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Colors",
-                          fillColor: Colors.white),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueCategoryMotorcycleColor = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Black',
-                        'GREY',
-                        'Yellow',
-                        "RED",
-                        "GREEN",
-                        "Argent",
-                        "Beige",
-                        'Egg shell',
-                        'Bordeaux',
-                        'Light blue',
-                        "Navy blue",
-                        "Bronze",
-                        "Light gray",
-                        'Dark gray',
-                        'Charcoal grey',
-                        'Ivory',
-                        "Marron",
-                        "Light brown",
-                        "Metalized",
-                        'Or',
-                        'Orange',
-                        'Dark red',
-                        "Rose",
-                        "Pink",
-                        "Dark green",
-                        "Violet",
-                        "Tuning",
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )),
-                _titleText('Type'),
-                Container(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                    child: DropdownButtonFormField<String>(
-                      value: dropdownValueCategoryMotorcycle,
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                          enabledBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(15.0),
-                            borderSide: BorderSide(color: Colors.yellow),
-                          ),
-                          focusedBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.pinkAccent),
-                          ),
-                          filled: true,
-                          hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Type",
-                          fillColor: Colors.white),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueCategoryMotorcycle = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Motocyclette',
-                        'Scooter',
-                        'Maxi Scooter',
-                        "Roadster",
-                        "Cruiser",
-                        "Sportive",
-                        "Road",
-                        'Trail',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )),
-                _titleText('Mileage'),
-                _textFormFieldFunctionIcon('Mileage'),
-                _titleText('Model year'),
-                _textFormFieldFunctionIcon('Model year'),
-                _titleText('Cylindrée (cm³)'),
-                _textFormFieldFunctionIcon('Cylindrée (cm³)'),
-                _titleText('Origin'),
-                _textFormFieldFunctionIcon('Origin'),
-                _titleText('First hand'),
-                _textFormFieldFunctionIcon('First hand'),
-                _titleText('Number of wheels'),
-                _textFormFieldFunctionIcon('Number of wheels'),
-                _titleText('Height of cell (cm)'),
-                _textFormFieldFunctionIcon('Height of cell (cm)'),
-                _titleText('Additional Details'),
-                Container(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                    child: DropdownButtonFormField<String>(
-                      value: dropDownValueCategoryMotorDetail,
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                          enabledBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(15.0),
-                            borderSide: BorderSide(color: Colors.yellow),
-                          ),
-                          focusedBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.pinkAccent),
-                          ),
-                          filled: true,
-                          hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Additional Detail",
-                          fillColor: Colors.white),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropDownValueCategoryMotorDetail = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Reservoir bag',
-                        'Anti-theft',
-                        'Low bubble',
-                        "ABS / CBS",
-                        "CD / MP3 / Bluetooth",
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )),
-                _titleText('Title'),
-                _textFormFieldFunctionIcon("Title"),
-                _longDescription("Description"),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Create a post',
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(30.0),
+                  topRight: const Radius.circular(30.0),
+                ),
+              ),
+              height: MediaQuery.of(context).size.height * 1,
+              child: ListView(children: [
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        'asset/cameraimage.jpeg',
-                        height: 100,
-                        width: 100,
+                      _titleText('Rental'),
+                      _textFormFieldFunctionIcon('Set Rental'),
+                      _titleText('Sector'),
+                      _textFormFieldFunctionIcon('Sector'),
+                      _titleText('Type of Pole'),
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: _textFormFieldFunctionIcon('I come')),
+                          Expanded(
+                              flex: 1,
+                              child: _textFormFieldFunctionIcon('Demander')),
+                        ],
                       ),
-                      Image.asset(
-                        'asset/motbike.png',
-                        height: 100,
-                        width: 100,
+                      _titleText('Category'),
+                      _textFormFieldFunctionIcon('Category'),
+                      _titleText('Mark'),
+                      Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 10),
+                          child: DropdownButtonFormField<String>(
+                            value: dropdownValueCategoryMotorcycleModel,
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                filled: true,
+                                hintStyle: TextStyle(color: Colors.grey[800]),
+                                hintText: "Type of Model",
+                                fillColor: Colors.white),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValueCategoryMotorcycleModel =
+                                    newValue!;
+                              });
+                            },
+                            items: <String>[
+                              'APRILIA',
+                              'BENELLI',
+                              'BMW',
+                              "CAN-AM",
+                              "CF MOTO",
+                              "DUCATI",
+                              "E-MOTO",
+                              'EI-HEI',
+                              'FB MONDIAL',
+                              'HARLEY-DAVIDSON',
+                              "HONDA",
+                              "KAWASAKI",
+                              "KTM",
+                              'KYMCO',
+                              'MASH',
+                              'MOTO GUZZI',
+                              "OBA MOTORS",
+                              "PEUGEOT",
+                              "PHOENIX",
+                              'PIAGGIO',
+                              'ROYAL ENFIELD',
+                              'SUZUKI',
+                              "SYM",
+                              "TAKADO",
+                              "TGB",
+                              "VESPA",
+                              "VOGE",
+                              "YADEA",
+                              "YAMAHA",
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )),
+                      _titleText('Color'),
+                      Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 10),
+                          child: DropdownButtonFormField<String>(
+                            value: dropdownValueCategoryMotorcycleColor,
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                filled: true,
+                                hintStyle: TextStyle(color: Colors.grey[800]),
+                                hintText: "Colors",
+                                fillColor: Colors.white),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValueCategoryMotorcycleColor =
+                                    newValue!;
+                              });
+                            },
+                            items: <String>[
+                              'Black',
+                              'GREY',
+                              'Yellow',
+                              "RED",
+                              "GREEN",
+                              "Argent",
+                              "Beige",
+                              'Egg shell',
+                              'Bordeaux',
+                              'Light blue',
+                              "Navy blue",
+                              "Bronze",
+                              "Light gray",
+                              'Dark gray',
+                              'Charcoal grey',
+                              'Ivory',
+                              "Marron",
+                              "Light brown",
+                              "Metalized",
+                              'Or',
+                              'Orange',
+                              'Dark red',
+                              "Rose",
+                              "Pink",
+                              "Dark green",
+                              "Violet",
+                              "Tuning",
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )),
+                      _titleText('Type'),
+                      Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 10),
+                          child: DropdownButtonFormField<String>(
+                            value: dropdownValueCategoryMotorcycle,
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                filled: true,
+                                hintStyle: TextStyle(color: Colors.grey[800]),
+                                hintText: "Type",
+                                fillColor: Colors.white),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValueCategoryMotorcycle = newValue!;
+                              });
+                            },
+                            items: <String>[
+                              'Motocyclette',
+                              'Scooter',
+                              'Maxi Scooter',
+                              "Roadster",
+                              "Cruiser",
+                              "Sportive",
+                              "Road",
+                              'Trail',
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )),
+                      _titleText('Mileage'),
+                      _textFormFieldFunctionIcon('Mileage'),
+                      _titleText('Model year'),
+                      _textFormFieldFunctionIcon('Model year'),
+                      _titleText('Cylindrée (cm³)'),
+                      _textFormFieldFunctionIcon('Cylindrée (cm³)'),
+                      _titleText('Origin'),
+                      _textFormFieldFunctionIcon('Origin'),
+                      _titleText('First hand'),
+                      _textFormFieldFunctionIcon('First hand'),
+                      _titleText('Number of wheels'),
+                      _textFormFieldFunctionIcon('Number of wheels'),
+                      _titleText('Height of cell (cm)'),
+                      _textFormFieldFunctionIcon('Height of cell (cm)'),
+                      _titleText('Additional Details'),
+                      Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 10),
+                          child: DropdownButtonFormField<String>(
+                            value: dropDownValueCategoryMotorDetail,
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                filled: true,
+                                hintStyle: TextStyle(color: Colors.grey[800]),
+                                hintText: "Additional Detail",
+                                fillColor: Colors.white),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropDownValueCategoryMotorDetail = newValue!;
+                              });
+                            },
+                            items: <String>[
+                              'Reservoir bag',
+                              'Anti-theft',
+                              'Low bubble',
+                              "ABS / CBS",
+                              "CD / MP3 / Bluetooth",
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )),
+                      _titleText('Title'),
+                      _textFormFieldFunctionIcon("Title"),
+                      Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        child: _longDescription("Description"),
                       ),
-                      Image.asset(
-                        'asset/motbike.png',
-                        height: 100,
-                        width: 100,
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'asset/cameraimage.jpeg',
+                              height: 100,
+                              width: 100,
+                            ),
+                            Image.asset(
+                              'asset/motbike.png',
+                              height: 100,
+                              width: 100,
+                            ),
+                            Image.asset(
+                              'asset/motbike.png',
+                              height: 100,
+                              width: 100,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _titleText('Price DH'),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'MIN',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 10),
+                            ),
+                            Text(
+                              'Max',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 10),
+                            )
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: _textFormFieldFunctionIcon('Min')),
+                          Expanded(
+                              flex: 1,
+                              child: _textFormFieldFunctionIcon('Max')),
+                        ],
+                      ),
+                      RangeSlider(
+                          values: values,
+                          activeColor: Colors.yellow[700],
+                          inactiveColor: Colors.black38,
+                          min: 1,
+                          max: 100,
+                          // values: values,
+                          onChanged: (values) {
+                            setState(() {
+                              values = values;
+                            });
+                          }),
+                      _titleText(' Phone Number'),
+                      _textFormFieldFunctionIcon('Phone Number'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Do not display address',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Boost the ads',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                _titleText('Price DH'),
-                Row(
-                  children: [
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Min')),
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Max')),
-                  ],
-                ),
-                RangeSlider(
-                    values: values,
-                    activeColor: Colors.yellow[700],
-                    inactiveColor: Colors.black38,
-                    min: 1,
-                    max: 100,
-                    // values: values,
-                    onChanged: (values) {
-                      setState(() {
-                        values = values;
-                      });
-                    }),
-                _titleText(' Phone Number'),
-                _textFormFieldFunctionIcon('Phone Number'),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Do not display address',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Boost the ads',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+              ]),
             ),
           ),
-        ]),
+        ],
       ),
     );
   }

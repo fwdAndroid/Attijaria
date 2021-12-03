@@ -228,7 +228,11 @@ class _LoginState extends State<Login> {
                             primary: Color(0xff50442c), // background
                             onPrimary: Colors.white, // foreground
                           ),
-                          icon: Image.asset('asset/google.png'),
+                          icon: Image.asset(
+                            'asset/google.png',
+                            height: 50,
+                            width: 120,
+                          ),
                           onPressed: () async {
                             await googleSignUp(context).then(
                               (value) => Navigator.of(context).pushReplacement(
@@ -245,7 +249,11 @@ class _LoginState extends State<Login> {
                             primary: Color(0xff50442c), // background
                             onPrimary: Colors.white, // foreground
                           ),
-                          icon: Image.asset('asset/face.png'),
+                          icon: Image.asset(
+                            'asset/face.png',
+                            height: 50,
+                            width: 120,
+                          ),
                           onPressed: () {},
                           label: Text(''),
                         ),

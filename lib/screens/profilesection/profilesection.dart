@@ -40,6 +40,12 @@ class _ProfileSectionState extends State<ProfileSection> {
       initialIndex: 1,
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(Icons.search),
+            )
+          ],
           backgroundColor: Colors.black,
           title: Text(
             'Attijjara',

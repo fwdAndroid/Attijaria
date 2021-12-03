@@ -6,6 +6,7 @@ import 'package:attijaria/screens/Home/homepage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -20,6 +21,19 @@ class _RegisterState extends State<Register> {
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (builder) => HomePage()));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -170,37 +184,74 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                 ),
-                Text(
-                  'Or Connect With',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    letterSpacing: -0.24,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    shadows: [
-                      BoxShadow(
-                        color: Color(0xff000000),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: Offset(0, 3), // changes position of shadow
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 20),
+                        child: Text(
+                          'Or Connect With',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            letterSpacing: -0.24,
+                            // ignore: prefer_const_literals_to_create_immutables
+                            shadows: [
+                              BoxShadow(
+                                color: Color(0xff000000),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xff50442c), // background
+                              onPrimary: Colors.white, // foreground
+                            ),
+                            icon: Image.asset(
+                              'asset/google.png',
+                              height: 50,
+                              width: 120,
+                            ),
+                            onPressed: () async {
+                              await googleSignUp(context).then(
+                                (value) =>
+                                    Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                ),
+                              );
+                            },
+                            label: Text(''),
+                          ),
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xff50442c), // background
+                              onPrimary: Colors.white, // foreground
+                            ),
+                            icon: Image.asset(
+                              'asset/face.png',
+                              height: 50,
+                              width: 120,
+                            ),
+                            onPressed: () {},
+                            label: Text(''),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  margin:
-                      EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Image.asset('asset/facebook.png')
-                    ],
-                  ),
-                )
               ],
             ),
           ),
@@ -263,5 +314,30 @@ class _RegisterState extends State<Register> {
     } catch (e) {
       print(e);
     }
+  }
+
+  googleSignUp(BuildContext context) async {
+    try {
+      final GoogleSignIn _googleSignIn = GoogleSignIn(
+        scopes: ['email'],
+      );
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      final User? user = (await _auth.signInWithCredential(credential)).user;
+
+      print("signed in " + user!.email.toString());
+
+      return user;
+      // ignore: empty_catches
+    } catch (e) {}
   }
 }

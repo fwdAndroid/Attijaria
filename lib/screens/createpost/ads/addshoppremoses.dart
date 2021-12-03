@@ -27,11 +27,11 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
         filled: true,
         fillColor: Colors.white70,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
           borderSide: BorderSide(color: Colors.grey, width: 2),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
           borderSide: BorderSide(color: Colors.yellow, width: 2),
         ),
       ),
@@ -67,12 +67,12 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
           filled: true,
           fillColor: Colors.white70,
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12.0)),
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-            borderSide: BorderSide(color: Colors.yellow, width: 2),
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
         ),
       ),
@@ -109,203 +109,262 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
+        leading: Icon(Icons.settings),
         elevation: 0,
-        title: Text('Stores, Shops Post'),
+        title: Text('Actuators'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.search),
+          )
+        ],
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: const Radius.circular(30.0),
-            topRight: const Radius.circular(30.0),
-          ),
-        ),
-        height: MediaQuery.of(context).size.height * 1,
-        child: ListView(children: [
-          SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            color: Colors.black,
+            child: Row(
               children: [
-                _titleText('Location'),
-                _textFormFieldFunctionIcon('Set Location'),
-                _titleText('Sector'),
-                _textFormFieldFunctionIcon('Sector'),
-                _titleText('Position Type'),
-                SizedBox(
-                  height: 90,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 1, child: _textFormFieldFunctionIcon('Sell')),
-                      Expanded(
-                          flex: 1,
-                          child: _textFormFieldFunctionIcon('Request')),
-                    ],
-                  ),
-                ),
-                _titleText('Category'),
-                _textFormFieldFunctionIcon('Category'),
-                _titleText('Address'),
-                _textFormFieldFunctionIcon('Address'),
-                _titleText('Total surface'),
-                _textFormFieldFunctionIcon('Total surface'),
-                _titleText('Loft surface'),
-                _textFormFieldFunctionIcon('Loft surface'),
-                _titleText('Additional Details'),
-                Container(
-                    padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                    child: DropdownButtonFormField<String>(
-                      value: dropdownValueCategory,
-                      icon: const Icon(Icons.arrow_downward),
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                          enabledBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(15.0),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedBorder: new OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(25.0),
-                            borderSide: BorderSide(color: Colors.pinkAccent),
-                          ),
-                          filled: true,
-                          hintStyle: TextStyle(color: Colors.grey[800]),
-                          hintText: "Additional Details",
-                          fillColor: Colors.white),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownValueCategory = newValue!;
-                        });
-                      },
-                      items: <String>[
-                        'Air Condition',
-                        'Heating',
-                        'Garage',
-                        "Security",
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    )),
-                _titleText('Title'),
-                _textFormFieldFunctionIcon('Title'),
-                _titleText('Description'),
-                Container(
-                    margin: EdgeInsets.only(top: 10, left: 15, right: 15),
-                    child: _longDescription('Write Product Description')),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'asset/cameraimage.jpeg',
-                        height: 100,
-                        width: 100,
-                      ),
-                      Image.asset(
-                        'asset/motbike.png',
-                        height: 100,
-                        width: 100,
-                      ),
-                      Image.asset(
-                        'asset/motbike.png',
-                        height: 100,
-                        width: 100,
-                      ),
-                    ],
-                  ),
+                Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
                 ),
                 SizedBox(
-                  height: 10,
+                  width: 10,
                 ),
-                _titleText('Price DH'),
-                Row(
-                  children: [
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Min')),
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Max')),
-                  ],
-                ),
-                RangeSlider(
-                    values: values,
-                    activeColor: Colors.yellow[700],
-                    inactiveColor: Colors.black38,
-                    min: 1,
-                    max: 100,
-                    // values: values,
-                    onChanged: (values) {
-                      setState(() {
-                        values = values;
-                      });
-                    }),
-                _titleText(' Phone Number'),
-                _textFormFieldFunctionIcon('Phone Number'),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Do not display address',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Boost the ads',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Official Store',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                Text(
+                  'Create a post',
+                  style: TextStyle(color: Colors.white),
+                )
               ],
             ),
           ),
-        ]),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: const Radius.circular(30.0),
+                  topRight: const Radius.circular(30.0),
+                ),
+              ),
+              height: MediaQuery.of(context).size.height * 1,
+              child: ListView(children: [
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _titleText('Rental'),
+                      _textFormFieldFunctionIcon('Set Rental'),
+                      _titleText('Sector'),
+                      _textFormFieldFunctionIcon('Sector'),
+                      _titleText('Position Type'),
+                      SizedBox(
+                        height: 90,
+                        child: Row(
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: _textFormFieldFunctionIcon('Sell')),
+                            Expanded(
+                                flex: 1,
+                                child: _textFormFieldFunctionIcon('Request')),
+                          ],
+                        ),
+                      ),
+                      _titleText('Category'),
+                      _textFormFieldFunctionIcon('Category'),
+                      _titleText('Address'),
+                      _textFormFieldFunctionIcon('Address'),
+                      _titleText('BathRooms'),
+                      _textFormFieldFunctionIcon('BathRooms'),
+                      _titleText('Total surface'),
+                      _textFormFieldFunctionIcon('Total surface'),
+                      _titleText('Loft surface'),
+                      _textFormFieldFunctionIcon('Loft surface'),
+                      _titleText('Additional Details'),
+                      Container(
+                          padding:
+                              EdgeInsets.only(left: 20, right: 20, top: 20),
+                          child: DropdownButtonFormField<String>(
+                            value: dropdownValueCategory,
+                            icon: const Icon(Icons.arrow_downward),
+                            iconSize: 24,
+                            elevation: 16,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                                enabledBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide: BorderSide(color: Colors.grey),
+                                ),
+                                focusedBorder: new OutlineInputBorder(
+                                  borderRadius: new BorderRadius.circular(8.0),
+                                  borderSide:
+                                      BorderSide(color: Colors.pinkAccent),
+                                ),
+                                filled: true,
+                                hintStyle: TextStyle(color: Colors.grey[800]),
+                                hintText: "Additional Details",
+                                fillColor: Colors.white),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                dropdownValueCategory = newValue!;
+                              });
+                            },
+                            items: <String>[
+                              'Air Condition',
+                              'Heating',
+                              'Garage',
+                              "Security",
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          )),
+                      _titleText('Title'),
+                      _textFormFieldFunctionIcon('Title'),
+                      _titleText('Description'),
+                      Container(
+                          margin: EdgeInsets.only(top: 10, left: 15, right: 15),
+                          child: _longDescription('Write Product Description')),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'asset/cameraimage.jpeg',
+                              height: 100,
+                              width: 100,
+                            ),
+                            Image.asset(
+                              'asset/motbike.png',
+                              height: 100,
+                              width: 100,
+                            ),
+                            Image.asset(
+                              'asset/motbike.png',
+                              height: 100,
+                              width: 100,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _titleText('Price DH'),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'MIN',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 10),
+                            ),
+                            Text(
+                              'Max',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 10),
+                            )
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                              flex: 1,
+                              child: _textFormFieldFunctionIcon('Min')),
+                          Expanded(
+                              flex: 1,
+                              child: _textFormFieldFunctionIcon('Max')),
+                        ],
+                      ),
+                      RangeSlider(
+                          values: values,
+                          activeColor: Colors.yellow[700],
+                          inactiveColor: Colors.black38,
+                          min: 1,
+                          max: 100,
+                          // values: values,
+                          onChanged: (values) {
+                            setState(() {
+                              values = values;
+                            });
+                          }),
+                      _titleText(' Phone Number'),
+                      _textFormFieldFunctionIcon('Phone Number'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Do not display address',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Boost the ads',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Official Store',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+          ),
+        ],
       ),
     );
   }
