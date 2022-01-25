@@ -21,6 +21,7 @@ class _RegisterState extends State<Register> {
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passController = TextEditingController();
+  TextEditingController dob = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -36,6 +37,14 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+     String dropdownvalue = 'Male';   
+  
+  // List of items in our dropdown menu
+  var items = [    
+    'Male',
+    'Female',
+    'Not Specified',
+  ];
     return SafeArea(
       child: Scaffold(
         body: Form(
@@ -69,6 +78,50 @@ class _RegisterState extends State<Register> {
                             'Name',
                             nameController,
                           ),
+                        ),
+                          Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          child: _textFormFieldFunction(
+                            'DOB',
+                            dob,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(left:20),
+                          width: 310,
+                           height: 55,
+                           decoration: BoxDecoration(
+        color: Color(0xff9d8f67),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: EdgeInsets.symmetric(horizontal:20, vertical: 12),
+                          child:  DropdownButton(
+                            isExpanded: true,
+                
+              // Initial Value
+              value: dropdownvalue,
+                
+              // Down Arrow Icon
+              icon: const Icon(Icons.keyboard_arrow_down),    
+                
+              // Array list of items
+              items: items.map((String items) {
+                return DropdownMenuItem(
+                  
+                  value: items,
+                  child: Text(items,style: TextStyle(color: Colors.white,),),
+                );
+              }).toList(),
+              // After selecting the desired option,it will
+              // change button value to selected value
+              onChanged: (String? newValue) { 
+                setState(() {
+                  dropdownvalue = newValue!;
+                });
+              },
+            ),
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(

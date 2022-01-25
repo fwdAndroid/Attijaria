@@ -1,3 +1,4 @@
+import 'package:attijaria/authentication/register.dart';
 import 'package:attijaria/screens/bottompages/account.dart';
 import 'package:attijaria/screens/introscreens/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: AccountPage(),
+      home: Register(),
     );
   }
 }
