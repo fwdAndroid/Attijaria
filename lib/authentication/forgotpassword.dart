@@ -1,6 +1,8 @@
+import 'package:attijaria/Utils/constant.dart';
 import 'package:attijaria/authentication/codepassword.dart';
 import 'package:attijaria/authentication/login.dart';
 import 'package:attijaria/config/config.dart';
+import 'package:attijaria/widgets/customdialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -48,17 +50,26 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child:
-                    _textFormFieldFunction('Your email or Phone', controller),
+                    _textFormFieldFunction('Your email', controller),
               ),
               Container(
                   margin: EdgeInsets.only(top: 20),
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => VerificationCode()));
-                    },
+                    onPressed: () async{
+                      if(controller.text.isEmpty){
+                        Customdialog().showInSnackBar("required email", context);
+                      }
+                      else if(controller.text.isNotEmpty) {
+Customdialog.showDialogBox(context);
+                       await firebaseAuth.sendPasswordResetEmail(
+                            email: controller.text.trim()).then((value) {
+                         Navigator.pop(context);
+                         Navigator.pop(context);
+                         Customdialog().showInSnackBar(
+                             "Please check your email account", context);
+                       });
+
+                      }   },
                     style: ElevatedButton.styleFrom(
                         fixedSize: Size(343, 50),
                         shape: RoundedRectangleBorder(

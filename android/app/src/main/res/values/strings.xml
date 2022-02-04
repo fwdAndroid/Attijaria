@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Attjaria</string>
+    <string name="facebook_app_id">307468481403244</string>
+    <string name="fb_login_protocol_scheme">fb307468481403244</string>
+    <string name="facebook_client_token">c9838ff85ff3d1209b47595875463a55</string>
+</resources>

@@ -1,3 +1,6 @@
+import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/widgets/customdialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChangeEmail extends StatefulWidget {
@@ -8,6 +11,8 @@ class ChangeEmail extends StatefulWidget {
 }
 
 class _ChangeEmailState extends State<ChangeEmail> {
+TextEditingController emailController=TextEditingController();
+TextEditingController passwordController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,9 +52,10 @@ class _ChangeEmailState extends State<ChangeEmail> {
                 width: 320,
                 padding: EdgeInsets.all(10.0),
                 child: TextField(
+                  controller: passwordController,
                   autocorrect: true,
                   decoration: InputDecoration(
-                    hintText: 'Enter New Email Address',
+                    hintText: 'Enter Your Password',
                     suffixIcon: Icon(
                       Icons.email,
                       color: Colors.yellow,
@@ -69,6 +75,35 @@ class _ChangeEmailState extends State<ChangeEmail> {
                   ),
                 ),
               ),
+              // Spacer(),
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                width: 320,
+                padding: EdgeInsets.all(10.0),
+                child: TextField(
+                  controller: emailController,
+                  autocorrect: true,
+                  decoration: InputDecoration(
+                    hintText: 'Enter New Email Address',
+                    suffixIcon: Icon(
+                      Icons.email,
+                      color: Colors.yellow,
+                    ),
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.white70,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                      borderSide: BorderSide(color: Colors.grey, width: 2),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide:
+                      BorderSide(color: Color(0xffF8B800), width: 2),
+                    ),
+                  ),
+                ),
+              ),
               Spacer(),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -82,7 +117,45 @@ class _ChangeEmailState extends State<ChangeEmail> {
                     onPrimary: Colors.white,
                     onSurface: Colors.grey,
                   ),
-                  onPressed: () {},
+                  onPressed: ()async {
+                    if(passwordController.text.isEmpty){
+                      Customdialog().showInSnackBar("required Password", context);
+                    }
+                   else if(emailController.text.isEmpty){
+                      Customdialog().showInSnackBar("required Email", context);
+                    }
+                    else if(emailController.text.isNotEmpty&passwordController.text.isNotEmpty){
+                      Customdialog.showDialogBox(context);
+
+                      try{
+                        User firebaseUser = await firebaseAuth.currentUser!;
+                        var result = await firebaseUser.reauthenticateWithCredential(
+                            EmailAuthProvider.credential(email: firebaseUser.email!,
+                                password: passwordController.text.trim()));
+                        await result.user!.updateEmail(emailController.text.trim()).then((value) =>
+                         firebaseFirestore.collection("users").doc(firebaseAuth.currentUser!.uid).update({
+                           "Email":emailController.text.trim()
+                         }).then((value) {
+                           Navigator.pop(context);
+                           Navigator.pop(context);
+                           Customdialog().showInSnackBar(
+                               "Email Successfully updated", context);
+                         }).catchError((e){
+                           throw e;
+                         })
+                     ).catchError((e){
+                       throw e;
+                     });
+
+                   }on FirebaseAuthException
+                    catch(e){
+                      Navigator.pop(context);
+                      Customdialog.showBox(context,e.toString());
+                    }
+
+                    }
+
+                  },
                   child: Text(
                     'Save',
                     style: TextStyle(color: Colors.white),

@@ -1,13 +1,20 @@
+import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/widgets/customdialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChangePassword extends StatefulWidget {
-  const ChangePassword({Key? key}) : super(key: key);
+  ChangePassword({Key? key}) : super(key: key);
 
   @override
   _ChangePasswordState createState() => _ChangePasswordState();
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
+  TextEditingController oldpasswordController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController retTypepasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +51,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               width: 320,
               padding: EdgeInsets.all(10.0),
               child: TextField(
+                controller: oldpasswordController,
                 autocorrect: true,
                 decoration: InputDecoration(
                   hintText: 'Enter Old Password',
@@ -69,6 +77,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               width: 320,
               padding: EdgeInsets.all(10.0),
               child: TextField(
+  controller: passwordController,
                 autocorrect: true,
                 decoration: InputDecoration(
                   hintText: 'Enter New Password',
@@ -94,6 +103,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               width: 320,
               padding: EdgeInsets.all(10.0),
               child: TextField(
+                controller: retTypepasswordController,
                 autocorrect: true,
                 decoration: InputDecoration(
                   hintText: 'Retype New Password',
@@ -128,7 +138,40 @@ class _ChangePasswordState extends State<ChangePassword> {
                   onPrimary: Colors.white,
                   onSurface: Colors.grey,
                 ),
-                onPressed: () {},
+                onPressed: ()async {
+                  if (oldpasswordController.text.isEmpty) {
+                    Customdialog().showInSnackBar("required Old Password", context);
+                  }
+                 else if (passwordController.text.isEmpty) {
+                    Customdialog().showInSnackBar("required New Password", context);
+                  }
+                  else if (retTypepasswordController.text.isEmpty) {
+                    Customdialog().showInSnackBar("required Retype Password", context);
+                  }
+
+                  else if(oldpasswordController.text.isNotEmpty&&passwordController.text.isNotEmpty&&retTypepasswordController.text.isNotEmpty){
+                    Customdialog.showDialogBox(context);
+                    try {
+                      User firebaseUser = await firebaseAuth.currentUser!;
+                      var result = await firebaseUser.reauthenticateWithCredential(
+                          EmailAuthProvider.credential(email: firebaseUser.email!,
+                              password: oldpasswordController.text.trim()));
+                     await result.user!.updatePassword(passwordController.text.trim()).then((value){
+                       Navigator.pop(context);
+                           Navigator.pop(context);
+                           Customdialog().showInSnackBar(
+                               "Password Successfully updated", context);
+
+                     }).catchError((e){
+                       throw e;
+                     });
+
+                    } on FirebaseAuthException catch (e) {
+                      Navigator.pop(context);
+                      Customdialog.showBox(context, e.toString());
+                    }
+                  }
+                },
                 child: Text(
                   'Save',
                   style: TextStyle(color: Colors.white),

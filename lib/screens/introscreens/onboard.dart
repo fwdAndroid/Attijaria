@@ -46,7 +46,7 @@ class _OnBoardingScreensState extends State<OnBoardingScreens> {
           ),
         ),
         Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
+          margin: EdgeInsets.only(bottom: 22),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,

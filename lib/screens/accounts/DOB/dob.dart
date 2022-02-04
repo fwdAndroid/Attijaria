@@ -1,3 +1,5 @@
+import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/widgets/customdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neat_and_clean_calendar/flutter_neat_and_clean_calendar.dart';
 import 'package:flutter_neat_and_clean_calendar/neat_and_clean_calendar_event.dart';
@@ -21,7 +23,7 @@ class _DOBState extends State<DOB> {
           color: Colors.orange),
     ],
   };
-
+String date="";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -95,7 +97,13 @@ class _DOBState extends State<DOB> {
                     todayColor: Colors.blue,
                     eventColor: Colors.grey,
                     locale: 'En',
-                    isExpanded: true,
+
+ onDateSelected: (e){
+               setState(() {
+                 date=e.toString();
+               });
+               print(e);
+ },                   isExpanded: true,
                     expandableDateFormat: 'EEEE, dd. MMMM yyyy',
                     dayOfWeekStyle: TextStyle(
                         color: Colors.black,
@@ -116,7 +124,23 @@ class _DOBState extends State<DOB> {
                     onPrimary: Colors.white,
                     onSurface: Colors.grey,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if(date.isEmpty){
+                      Customdialog().showInSnackBar("required DOB", context);
+                    }
+                    else{
+                      Customdialog.showDialogBox(context);
+                      firebaseFirestore.collection("users").doc(firebaseAuth.currentUser!.uid).update({
+                        "DOB":date.trim()
+                      }).then((value) {
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Customdialog().showInSnackBar(
+                            "DOB Successfully updated", context);
+                      });
+                    }
+
+                  },
                   child: Text(
                     'Save',
                     style: TextStyle(color: Colors.white),

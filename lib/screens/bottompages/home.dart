@@ -41,6 +41,11 @@ class _HomeState extends State<Home> {
             'Attijjara',
             style: TextStyle(color: Colors.white, fontSize: 25),
           ),
+
+          actions: [Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Icon(Icons.search_sharp),
+          )],
         ),
         body: ListView(
           controller: _scrollController,
@@ -75,40 +80,44 @@ class _HomeState extends State<Home> {
                   )),
             ),
             Container(color: Colors.black, height: 150, child: SliderList()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Card(
-                  child: IconButton(
-                    onPressed: () => setPostOrientation("grid"),
-                    icon: Image.asset('asset/frame.png'),
-                  ),
-                ),
-                Card(
-                  child: TextButton.icon(
-                    label: Text(
-                      'Tier',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    onPressed: () => setPostOrientation("list"),
-                    icon: Image.asset(
-                      'asset/swap.png',
-                      height: 20,
+            Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(23)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Card(
+                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    child: IconButton(
+                      onPressed: () => setPostOrientation("grid"),
+                      icon: Image.asset('asset/frame.png'),
                     ),
                   ),
-                ),
-                Card(
-                  child: TextButton.icon(
-                    label: Text(
-                      'Filters',
-                      style: TextStyle(color: Colors.grey),
+                  Card(
+                    child: TextButton.icon(
+                      label: Text(
+                        'Tier',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      onPressed: () => setPostOrientation("list"),
+                      icon: Image.asset(
+                        'asset/swap.png',
+                        height: 20,
+                      ),
                     ),
-                    onPressed: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (builder) => Filteration())),
-                    icon: Image.asset('asset/filter.png', height: 20),
                   ),
-                ),
-              ],
+                  Card(
+                    child: TextButton.icon(
+                      label: Text(
+                        'Filters',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (builder) => Filteration())),
+                      icon: Image.asset('asset/filter.png', height: 20),
+                    ),
+                  ),
+                ],
+              ),
             ),
             buildProfilePost(),
             Container(
@@ -118,7 +127,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height / 2,
+              height: MediaQuery.of(context).size.height *0.4,
               child: ListView.builder(
                 itemCount: 4,
                 itemBuilder: (context, index) {
@@ -173,24 +182,24 @@ class _HomeState extends State<Home> {
                                 ),
                               ],
                             ),
-                            Container(
-                              margin: EdgeInsets.only(right: 20),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.more_vert_outlined,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Icon(
-                                    Icons.favorite_outline_outlined,
-                                    color: Colors.red,
-                                  ),
-                                ],
-                              ),
-                            )
+                            // Container(
+                            //   margin: EdgeInsets.only(right: 20),
+                            //   child: Column(
+                            //     children: [
+                            //       Icon(
+                            //         Icons.more_vert_outlined,
+                            //         color: Colors.grey,
+                            //       ),
+                            //       SizedBox(
+                            //         height: 30,
+                            //       ),
+                            //       Icon(
+                            //         Icons.favorite_outline_outlined,
+                            //         color: Colors.red,
+                            //       ),
+                            //     ],
+                            //   ),
+                            // )
                           ],
                         )
                       ],
@@ -235,7 +244,7 @@ class _HomeState extends State<Home> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 2,
                   mainAxisSpacing: 2,
-                  childAspectRatio: itemWidth / itemHeight),
+                  childAspectRatio: 3 / 4),
               itemCount: 4,
               itemBuilder: (BuildContext ctx, index) {
                 return Row(
