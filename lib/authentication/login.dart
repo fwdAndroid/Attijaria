@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:attijaria/Utils/authutils.dart';
+import 'package:attijaria/Utils/constant.dart';
 import 'package:attijaria/authentication/forgotpassword.dart';
 import 'package:attijaria/authentication/register.dart';
 import 'package:attijaria/config/config.dart';
 import 'package:attijaria/screens/Home/homepage.dart';
+import 'package:attijaria/widgets/customdialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,18 +22,6 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   TextEditingController emailLoginCont = TextEditingController();
   TextEditingController passwordLoginCont = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (builder) => HomePage()));
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,32 +96,19 @@ class _LoginState extends State<Login> {
                               borderRadius: BorderRadius.circular(12.0),
                             )),
                         onPressed: () async {
-                          var finalResult = await signIn(
-                              emailLoginCont.text.trim(),
-                              passwordLoginCont.text.trim());
-                          Fluttertoast.showToast(
-                              msg: "Login Complete",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0);
-                          if (finalResult) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (xtc) => HomePage()));
-                          } else {
-                            Fluttertoast.showToast(
-                                msg: "This is Center Short Toast",
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.CENTER,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0);
+                          if(passwordLoginCont.text.isEmpty&&emailLoginCont.text.isEmpty){
+                            Customdialog().showInSnackBar("required all Fileds", context);
                           }
+                          else if(passwordLoginCont.text.isEmpty){
+                            Customdialog().showInSnackBar("requried password", context);
+                          }
+                          else if(emailLoginCont.text.isEmpty){
+                            Customdialog().showInSnackBar("required email", context);
+                          }
+
+                          else if(passwordLoginCont.text.isNotEmpty&&emailLoginCont.text.isNotEmpty){
+                            Customdialog.showDialogBox(context);
+                            AuthUtils().loginUser(emailLoginCont.text.trim(), passwordLoginCont.text.trim(), context);                          }
                         },
                         child: Text(
                           'Login',
@@ -220,44 +198,58 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xff50442c), // background
-                            onPrimary: Colors.white, // foreground
+                    Container(
+                      margin: EdgeInsets.only(bottom: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xff50442c), // background
+                              onPrimary: Colors.white, // foreground
+                            ),
+                            icon: Image.asset(
+                              'asset/google.png',
+                              height: 50,
+                              width: 120,
+                            ),
+                            onPressed: () async {
+                              // await googleSignUp(context).then(
+                              //   (value) => Navigator.of(context).pushReplacement(
+                              //     MaterialPageRoute(
+                              //       builder: (context) => HomePage(),
+                              //     ),
+                              //   ),
+                              // );
+                            await  AuthUtils().signInWithGoogle();
+                          await    AuthUtils().socialLoginUser(context);
+
+                            },
+                            label: Text(''),
                           ),
-                          icon: Image.asset(
-                            'asset/google.png',
-                            height: 50,
-                            width: 120,
+                          SizedBox(width: 10,),
+                          ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xff50442c), // background
+                              onPrimary: Colors.white, // foreground
+                            ),
+                            icon: Image.asset(
+                              'asset/face.png',
+                              height: 50,
+                              width: 120,
+                            ),
+                            onPressed: ()async {
+                              try{
+                                await  AuthUtils().facbookLogin();
+                                await    AuthUtils().socialLoginUser(context);
+                              }catch(e){
+                                Customdialog.showBox(context, e.toString());
+                              }
+                              },
+                            label: Text(''),
                           ),
-                          onPressed: () async {
-                            await googleSignUp(context).then(
-                              (value) => Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ),
-                              ),
-                            );
-                          },
-                          label: Text(''),
-                        ),
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xff50442c), // background
-                            onPrimary: Colors.white, // foreground
-                          ),
-                          icon: Image.asset(
-                            'asset/face.png',
-                            height: 50,
-                            width: 120,
-                          ),
-                          onPressed: () {},
-                          label: Text(''),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

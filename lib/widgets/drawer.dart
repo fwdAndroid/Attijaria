@@ -1,3 +1,4 @@
+import 'package:attijaria/Utils/constant.dart';
 import 'package:attijaria/authentication/login.dart';
 import 'package:attijaria/screens/Information/information.dart';
 import 'package:attijaria/screens/accounments/accoucmentslist.dart';
@@ -218,10 +219,9 @@ class _MyDrawerState extends State<MyDrawer> {
             Divider(height: 1, color: Colors.black),
             InkWell(
               onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (builder) => Login()));
-              },
+                await firebaseAuth.signOut().then((value) =>                 Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (builder) => Login())));
+                },
               child: Container(
                 margin: EdgeInsets.only(left: 14),
                 child: ListTile(

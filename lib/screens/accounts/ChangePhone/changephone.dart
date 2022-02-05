@@ -1,3 +1,5 @@
+import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/widgets/customdialog.dart';
 import 'package:flutter/material.dart';
 
 class ChangePhone extends StatefulWidget {
@@ -8,6 +10,7 @@ class ChangePhone extends StatefulWidget {
 }
 
 class _ChangePhoneState extends State<ChangePhone> {
+  TextEditingController phoneController=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
@@ -45,6 +48,7 @@ class _ChangePhoneState extends State<ChangePhone> {
                 width: 320,
                 padding: EdgeInsets.all(10.0),
                 child: TextField(
+                  controller: phoneController,
                   autocorrect: true,
                   decoration: InputDecoration(
                     hintText: 'Enter New Phone Number',
@@ -80,7 +84,22 @@ class _ChangePhoneState extends State<ChangePhone> {
                     onPrimary: Colors.white,
                     onSurface: Colors.grey,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    if(phoneController.text.isEmpty){
+                      Customdialog().showInSnackBar("required Phone Number", context);
+                    }
+                    else{
+                      Customdialog.showDialogBox(context);
+                      firebaseFirestore.collection("users").doc(firebaseAuth.currentUser!.uid).update({
+                        "Phone Number":phoneController.text.trim()
+                      }).then((value) {
+                       Navigator.pop(context);
+                       Navigator.pop(context);
+                       Customdialog().showInSnackBar(
+                            "Phone Number Successfully updated", context);
+                      });
+                    }
+                  },
                   child: Text(
                     'Save',
                     style: TextStyle(color: Colors.white),

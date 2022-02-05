@@ -1,3 +1,5 @@
+import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/widgets/customdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -91,7 +93,23 @@ class _SelectGenderState extends State<SelectGender> {
                 onPrimary: Colors.white,
                 onSurface: Colors.grey,
               ),
-              onPressed: () {},
+              onPressed: () {
+                if(dropdownValue.isEmpty){
+                  Customdialog().showInSnackBar("required Gender", context);
+                }
+                else{
+                  Customdialog.showDialogBox(context);
+                  firebaseFirestore.collection("users").doc(firebaseAuth.currentUser!.uid).update({
+                    "Gender":dropdownValue.trim()
+                  }).then((value) {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Customdialog().showInSnackBar(
+                        "Gender Successfully updated", context);
+                  });
+                }
+
+              },
               child: Text(
                 'Save',
                 style: TextStyle(color: Colors.white),
