@@ -1,3 +1,5 @@
+import 'package:attijaria/screens/Home/homepage.dart';
+import 'package:attijaria/screens/bottompages/home.dart';
 import 'package:attijaria/screens/introscreens/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: Welcome(),
+      home: HomePage(),
     );
   }
 }

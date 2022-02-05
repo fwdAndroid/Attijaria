@@ -1,3 +1,4 @@
+import 'package:animated_search_bar/animated_search_bar.dart';
 import 'package:attijaria/screens/Filters/filteration.dart';
 import 'package:attijaria/screens/accounments/motoaccouncements.dart';
 import 'package:attijaria/screens/productdetails/productdetails.dart';
@@ -16,6 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String postOrientation = "grid";
   bool isLoading = false;
+  String searchText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +44,30 @@ class _HomeState extends State<Home> {
             style: TextStyle(color: Colors.white, fontSize: 25),
           ),
 
-          actions: [Padding(
+          actions: [Container(
+            width: 140,
+            
             padding: const EdgeInsets.only(right: 10),
-            child: Icon(Icons.search_sharp),
+            child: AnimatedSearchBar(
+            
+            labelStyle: TextStyle(fontSize: 16),
+            searchStyle: TextStyle(color: Colors.white),
+            cursorColor: Colors.white,
+            searchDecoration: InputDecoration(
+              hintText: "Search",
+              alignLabelWithHint: true,
+              fillColor: Colors.white,
+              focusColor: Colors.white,
+              hintStyle: TextStyle(color: Colors.white70),
+              border: InputBorder.none,
+            ),
+            onChanged: (value) {
+              print("value on Change");
+              setState(() {
+                searchText = value;
+              });
+            },
+          ),
           )],
         ),
         body: ListView(

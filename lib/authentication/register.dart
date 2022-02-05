@@ -36,7 +36,7 @@ class _RegisterState extends State<Register> {
       'Female',
       'Not Specified',
     ];
-    var appSize=MediaQuery.of(context).size;
+    var appSize = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -94,38 +94,43 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                             Container(
-                              padding: EdgeInsets.only(left:20),
-                              width: 320,
-                              height: 48,
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              margin:
+                                  EdgeInsets.only(top: 10, left: 20, right: 20),
                               decoration: BoxDecoration(
                                 color: Color(0xff9d8f67),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              margin: EdgeInsets.symmetric(horizontal:20, vertical: 12),
-                              child:  DropdownButton(
+                              child: DropdownButton(
                                 isExpanded: true,
+                                underline: DropdownButtonHideUnderline(
+                                    child: Container()),
 
                                 // Initial Value
                                 value: dropdownvalue,
 
                                 // Down Arrow Icon
                                 icon: const Icon(Icons.keyboard_arrow_down),
-
+                                //   hint: Text("Select Genders",style: TextStyle(color: Colors.white),),
                                 // Array list of items
                                 items: items.map((String items) {
                                   return DropdownMenuItem(
                                     value: items,
-                                    child: Text(items,style: TextStyle(
-                                      color: Colors.black,),),
+                                    child: Text(
+                                      items,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                   );
                                 }).toList(),
                                 // After selecting the desired option,it will
                                 // change button value to selected value
-                                onChanged: ( newValue) {
+                                onChanged: (newValue) {
                                   setState(() {
                                     dropdownvalue = newValue.toString();
                                   });
-print(dropdownvalue);
+                                  print(dropdownvalue);
                                 },
                               ),
                             ),
@@ -133,8 +138,8 @@ print(dropdownvalue);
                               margin: EdgeInsets.symmetric(
                                 horizontal: 20,
                               ),
-                              child:
-                              _textFormFieldFunction('E-mail', emailController),
+                              child: _textFormFieldFunction(
+                                  'E-mail', emailController),
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(
@@ -147,32 +152,37 @@ print(dropdownvalue);
                               margin: EdgeInsets.only(top: 15),
                               child: ElevatedButton(
                                 onPressed: () async {
-                                  if(phoneController.text.isEmpty&&dobController.text.isEmpty&&nameController.text.isEmpty&&passController.text.isEmpty&&emailController.text.isEmpty){
-                                    Customdialog().showInSnackBar("required all Fileds", context);
-                                  }
-                                  else if(nameController.text.isEmpty){
-                                    Customdialog().showInSnackBar("required name", context);
-                                  }
-
-                                  else if(phoneController.text.isEmpty) {
+                                  if (phoneController.text.isEmpty &&
+                                      dobController.text.isEmpty &&
+                                      nameController.text.isEmpty &&
+                                      passController.text.isEmpty &&
+                                      emailController.text.isEmpty) {
+                                    Customdialog().showInSnackBar(
+                                        "required all Fileds", context);
+                                  } else if (nameController.text.isEmpty) {
+                                    Customdialog().showInSnackBar(
+                                        "required name", context);
+                                  } else if (phoneController.text.isEmpty) {
                                     Customdialog().showInSnackBar(
                                         "required Phone Number", context);
-                                  }
-                                  else if(dobController.text.isEmpty) {
+                                  } else if (dobController.text.isEmpty) {
                                     Customdialog().showInSnackBar(
                                         "required DOB", context);
-                                  }
-                                  else if(emailController.text.isEmpty){
-                                    Customdialog().showInSnackBar("required email", context);
-                                  }
-                                  else if(passController.text.isEmpty) {
+                                  } else if (emailController.text.isEmpty) {
+                                    Customdialog().showInSnackBar(
+                                        "required email", context);
+                                  } else if (passController.text.isEmpty) {
                                     Customdialog().showInSnackBar(
                                         "required password", context);
-                                  }
-                                  else if(nameController.text.isNotEmpty&&passController.text.isNotEmpty&&emailController.text.isNotEmpty){
+                                  } else if (nameController.text.isNotEmpty &&
+                                      passController.text.isNotEmpty &&
+                                      emailController.text.isNotEmpty) {
                                     Customdialog.showDialogBox(context);
-                                    AuthUtils().registerUser(nameController.text.trim(), emailController.text.trim(),
-                                        passController.text.trim(), dobController.text.trim(),
+                                    AuthUtils().registerUser(
+                                        nameController.text.trim(),
+                                        emailController.text.trim(),
+                                        passController.text.trim(),
+                                        dobController.text.trim(),
                                         dropdownvalue.trim(),
                                         phoneController.text.trim(),
                                         context);
@@ -187,8 +197,8 @@ print(dropdownvalue);
                                     )),
                                 child: Text(
                                   "Create Account",
-                                  style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
                                 ),
                               ),
                             ),
@@ -209,16 +219,17 @@ print(dropdownvalue);
                                           color: Color(0xff000000),
                                           spreadRadius: 5,
                                           blurRadius: 7,
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
+                                          offset: Offset(0,
+                                              3), // changes position of shadow
                                         ),
                                       ],
                                     ),
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (ctx) => Login()));
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (ctx) => Login()));
                                     },
                                     child: Text(
                                       'Login',
@@ -232,8 +243,8 @@ print(dropdownvalue);
                                             color: Color(0xff000000),
                                             spreadRadius: 5,
                                             blurRadius: 7,
-                                            offset: Offset(
-                                                0, 3), // changes position of shadow
+                                            offset: Offset(0,
+                                                3), // changes position of shadow
                                           ),
                                         ],
                                       ),
@@ -247,7 +258,7 @@ print(dropdownvalue);
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(bottom: 20),
+                      margin: EdgeInsets.only(bottom: 30),
                       child: Column(
                         children: [
                           Container(
@@ -264,65 +275,72 @@ print(dropdownvalue);
                                     color: Color(0xff000000),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-                                    offset:
-                                    Offset(0, 3), // changes position of shadow
+                                    offset: Offset(
+                                        0, 3), // changes position of shadow
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color(0xff50442c), // background
-                                  onPrimary: Colors.white, // foreground
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xff50442c), // background
+                                    onPrimary: Colors.white, // foreground
+                                  ),
+                                  icon: Image.asset(
+                                    'asset/google.png',
+                                    height: 50,
+                                    width: 120,
+                                  ),
+                                  onPressed: () async {
+                                    // await googleSignUp(context).then(
+                                    //       (value) =>
+                                    //       Navigator.of(context).pushReplacement(
+                                    //         MaterialPageRoute(
+                                    //           builder: (context) => HomePage(),
+                                    //         ),
+                                    //       ),
+                                    // );
+                                    try {
+                                      await AuthUtils().signInWithGoogle();
+                                      await AuthUtils()
+                                          .socialLoginUser(context);
+                                    } catch (e) {
+                                      Customdialog.showBox(
+                                          context, e.toString());
+                                    }
+                                  },
+                                  label: Text(''),
                                 ),
-                                icon: Image.asset(
-                                  'asset/google.png',
-                                  height: 50,
-                                  width: 120,
+                                ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color(0xff50442c), // background
+                                    onPrimary: Colors.white, // foreground
+                                  ),
+                                  icon: Image.asset(
+                                    'asset/face.png',
+                                    height: 50,
+                                    width: 120,
+                                  ),
+                                  onPressed: () async {
+                                    try {
+                                      await AuthUtils().facbookLogin();
+                                      await AuthUtils()
+                                          .socialLoginUser(context);
+                                    } catch (e) {
+                                      Customdialog.showBox(
+                                          context, e.toString());
+                                    }
+                                  },
+                                  label: Text(''),
                                 ),
-                                onPressed: () async {
-                                  // await googleSignUp(context).then(
-                                  //       (value) =>
-                                  //       Navigator.of(context).pushReplacement(
-                                  //         MaterialPageRoute(
-                                  //           builder: (context) => HomePage(),
-                                  //         ),
-                                  //       ),
-                                  // );
-                                  try {
-                                    await AuthUtils().signInWithGoogle();
-                                    await AuthUtils().socialLoginUser(context);
-                                  }catch(e){
-    Customdialog.showBox(context, e.toString());
-    }
-                                },
-                                label: Text(''),
-                              ),
-                              ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color(0xff50442c), // background
-                                  onPrimary: Colors.white, // foreground
-                                ),
-                                icon: Image.asset(
-                                  'asset/face.png',
-                                  height: 50,
-                                  width: 120,
-                                ),
-                                onPressed: () async{
-                                  try{
-                                    await  AuthUtils().facbookLogin();
-                                    await    AuthUtils().socialLoginUser(context);
-                                  }catch(e){
-                                    Customdialog.showBox(context, e.toString());
-                                  }
-                                },
-                                label: Text(''),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -339,7 +357,7 @@ print(dropdownvalue);
 
   _textFormFieldFunction(String s, TextEditingController controller) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 15),
       decoration: BoxDecoration(
         color: Color(0xff9d8f67),
         borderRadius: BorderRadius.circular(10),
@@ -348,7 +366,7 @@ print(dropdownvalue);
         controller: controller,
         decoration: InputDecoration(
           labelStyle: TextStyle(color: Colors.white),
-          contentPadding: EdgeInsets.symmetric(horizontal: 50),
+          contentPadding: EdgeInsets.symmetric(horizontal: 20),
           fillColor: Colors.blueAccent,
           hintText: s,
           hintStyle: TextStyle(color: Colors.white),
@@ -360,7 +378,7 @@ print(dropdownvalue);
 
   _textFormFieldFunctionPassword(String s, TextEditingController passContor) {
     return Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 15),
       decoration: BoxDecoration(
         color: Color(0xff9d8f67),
         borderRadius: BorderRadius.circular(10),
@@ -369,7 +387,7 @@ print(dropdownvalue);
         controller: passContor,
         obscureText: true,
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 50),
+            contentPadding: EdgeInsets.symmetric(horizontal: 20),
             labelStyle: TextStyle(color: Colors.white),
             border: InputBorder.none,
             hintText: s,
@@ -402,7 +420,7 @@ print(dropdownvalue);
 
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication? googleAuth =
-      await googleUser?.authentication;
+          await googleUser?.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
