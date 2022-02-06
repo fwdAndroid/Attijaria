@@ -44,11 +44,7 @@ class _HomeState extends State<Home> {
             style: TextStyle(color: Colors.white, fontSize: 25),
           ),
 
-<<<<<<< HEAD
-          actions: [Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Icon(Icons.search_sharp),
-=======
+
           actions: [Container(
             width: 140,
             
@@ -73,8 +69,7 @@ class _HomeState extends State<Home> {
               });
             },
           ),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
-          )],
+       )],
         ),
         body: ListView(
           controller: _scrollController,

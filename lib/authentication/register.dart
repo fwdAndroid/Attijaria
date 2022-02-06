@@ -36,11 +36,8 @@ class _RegisterState extends State<Register> {
       'Female',
       'Not Specified',
     ];
-<<<<<<< HEAD
-    var appSize=MediaQuery.of(context).size;
-=======
+
     var appSize = MediaQuery.of(context).size;
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -98,72 +95,46 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                             Container(
-<<<<<<< HEAD
-                              padding: EdgeInsets.only(left:20),
                               width: 320,
                               height: 48,
-=======
                               padding: EdgeInsets.symmetric(horizontal: 20),
                               margin:
                                   EdgeInsets.only(top: 10, left: 20, right: 20),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                               decoration: BoxDecoration(
                                 color: Color(0xff9d8f67),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-<<<<<<< HEAD
-                              margin: EdgeInsets.symmetric(horizontal:20, vertical: 12),
-                              child:  DropdownButton(
-                                isExpanded: true,
-=======
+                              // margin: EdgeInsets.symmetric(horizontal:20, vertical: 12),
                               child: DropdownButton(
                                 isExpanded: true,
                                 underline: DropdownButtonHideUnderline(
                                     child: Container()),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
 
                                 // Initial Value
                                 value: dropdownvalue,
 
                                 // Down Arrow Icon
                                 icon: const Icon(Icons.keyboard_arrow_down),
-<<<<<<< HEAD
-
-=======
                                 //   hint: Text("Select Genders",style: TextStyle(color: Colors.white),),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                                 // Array list of items
                                 items: items.map((String items) {
                                   return DropdownMenuItem(
                                     value: items,
-<<<<<<< HEAD
-                                    child: Text(items,style: TextStyle(
-                                      color: Colors.black,),),
-=======
                                     child: Text(
                                       items,
                                       style: TextStyle(
                                         color: Colors.black,
                                       ),
                                     ),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                                   );
                                 }).toList(),
                                 // After selecting the desired option,it will
                                 // change button value to selected value
-<<<<<<< HEAD
-                                onChanged: ( newValue) {
-                                  setState(() {
-                                    dropdownvalue = newValue.toString();
-                                  });
-print(dropdownvalue);
-=======
                                 onChanged: (newValue) {
                                   setState(() {
                                     dropdownvalue = newValue.toString();
                                   });
                                   print(dropdownvalue);
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                                 },
                               ),
                             ),
@@ -171,14 +142,9 @@ print(dropdownvalue);
                               margin: EdgeInsets.symmetric(
                                 horizontal: 20,
                               ),
-<<<<<<< HEAD
                               child:
                               _textFormFieldFunction('E-mail', emailController),
-=======
-                              child: _textFormFieldFunction(
-                                  'E-mail', emailController),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
-                            ),
+),
                             Container(
                               margin: EdgeInsets.symmetric(
                                 horizontal: 20,
@@ -190,7 +156,6 @@ print(dropdownvalue);
                               margin: EdgeInsets.only(top: 15),
                               child: ElevatedButton(
                                 onPressed: () async {
-<<<<<<< HEAD
                                   if(phoneController.text.isEmpty&&dobController.text.isEmpty&&nameController.text.isEmpty&&passController.text.isEmpty&&emailController.text.isEmpty){
                                     Customdialog().showInSnackBar("required all Fileds", context);
                                   }
@@ -215,9 +180,13 @@ print(dropdownvalue);
                                   }
                                   else if(nameController.text.isNotEmpty&&passController.text.isNotEmpty&&emailController.text.isNotEmpty){
                                     Customdialog.showDialogBox(context);
-                                    AuthUtils().registerUser(nameController.text.trim(), emailController.text.trim(),
+                                    AuthUtils().registerUser(nameController.text.trim(),
+                                        emailController.text.trim(),
                                         passController.text.trim(), dobController.text.trim(),
-=======
+                                        dropdownvalue,phoneController.text.trim(),
+                                        context
+                                    );
+                                    }
                                   if (phoneController.text.isEmpty &&
                                       dobController.text.isEmpty &&
                                       nameController.text.isEmpty &&
@@ -249,8 +218,7 @@ print(dropdownvalue);
                                         emailController.text.trim(),
                                         passController.text.trim(),
                                         dobController.text.trim(),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
-                                        dropdownvalue.trim(),
+                                       dropdownvalue.trim(),
                                         phoneController.text.trim(),
                                         context);
                                   }
@@ -264,13 +232,8 @@ print(dropdownvalue);
                                     )),
                                 child: Text(
                                   "Create Account",
-<<<<<<< HEAD
-                                  style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
-=======
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 18),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                                 ),
                               ),
                             ),
@@ -291,27 +254,17 @@ print(dropdownvalue);
                                           color: Color(0xff000000),
                                           spreadRadius: 5,
                                           blurRadius: 7,
-<<<<<<< HEAD
-                                          offset: Offset(
-                                              0, 3), // changes position of shadow
-=======
                                           offset: Offset(0,
                                               3), // changes position of shadow
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                                         ),
                                       ],
                                     ),
                                   ),
                                   TextButton(
                                     onPressed: () {
-<<<<<<< HEAD
-                                      Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (ctx) => Login()));
-=======
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (ctx) => Login()));
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                                     },
                                     child: Text(
                                       'Login',
@@ -325,14 +278,9 @@ print(dropdownvalue);
                                             color: Color(0xff000000),
                                             spreadRadius: 5,
                                             blurRadius: 7,
-<<<<<<< HEAD
-                                            offset: Offset(
-                                                0, 3), // changes position of shadow
-=======
                                             offset: Offset(0,
                                                 3), // changes position of shadow
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
-                                          ),
+ ),
                                         ],
                                       ),
                                     ),
@@ -345,11 +293,8 @@ print(dropdownvalue);
                       ),
                     ),
                     Container(
-<<<<<<< HEAD
                       margin: EdgeInsets.only(bottom: 20),
-=======
-                      margin: EdgeInsets.only(bottom: 30),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
+
                       child: Column(
                         children: [
                           Container(
@@ -366,19 +311,13 @@ print(dropdownvalue);
                                     color: Color(0xff000000),
                                     spreadRadius: 5,
                                     blurRadius: 7,
-<<<<<<< HEAD
-                                    offset:
-                                    Offset(0, 3), // changes position of shadow
-=======
                                     offset: Offset(
                                         0, 3), // changes position of shadow
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                                   ),
                                 ],
                               ),
                             ),
                           ),
-<<<<<<< HEAD
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -430,8 +369,7 @@ print(dropdownvalue);
                                 },
                                 label: Text(''),
                               ),
-                            ],
-=======
+                            ]),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -491,7 +429,6 @@ print(dropdownvalue);
                                 ),
                               ],
                             ),
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
                           ),
                         ],
                       ),

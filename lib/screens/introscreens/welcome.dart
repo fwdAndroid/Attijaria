@@ -1,10 +1,7 @@
 import 'package:attijaria/Utils/constant.dart';
 import 'package:attijaria/screens/Home/homepage.dart';
 import 'package:attijaria/screens/introscreens/onboard.dart';
-<<<<<<< HEAD
 import 'package:dots_indicator/dots_indicator.dart';
-=======
->>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
