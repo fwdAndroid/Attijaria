@@ -25,7 +25,7 @@ class _SliderListState extends State<SliderList> {
             width: MediaQuery.of(context).size.width,
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40.0),
+                borderRadius: BorderRadius.circular(20.0),
               ),
               elevation: 4,
               child: Row(

@@ -54,6 +54,10 @@ dependencies:
   cloud_firestore: ^3.1.6
   flutter_spinkit: ^5.1.0
   flutter_facebook_auth: ^4.0.1
+<<<<<<< HEAD
+=======
+  animated_search_bar: ^2.1.0
+>>>>>>> 06c64b5b830d736b9911a42878aeed48329cb7c5
 
 dev_dependencies:
   flutter_test:
