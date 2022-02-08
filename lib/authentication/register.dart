@@ -105,37 +105,43 @@ class _RegisterState extends State<Register> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               // margin: EdgeInsets.symmetric(horizontal:20, vertical: 12),
-                              child: DropdownButton(
-                                isExpanded: true,
-                                underline: DropdownButtonHideUnderline(
-                                    child: Container()),
+                              child: Theme(
+                                data: ThemeData(accentColor: Colors.white,
+                                primaryColor: Colors.white,
+                                  canvasColor: Colors.white
+                                ),
+                                child: DropdownButton(
+                                  isExpanded: true,
+                                  underline: DropdownButtonHideUnderline(
+                                      child: Container()),
 
-                                // Initial Value
-                                value: dropdownvalue,
+                                  // Initial Value
+                                  value: dropdownvalue,
 
-                                // Down Arrow Icon
-                                icon: const Icon(Icons.keyboard_arrow_down),
-                                //   hint: Text("Select Genders",style: TextStyle(color: Colors.white),),
-                                // Array list of items
-                                items: items.map((String items) {
-                                  return DropdownMenuItem(
-                                    value: items,
-                                    child: Text(
-                                      items,
-                                      style: TextStyle(
-                                        color: Colors.black,
+                                  // Down Arrow Icon
+                                  icon: const Icon(Icons.keyboard_arrow_down),
+                                  //   hint: Text("Select Genders",style: TextStyle(color: Colors.white),),
+                                  // Array list of items
+                                  items: items.map((String items) {
+                                    return DropdownMenuItem(
+                                      value: items,
+                                      child: Text(
+                                        items,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }).toList(),
-                                // After selecting the desired option,it will
-                                // change button value to selected value
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    dropdownvalue = newValue.toString();
-                                  });
-                                  print(dropdownvalue);
-                                },
+                                    );
+                                  }).toList(),
+                                  // After selecting the desired option,it will
+                                  // change button value to selected value
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      dropdownvalue = newValue!;
+                                    });
+                                    print(dropdownvalue);
+                                  },
+                                ),
                               ),
                             ),
                             Container(
@@ -370,66 +376,7 @@ class _RegisterState extends State<Register> {
                                 label: Text(''),
                               ),
                             ]),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton.icon(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xff50442c), // background
-                                    onPrimary: Colors.white, // foreground
-                                  ),
-                                  icon: Image.asset(
-                                    'asset/google.png',
-                                    height: 50,
-                                    width: 120,
-                                  ),
-                                  onPressed: () async {
-                                    // await googleSignUp(context).then(
-                                    //       (value) =>
-                                    //       Navigator.of(context).pushReplacement(
-                                    //         MaterialPageRoute(
-                                    //           builder: (context) => HomePage(),
-                                    //         ),
-                                    //       ),
-                                    // );
-                                    try {
-                                      await AuthUtils().signInWithGoogle();
-                                      await AuthUtils()
-                                          .socialLoginUser(context);
-                                    } catch (e) {
-                                      Customdialog.showBox(
-                                          context, e.toString());
-                                    }
-                                  },
-                                  label: Text(''),
-                                ),
-                                ElevatedButton.icon(
-                                  style: ElevatedButton.styleFrom(
-                                    primary: Color(0xff50442c), // background
-                                    onPrimary: Colors.white, // foreground
-                                  ),
-                                  icon: Image.asset(
-                                    'asset/face.png',
-                                    height: 50,
-                                    width: 120,
-                                  ),
-                                  onPressed: () async {
-                                    try {
-                                      await AuthUtils().facbookLogin();
-                                      await AuthUtils()
-                                          .socialLoginUser(context);
-                                    } catch (e) {
-                                      Customdialog.showBox(
-                                          context, e.toString());
-                                    }
-                                  },
-                                  label: Text(''),
-                                ),
-                              ],
-                            ),
-                          ),
+
                         ],
                       ),
                     ),

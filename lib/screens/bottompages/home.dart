@@ -17,8 +17,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String postOrientation = "grid";
   bool isLoading = false;
-  String searchText = "";
-
+  String? searchText;
+  bool showtext = false;
   @override
   Widget build(BuildContext context) {
     ScrollController _scrollController = new ScrollController();
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           }
         }
       });
-
+    var appSize = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.white,
         drawer: MyDrawer(),
@@ -39,37 +39,64 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.black,
           elevation: 0,
           centerTitle: true,
-          title: Text(
-            'Attijjara',
-            style: TextStyle(color: Colors.white, fontSize: 25),
-          ),
-
-
-          actions: [Container(
-            width: 140,
-            
-            padding: const EdgeInsets.only(right: 10),
-            child: AnimatedSearchBar(
-            
-            labelStyle: TextStyle(fontSize: 16),
-            searchStyle: TextStyle(color: Colors.white),
-            cursorColor: Colors.white,
-            searchDecoration: InputDecoration(
-              hintText: "Search",
-              alignLabelWithHint: true,
-              fillColor: Colors.white,
-              focusColor: Colors.white,
-              hintStyle: TextStyle(color: Colors.white70),
-              border: InputBorder.none,
+          title: showtext == false
+              ? Text(
+                  'Attijjara',
+                  style: TextStyle(color: Colors.white, fontSize: 25),
+                )
+              : Container(),
+          actions: [
+            AnimatedContainer(duration: Duration(microseconds: 200),
+              width:showtext==false?0.0:appSize.width*0.7,
+              child: TextField(
+                style: TextStyle(color: Colors.white),
+                cursorColor: Colors.white,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Search",
+                  hintStyle: TextStyle(color: Colors.white)
+              ,contentPadding: EdgeInsets.only(top: 7)
+                ),),
             ),
-            onChanged: (value) {
-              print("value on Change");
-              setState(() {
-                searchText = value;
-              });
-            },
-          ),
-       )],
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: InkWell(
+                  onTap: (){
+                    setState(() {
+                      showtext=!showtext;
+                    });
+                  },
+                  child:showtext==false? Icon(Icons.search):
+                  Icon(Icons.close)),
+            ),
+
+            // Container(
+            //   // width: appSize.width * 0.8,
+            //   // padding: const EdgeInsets.only(right: 10),
+            //   child: AnimatedSearchBar(
+            //
+            //     labelStyle: TextStyle(fontSize: 16),
+            //     searchStyle: TextStyle(color: Colors.white),
+            //     cursorColor: Colors.white,
+            //     searchDecoration: InputDecoration(
+            //       hintText: "Search",
+            //       // label: Text("Hone"),
+            //       alignLabelWithHint: true,
+            //       fillColor: Colors.white,
+            //       focusColor: Colors.white,
+            //       hintStyle: TextStyle(color: Colors.white70),
+            //       border: InputBorder.none,
+            //     ),
+            //     onChanged: (value) {
+            //       print("value on Change");
+            //       setState(() {
+            //         searchText = value;
+            //       });
+            //       print(searchText);
+            //     },
+            //   ),
+            // )
+          ],
         ),
         body: ListView(
           controller: _scrollController,
@@ -105,7 +132,8 @@ class _HomeState extends State<Home> {
             ),
             Container(color: Colors.black, height: 150, child: SliderList()),
             Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(23)),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(23)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -135,8 +163,10 @@ class _HomeState extends State<Home> {
                         'Filters',
                         style: TextStyle(color: Colors.grey),
                       ),
-                      onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (builder) => Filteration())),
+                      onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => Filteration())),
                       icon: Image.asset('asset/filter.png', height: 20),
                     ),
                   ),
@@ -151,7 +181,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height *0.4,
+              height: MediaQuery.of(context).size.height * 0.4,
               child: ListView.builder(
                 itemCount: 4,
                 itemBuilder: (context, index) {
