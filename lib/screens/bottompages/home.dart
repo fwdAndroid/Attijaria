@@ -17,8 +17,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String postOrientation = "grid";
   bool isLoading = false;
-  String? searchText;
-  bool showtext = false;
+  String searchText = "";
+
   @override
   Widget build(BuildContext context) {
     ScrollController _scrollController = new ScrollController();
@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
           }
         }
       });
-    var appSize = MediaQuery.of(context).size;
+
     return Scaffold(
         backgroundColor: Colors.white,
         drawer: MyDrawer(),
@@ -39,64 +39,39 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.black,
           elevation: 0,
           centerTitle: true,
-          title: showtext == false
-              ? Text(
-                  'Attijjara',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                )
-              : Container(),
-          actions: [
-            AnimatedContainer(duration: Duration(microseconds: 200),
-              width:showtext==false?0.0:appSize.width*0.7,
-              child: TextField(
-                style: TextStyle(color: Colors.white),
-                cursorColor: Colors.white,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Search",
-                  hintStyle: TextStyle(color: Colors.white)
-              ,contentPadding: EdgeInsets.only(top: 7)
-                ),),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: InkWell(
-                  onTap: (){
-                    setState(() {
-                      showtext=!showtext;
-                    });
-                  },
-                  child:showtext==false? Icon(Icons.search):
-                  Icon(Icons.close)),
-            ),
+          title: Text(
+            'Attijjara',
+            style: TextStyle(color: Colors.white, fontSize: 25),
+          ),
 
-            // Container(
-            //   // width: appSize.width * 0.8,
-            //   // padding: const EdgeInsets.only(right: 10),
-            //   child: AnimatedSearchBar(
-            //
-            //     labelStyle: TextStyle(fontSize: 16),
-            //     searchStyle: TextStyle(color: Colors.white),
-            //     cursorColor: Colors.white,
-            //     searchDecoration: InputDecoration(
-            //       hintText: "Search",
-            //       // label: Text("Hone"),
-            //       alignLabelWithHint: true,
-            //       fillColor: Colors.white,
-            //       focusColor: Colors.white,
-            //       hintStyle: TextStyle(color: Colors.white70),
-            //       border: InputBorder.none,
-            //     ),
-            //     onChanged: (value) {
-            //       print("value on Change");
-            //       setState(() {
-            //         searchText = value;
-            //       });
-            //       print(searchText);
-            //     },
+
+          actions: [Container(
+
+              padding: const EdgeInsets.only(right: 10),
+              child: IconButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => Filteration()));
+              }, icon: Icon(Icons.search,color: Colors.white), )
+            //    AnimatedSearchBar(
+
+            //   labelStyle: TextStyle(fontSize: 16),
+            //   searchStyle: TextStyle(color: Colors.white),
+            //   cursorColor: Colors.white,
+            //   searchDecoration: InputDecoration(
+            //     hintText: "Search",
+            //     alignLabelWithHint: true,
+            //     fillColor: Colors.white,
+            //     focusColor: Colors.white,
+            //     hintStyle: TextStyle(color: Colors.white70),
+            //     border: InputBorder.none,
             //   ),
-            // )
-          ],
+            //   onChanged: (value) {
+            //     print("value on Change");
+            //     setState(() {
+            //       searchText = value;
+            //     });
+            //   },
+            // ),
+          )],
         ),
         body: ListView(
           controller: _scrollController,
@@ -111,6 +86,23 @@ class _HomeState extends State<Home> {
                 );
               },
               child: Image.asset('asset/ads.png'),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 10,right: 10,top: 5,bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Attijaria',style: TextStyle(color: Colors.black,fontSize: 20,),),
+                  IconButton(
+
+                    onPressed: () =>setPostOrientation("grid"),
+                    icon: Image.asset(
+                      'asset/frame.png',
+                      height: 20,
+                    ),
+                  ),
+                ],
+              ),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
@@ -131,48 +123,45 @@ class _HomeState extends State<Home> {
                   )),
             ),
             Container(color: Colors.black, height: 150, child: SliderList()),
-            Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(23)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Card(
-                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                    child: IconButton(
-                      onPressed: () => setPostOrientation("grid"),
-                      icon: Image.asset('asset/frame.png'),
-                    ),
-                  ),
-                  Card(
-                    child: TextButton.icon(
-                      label: Text(
-                        'Tier',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      onPressed: () => setPostOrientation("list"),
-                      icon: Image.asset(
-                        'asset/swap.png',
-                        height: 20,
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: TextButton.icon(
-                      label: Text(
-                        'Filters',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => Filteration())),
-                      icon: Image.asset('asset/filter.png', height: 20),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(23)),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Card(
+            //         // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            //         child: IconButton(
+            //           onPressed: () => setPostOrientation("grid"),
+            //           icon: Image.asset('asset/frame.png'),
+            //         ),
+            //       ),
+            //       Card(
+            //         child: TextButton.icon(
+            //           label: Text(
+            //             'Tier',
+            //             style: TextStyle(color: Colors.grey),
+            //           ),
+            //           onPressed: () => setPostOrientation("list"),
+            //           icon: Image.asset(
+            //             'asset/swap.png',
+            //             height: 20,
+            //           ),
+            //         ),
+            //       ),
+            //       Card(
+            //         child: TextButton.icon(
+            //           label: Text(
+            //             'Filters',
+            //             style: TextStyle(color: Colors.grey),
+            //           ),
+            //           onPressed: () => Navigator.push(context,
+            //               MaterialPageRoute(builder: (builder) => Filteration())),
+            //           icon: Image.asset('asset/filter.png', height: 20),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             buildProfilePost(),
             Container(
               margin: EdgeInsets.only(top: 5, bottom: 0),
@@ -181,7 +170,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: MediaQuery.of(context).size.height *0.4,
               child: ListView.builder(
                 itemCount: 4,
                 itemBuilder: (context, index) {
@@ -274,11 +263,11 @@ class _HomeState extends State<Home> {
   }
 
   buildProfilePost() {
-    var size = MediaQuery.of(context).size;
+    // var size = MediaQuery.of(context).size;
 
-    /*24 is for notification bar on Android*/
-    final double itemWidth = (size.height - kToolbarHeight - 69) / 2;
-    final double itemHeight = size.width;
+    // /*24 is for notification bar on Android*/
+    // final double itemWidth = (size.height - kToolbarHeight - 69) / 2;
+    // final double itemHeight = size.width;
 
     if (isLoading) {
       return CircularProgressIndicator();
@@ -286,159 +275,163 @@ class _HomeState extends State<Home> {
     //Oreientation show post as grid or list
     else if (postOrientation == "grid") {
       //Showing Profile Images In GridView Style
-      return SizedBox(
-        height: MediaQuery.of(context).size.height / 2,
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (builder) => ProductDetail()));
-          },
-          child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 2,
-                  mainAxisSpacing: 2,
-                  childAspectRatio: 3 / 4),
-              itemCount: 4,
-              itemBuilder: (BuildContext ctx, index) {
-                return Row(
-                  children: [
-                    Stack(
-                      children: [
-                        Container(
-                            padding: EdgeInsets.only(top: 15),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: HexColor("#F6F7F8"),
-                            )),
-                        Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                children: [
-                                  Card(
-                                    margin: EdgeInsets.only(left: 10),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: 174,
-                                          width: MediaQuery.of(this.context)
-                                                  .size
-                                                  .width /
-                                              2.4,
-                                          child: Stack(
-                                            children: [
-                                              Container(
-                                                decoration:
-                                                    BoxDecoration(boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.white
-                                                        .withOpacity(0.8),
-                                                    spreadRadius: 5,
-                                                    blurRadius: 5,
-                                                    offset:
-                                                        Offset(0, 7), // changes
-                                                  )
-                                                ]),
-                                                height: 174,
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  child: Image.asset(
-                                                      'asset/rectangles.png',
-                                                      fit: BoxFit.fitHeight),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                top: 10,
-                                                right: 10,
-                                                child: Icon(
-                                                  Icons.favorite_border,
-                                                  color: Colors.red,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(left: 10),
-                                          child: Text(
-                                            '700,90 DH',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
+      return Container(
+        margin: EdgeInsets.only(top: 10),
+        child: SizedBox(
+          height: 250,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (builder) => ProductDetail()));
+            },
+            child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                //     crossAxisCount: 2,
+                //     crossAxisSpacing: 2,
+                //     mainAxisSpacing: 2,
+                //     childAspectRatio: 3 / 4),
+                itemCount: 4,
+                itemBuilder: (BuildContext ctx, index) {
+                  return Row(
+                    children: [
+                      Stack(
+                        children: [
+                          Container(
+                              padding: EdgeInsets.only(top: 15),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: HexColor("#F6F7F8"),
+                              )),
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Row(
+                                  children: [
+                                    Card(
+                                      margin: EdgeInsets.only(left: 10),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            height: 174,
+                                            width: MediaQuery.of(this.context)
+                                                .size
+                                                .width /
+                                                2.4,
+                                            child: Stack(
                                               children: [
                                                 Container(
-                                                  margin:
-                                                      EdgeInsets.only(left: 5),
+                                                  decoration:
+                                                  BoxDecoration(boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.white
+                                                          .withOpacity(0.8),
+                                                      spreadRadius: 5,
+                                                      blurRadius: 5,
+                                                      offset:
+                                                      Offset(0, 7), // changes
+                                                    )
+                                                  ]),
+                                                  height: 174,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                    BorderRadius.circular(10),
+                                                    child: Image.asset(
+                                                        'asset/rectangles.png',
+                                                        fit: BoxFit.fitHeight),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  top: 10,
+                                                  right: 10,
                                                   child: Icon(
-                                                    Icons.location_pin,
-                                                    size: 14,
-                                                    color: HexColor('#9098B1'),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Casablanca',
-                                                  style: TextStyle(
-                                                    color: HexColor('#9098B1'),
-                                                    fontSize: 14,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Icon(
-                                                  Icons.lock_clock,
-                                                  size: 14,
-                                                  color: HexColor('#9098B1'),
-                                                ),
-                                                Text(
-                                                  '14:17',
-                                                  style: TextStyle(
-                                                    color: HexColor('#9098B1'),
-                                                    fontSize: 14,
+                                                    Icons.favorite_border,
+                                                    color: Colors.red,
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                          ],
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(
-                                              left: 8, top: 2, bottom: 8),
-                                          child: Text(
-                                            'Livre Mac',
-                                            style: TextStyle(
-                                              color: HexColor('#9098B1'),
-                                              fontSize: 12,
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(left: 10),
+                                            child: Text(
+                                              '700,90 DH',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              }),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    margin:
+                                                    EdgeInsets.only(left: 5),
+                                                    child: Icon(
+                                                      Icons.location_pin,
+                                                      size: 14,
+                                                      color: HexColor('#9098B1'),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'Casablanca',
+                                                    style: TextStyle(
+                                                      color: HexColor('#9098B1'),
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Icon(
+                                                    Icons.lock_clock,
+                                                    size: 14,
+                                                    color: HexColor('#9098B1'),
+                                                  ),
+                                                  Text(
+                                                    '14:17',
+                                                    style: TextStyle(
+                                                      color: HexColor('#9098B1'),
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                                left: 8, top: 2, bottom: 8),
+                                            child: Text(
+                                              'Livre Mac',
+                                              style: TextStyle(
+                                                color: HexColor('#9098B1'),
+                                                fontSize: 12,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                }),
+          ),
         ),
       );
     } else if (postOrientation == "list") {
