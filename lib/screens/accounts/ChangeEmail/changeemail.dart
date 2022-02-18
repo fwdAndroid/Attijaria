@@ -124,7 +124,8 @@ TextEditingController passwordController=TextEditingController();
                    else if(emailController.text.isEmpty){
                       Customdialog().showInSnackBar("required Email", context);
                     }
-                    else if(emailController.text.isNotEmpty&passwordController.text.isNotEmpty){
+                    else if(emailController.text.isNotEmpty &
+                    passwordController.text.isNotEmpty){
                       Customdialog.showDialogBox(context);
 
                       try{

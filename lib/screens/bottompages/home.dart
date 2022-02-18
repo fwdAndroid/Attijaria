@@ -1,12 +1,14 @@
 import 'package:animated_search_bar/animated_search_bar.dart';
+import 'package:attijaria/Utils/constant.dart';
 import 'package:attijaria/screens/Filters/filteration.dart';
 import 'package:attijaria/screens/accounments/motoaccouncements.dart';
 import 'package:attijaria/screens/productdetails/productdetails.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/sliderlist.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import 'package:intl/intl.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -171,85 +173,101 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height *0.4,
-              child: ListView.builder(
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    elevation: 4,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 10),
-                              height: 140,
-                              width: 100,
-                              child: Image.asset('asset/watch.png'),
+              child: StreamBuilder(
+                  stream: firebaseFirestore.collection("posts").snapshots(),
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasData) {
+                      return  snapshot.data!.docs.length==0?Center(child: Text("Empty Posts")):ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          var ds=snapshot.data!.docs[index];
+                          return  Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
                             ),
-                            Column(
+                            elevation: 4,
+                            child: Column(
                               children: [
-                                Container(
-                                    margin: EdgeInsets.only(top: 10, left: 10),
-                                    child: Text('Apple Watch')),
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.location_pin,
-                                    color: Colors.grey,
-                                  ),
-                                  label: Text(
-                                    'Lahore \n DHA ',
-                                    style: TextStyle(
-                                      color: Colors.grey,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(left: 10),
+                                      height: 140,
+                                      width: 100,
+                                      child: Image.network(ds['imageLink']),
                                     ),
-                                  ),
-                                ),
-                                Container(
-                                  child: TextButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.timer,
-                                      color: Colors.grey,
+                                    Column(
+                                      children: [
+                                        Container(
+                                            margin: EdgeInsets.only(top: 10, left: 10),
+                                            child: Text(ds['Category'])),
+                                        TextButton.icon(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.location_pin,
+                                            color: Colors.grey,
+                                          ),
+                                          label: Text(
+                                            '${ds['title']} ',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          child: TextButton.icon(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.timer,
+                                              color: Colors.grey,
+                                            ),
+                                            label: Text(
+                                              // '2:30 PM ',
+
+                          DateFormat.jm().format(
+                          DateTime.parse(ds['time']
+                              .toDate()
+                              .toString())),
+                                              style: TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    label: Text(
-                                      '2:30 PM ',
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                    // Container(
+                                    //   margin: EdgeInsets.only(right: 20),
+                                    //   child: Column(
+                                    //     children: [
+                                    //       Icon(
+                                    //         Icons.more_vert_outlined,
+                                    //         color: Colors.grey,
+                                    //       ),
+                                    //       SizedBox(
+                                    //         height: 30,
+                                    //       ),
+                                    //       Icon(
+                                    //         Icons.favorite_outline_outlined,
+                                    //         color: Colors.red,
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // )
+                                  ],
+                                )
                               ],
                             ),
-                            // Container(
-                            //   margin: EdgeInsets.only(right: 20),
-                            //   child: Column(
-                            //     children: [
-                            //       Icon(
-                            //         Icons.more_vert_outlined,
-                            //         color: Colors.grey,
-                            //       ),
-                            //       SizedBox(
-                            //         height: 30,
-                            //       ),
-                            //       Icon(
-                            //         Icons.favorite_outline_outlined,
-                            //         color: Colors.red,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // )
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Icon(Icons.error_outline);
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  }),
             )
           ],
         ));
@@ -284,152 +302,166 @@ class _HomeState extends State<Home> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (builder) => ProductDetail()));
             },
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 2,
-                //     crossAxisSpacing: 2,
-                //     mainAxisSpacing: 2,
-                //     childAspectRatio: 3 / 4),
-                itemCount: 4,
-                itemBuilder: (BuildContext ctx, index) {
-                  return Row(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(top: 15),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: HexColor("#F6F7F8"),
-                              )),
-                          Column(
+            child: StreamBuilder(
+                stream: firebaseFirestore.collection('posts').snapshots(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    return   snapshot.data!.docs.length==0?Center(child: Text("Empty Posts")):ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        //     crossAxisCount: 2,
+                        //     crossAxisSpacing: 2,
+                        //     mainAxisSpacing: 2,
+                        //     childAspectRatio: 3 / 4),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (BuildContext ctx, index) {
+                          var ds=snapshot.data!.docs[index];
+                          return Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Row(
-                                  children: [
-                                    Card(
-                                      margin: EdgeInsets.only(left: 10),
-                                      shape: RoundedRectangleBorder(
+                              Stack(
+                                children: [
+                                  Container(
+                                      padding: EdgeInsets.only(top: 15),
+                                      decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            height: 174,
-                                            width: MediaQuery.of(this.context)
-                                                .size
-                                                .width /
-                                                2.4,
-                                            child: Stack(
-                                              children: [
-                                                Container(
-                                                  decoration:
-                                                  BoxDecoration(boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.white
-                                                          .withOpacity(0.8),
-                                                      spreadRadius: 5,
-                                                      blurRadius: 5,
-                                                      offset:
-                                                      Offset(0, 7), // changes
-                                                    )
-                                                  ]),
-                                                  height: 174,
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                    BorderRadius.circular(10),
-                                                    child: Image.asset(
-                                                        'asset/rectangles.png',
-                                                        fit: BoxFit.fitHeight),
-                                                  ),
-                                                ),
-                                                Positioned(
-                                                  top: 10,
-                                                  right: 10,
-                                                  child: Icon(
-                                                    Icons.favorite_border,
-                                                    color: Colors.red,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(left: 10),
-                                            child: Text(
-                                              '700,90 DH',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16,
+                                        color: HexColor("#F6F7F8"),
+                                      )),
+                                  Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 10),
+                                        child: Row(
+                                          children: [
+                                            Card(
+                                              margin: EdgeInsets.only(left: 10),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(10),
                                               ),
-                                            ),
-                                          ),
-                                          Column(
-                                            children: [
-                                              Row(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
-                                                    margin:
-                                                    EdgeInsets.only(left: 5),
-                                                    child: Icon(
-                                                      Icons.location_pin,
-                                                      size: 14,
-                                                      color: HexColor('#9098B1'),
+                                                    height: 174,
+                                                    width: MediaQuery.of(this.context)
+                                                        .size
+                                                        .width /
+                                                        2.4,
+                                                    child: Stack(
+                                                      children: [
+                                                        Container(
+                                                          decoration:
+                                                          BoxDecoration(boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors.white
+                                                                  .withOpacity(0.8),
+                                                              spreadRadius: 5,
+                                                              blurRadius: 5,
+                                                              offset:
+                                                              Offset(0, 7), // changes
+                                                            )
+                                                          ]),
+                                                          height: 174,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                            BorderRadius.circular(10),
+                                                            child: Image.network(
+                                                                ds['imageLink'],
+                                                                fit: BoxFit.cover),
+                                                          ),
+                                                        ),
+                                                        Positioned(
+                                                          top: 10,
+                                                          right: 10,
+                                                          child: Icon(
+                                                            Icons.favorite_border,
+                                                            color: Colors.red,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  Text(
-                                                    'Casablanca',
-                                                    style: TextStyle(
-                                                      color: HexColor('#9098B1'),
-                                                      fontSize: 14,
+                                                  Container(
+                                                    margin: EdgeInsets.only(left: 10),
+                                                    child: Text(
+                                                      '${ds['maxPrice']} DH',
+                                                      style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 16,
+                                                      ),
                                                     ),
                                                   ),
-                                                  SizedBox(
-                                                    width: 5,
+                                                  Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            margin:
+                                                            EdgeInsets.only(left: 5),
+                                                            child: Icon(
+                                                              Icons.location_pin,
+                                                              size: 14,
+                                                              color: HexColor('#9098B1'),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ds['Category'],
+                                                            style: TextStyle(
+                                                              color: HexColor('#9098B1'),
+                                                              fontSize: 14,
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 5,
+                                                          ),
+                                                          Icon(
+                                                            Icons.lock_clock,
+                                                            size: 14,
+                                                            color: HexColor('#9098B1'),
+                                                          ),
+                                                          Text(
+                          DateFormat.jm().format(
+                          DateTime.parse(ds['time']
+                              .toDate()
+                              .toString())),
+                                                            style: TextStyle(
+                                                              color: HexColor('#9098B1'),
+                                                              fontSize: 14,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
                                                   ),
-                                                  Icon(
-                                                    Icons.lock_clock,
-                                                    size: 14,
-                                                    color: HexColor('#9098B1'),
-                                                  ),
-                                                  Text(
-                                                    '14:17',
-                                                    style: TextStyle(
-                                                      color: HexColor('#9098B1'),
-                                                      fontSize: 14,
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 8, top: 2, bottom: 8),
+                                                    child: Text(
+                                                      ds['title'],
+                                                      style: TextStyle(
+                                                        color: HexColor('#9098B1'),
+                                                        fontSize: 12,
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(
-                                                left: 8, top: 2, bottom: 8),
-                                            child: Text(
-                                              'Livre Mac',
-                                              style: TextStyle(
-                                                color: HexColor('#9098B1'),
-                                                fontSize: 12,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
+                          );
+                        });
+                  } else if (snapshot.hasError) {
+                    return Icon(Icons.error_outline);
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
                 }),
           ),
         ),

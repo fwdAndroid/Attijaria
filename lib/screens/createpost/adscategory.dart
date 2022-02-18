@@ -59,7 +59,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (ctx) => CreatePost()));
+                                      builder: (ctx) => CreatePost(
+                                        cetagory: "Vehicles",
+                                      )));
                             }),
                       ],
                     ),

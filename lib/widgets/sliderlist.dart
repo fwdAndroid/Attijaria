@@ -1,3 +1,5 @@
+import 'package:attijaria/Utils/constant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
@@ -16,89 +18,100 @@ class _SliderListState extends State<SliderList> {
     return SizedBox(
       width: MediaQuery.of(context).size.width / 1,
       height: MediaQuery.of(context).size.height / 1,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 6,
-        itemBuilder: (context, index) {
-          return SizedBox(
-            height: 500,
-            width: MediaQuery.of(context).size.width,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              elevation: 4,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: EdgeInsets.only(left: 10),
-                      height: 140,
-                      width: 100,
-                      child: Image.asset('asset/boot.png'),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: ListTile(
-                      title: Column(
+      child: StreamBuilder(
+          stream: firebaseFirestore.collection("cetagories").snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  var ds=snapshot.data!.docs[index];
+                  return SizedBox(
+                    height: 500,
+                    width: MediaQuery.of(context).size.width,
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      elevation: 4,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 30, left: 10),
-                            child: Text('700 DH',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                    fontSize: 30)),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              margin: EdgeInsets.only(left: 10),
+                              height: 140,
+                              width: 100,
+                              child: Image.network(ds['imageUrl']),
+                            ),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              TextButton.icon(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.location_pin,
-                                  color: Colors.grey,
-                                ),
-                                label: Text(
-                                  'Lahore',
-                                  style: TextStyle(
-                                    color: Colors.grey,
+                          Expanded(
+                            flex: 2,
+                            child: ListTile(
+                              title: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(top: 30, left: 10),
+                                    child: Text(ds['price'],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                            fontSize: 30)),
                                   ),
-                                ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextButton.icon(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          Icons.location_pin,
+                                          color: Colors.grey,
+                                        ),
+                                        label: Text(
+                                          ds['cetagory'],
+                                          style: TextStyle(
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        child: TextButton.icon(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.timer,
+                                            color: Colors.grey,
+                                          ),
+                                          label: Text(
+                                            '2:30 PM ',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(ds['description'],
+                                      style:
+                                      TextStyle(color: Colors.black, fontSize: 15)),
+                                ],
                               ),
-                              Container(
-                                child: TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.timer,
-                                    color: Colors.grey,
-                                  ),
-                                  label: Text(
-                                    '2:30 PM ',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                          Text('Fawad ',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 15)),
                         ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+                  );
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Icon(Icons.error_outline);
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
     );
   }
 }

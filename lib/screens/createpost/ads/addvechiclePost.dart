@@ -1,9 +1,16 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors
 
+import 'dart:io';
+import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/widgets/customdialog.dart';
 import 'package:flutter/material.dart';
-
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:uuid/uuid.dart';
 class CreatePost extends StatefulWidget {
-  const CreatePost({Key? key}) : super(key: key);
+  String cetagory;
+   CreatePost({Key? key,required this.cetagory}) : super(key: key);
 
   @override
   _CreatePostState createState() => _CreatePostState();
@@ -11,7 +18,7 @@ class CreatePost extends StatefulWidget {
 
 class _CreatePostState extends State<CreatePost> {
   RangeValues values = RangeValues(1, 100);
-
+final formkey=GlobalKey<FormState>();
   Widget _longDescription(String descrop) {
     return Container(
 
@@ -53,11 +60,15 @@ class _CreatePostState extends State<CreatePost> {
 
 //TextFieldws
   Widget _textFormFieldFunctionIcon(
+      TextEditingController controller,
+          String? Function(String?)? validator,
     String Active,
   ) {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
+        validator: validator,
         autocorrect: true,
         decoration: InputDecoration(
           hintText: Active,
@@ -76,6 +87,59 @@ class _CreatePostState extends State<CreatePost> {
     );
   }
 
+  TextEditingController rentalController=TextEditingController();
+  TextEditingController sentorController=TextEditingController();
+  TextEditingController sellController=TextEditingController();
+  TextEditingController requestController=TextEditingController();
+  TextEditingController cetagoryController=TextEditingController();
+  TextEditingController carTypeController=TextEditingController();
+  TextEditingController markController=TextEditingController();
+  TextEditingController modelController=TextEditingController();
+  TextEditingController milegaController=TextEditingController();
+  TextEditingController gearBoxController=TextEditingController();
+  TextEditingController thumbnailController=TextEditingController();
+  TextEditingController modelYearController=TextEditingController();
+  TextEditingController fiscalPowerController=TextEditingController();
+  TextEditingController fuelTypeController=TextEditingController();
+  TextEditingController originController=TextEditingController();
+  TextEditingController firstHandController=TextEditingController();
+  TextEditingController colorsController=TextEditingController();
+  TextEditingController additionalDetailsController=TextEditingController();
+  TextEditingController titleController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
+  TextEditingController minPriceController=TextEditingController();
+  TextEditingController maxPriceController=TextEditingController();
+  TextEditingController phoneNumberController=TextEditingController();
+
+  File? imageUrl;
+
+  String? imageLink;
+
+  final ImagePicker _picker = ImagePicker();
+
+  void addImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageUrl = File(image!.path);
+    });
+    // Customdialog.showDialogBox(context);
+    // await uploadImageToFirebase().then((value) {
+    //   uploadImageToFirebase().then((value) {
+    //     firebaseFirestore.collection("messages").add({
+    //       "content": null,
+    //       "senderId": firebaseAuth.currentUser!.uid,
+    //       'receiverId': "aL1UE8ZWMT51IGEhYfmU",
+    //       "Time": DateTime.now(),
+    //       'image': imageLink
+    //     }).then((value) {
+    //       Customdialog.closeDialog(context);
+    //       FocusScope.of(context).unfocus();
+    //       messageController.clear();
+    //     });
+    //   });
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +155,50 @@ class _CreatePostState extends State<CreatePost> {
                   primary: Color(0xffF8B800), // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () {},
+                onPressed: () async{
+                  if(formkey.currentState!.validate()){
+                    if(imageUrl==null){
+                      Customdialog().showInSnackBar("Please add image", context);
+                    }
+                    else{
+                      Customdialog.showDialogBox(context);
+                  await    uploadImageToFirebase().then((v) {
+                        firebaseFirestore.collection("posts").add({
+                          "setRent":rentalController.text.trim(),
+                          "Sector":sentorController.text.trim(),
+                          "Sell": sellController.text,
+                          "Request": requestController.text,
+                          "Category":widget.cetagory,
+                          "carType":carTypeController.text.trim()
+                          ,"mark":markController.text.trim(),
+                          "model":modelController.text.trim(),
+                          "mileaga":milegaController.text.trim(),
+                          "gearbox":gearBoxController.text.trim(),
+                          "thumbnail":thumbnailController.text.trim(),
+                          "modelYear":modelYearController.text.trim(),
+                          "fiscalPower":fiscalPowerController.text.trim(),
+                          "fuelType":fuelTypeController.text.trim(),
+                          "origin":originController.text.trim(),
+                          'colors':colorsController.text.trim(),
+                          "additionalDetails":additionalDetailsController.text,
+                          "title":titleController.text.trim(),
+                          "description":descriptionController.text.trim(),
+                          "imageLink":imageLink,
+                          "minPrice":minPriceController.text.trim(),
+                          "maxPrice":maxPriceController.text.trim(),
+                          "phoneNumber":phoneNumberController.text.trim(),
+                          "time":DateTime.now()
+                        }).whenComplete(() {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Customdialog().showInSnackBar("Create a new post", context);
+                        });
+                      });
+                    }
+                  }
+                },
                 child: Text(
                   'Save',
                   style: TextStyle(color: Colors.white),
@@ -122,9 +229,14 @@ class _CreatePostState extends State<CreatePost> {
             color: Colors.black,
             child: Row(
               children: [
-                Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
+                InkWell(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
                 ),
                 SizedBox(
                   width: 10,
@@ -146,15 +258,16 @@ class _CreatePostState extends State<CreatePost> {
                 ),
               ),
               height: MediaQuery.of(context).size.height * 1,
-              child: ListView(children: [
-                SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: formkey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _titleText('Rental'),
-                      _textFormFieldFunctionIcon('Set Rental'),
+                      _textFormFieldFunctionIcon(rentalController,RequiredValidator(errorText: "Required"),'Set Rental'),
                       _titleText('Sector'),
-                      _textFormFieldFunctionIcon('Sector'),
+                      _textFormFieldFunctionIcon(sellController,RequiredValidator(errorText: "Required"),'Sector'),
                       _titleText('Position Type'),
                       SizedBox(
                         height: 90,
@@ -162,43 +275,43 @@ class _CreatePostState extends State<CreatePost> {
                           children: [
                             Expanded(
                                 flex: 1,
-                                child: _textFormFieldFunctionIcon('Sell')),
+                                child: _textFormFieldFunctionIcon(sellController,RequiredValidator(errorText: "Required"),'Sell')),
                             Expanded(
                                 flex: 1,
-                                child: _textFormFieldFunctionIcon('Request')),
+                                child: _textFormFieldFunctionIcon(requestController,RequiredValidator(errorText: "Required"), 'Request')),
                           ],
                         ),
                       ),
                       _titleText('Category'),
-                      _textFormFieldFunctionIcon('Category'),
+                      _textFormFieldFunctionIcon(cetagoryController,RequiredValidator(errorText: "Required"), 'Category'),
                       _titleText('Car type'),
-                      _textFormFieldFunctionIcon('Car type'),
+                      _textFormFieldFunctionIcon(carTypeController,RequiredValidator(errorText: "Required"), 'Car type'),
                       _titleText('Mark'),
-                      _textFormFieldFunctionIcon('Mark'),
+                      _textFormFieldFunctionIcon(markController,RequiredValidator(errorText: "Required"), 'Mark'),
                       _titleText('Model'),
-                      _textFormFieldFunctionIcon('Model'),
+                      _textFormFieldFunctionIcon(modelController,RequiredValidator(errorText: "Required"),'Model'),
                       _titleText('Mileage'),
-                      _textFormFieldFunctionIcon('Mileage'),
+                      _textFormFieldFunctionIcon(milegaController,RequiredValidator(errorText: "Required"),'Mileage'),
                       _titleText('Gear box'),
-                      _textFormFieldFunctionIcon('Gear box'),
+                      _textFormFieldFunctionIcon(gearBoxController,RequiredValidator(errorText: "Required"),'Gear box'),
                       _titleText('Thumbnail'),
-                      _textFormFieldFunctionIcon('Thumbnail'),
+                      _textFormFieldFunctionIcon(thumbnailController,RequiredValidator(errorText: "Required"),'Thumbnail'),
                       _titleText('Model Year'),
-                      _textFormFieldFunctionIcon('Model Year'),
+                      _textFormFieldFunctionIcon(modelYearController,RequiredValidator(errorText: "Required"),'Model Year'),
                       _titleText('Fiscal power'),
-                      _textFormFieldFunctionIcon('Fiscal power'),
+                      _textFormFieldFunctionIcon(fiscalPowerController,RequiredValidator(errorText: "Required"), 'Fiscal power'),
                       _titleText('Fuel Type'),
-                      _textFormFieldFunctionIcon('Fuel Type'),
+                      _textFormFieldFunctionIcon(fuelTypeController,RequiredValidator(errorText: "Required"),'Fuel Type'),
                       _titleText('Origin'),
-                      _textFormFieldFunctionIcon('Origin'),
+                      _textFormFieldFunctionIcon(originController,RequiredValidator(errorText: "Required"),'Origin'),
                       _titleText('First hand'),
-                      _textFormFieldFunctionIcon('First hand'),
+                      _textFormFieldFunctionIcon(firstHandController,RequiredValidator(errorText: "Required"),'First hand'),
                       _titleText('Colors'),
-                      _textFormFieldFunctionIcon('Colors'),
+                      _textFormFieldFunctionIcon(colorsController,RequiredValidator(errorText: "Required"),'Colors'),
                       _titleText('Additional Details'),
-                      _textFormFieldFunctionIcon('Additional Details'),
+                      _textFormFieldFunctionIcon(additionalDetailsController,RequiredValidator(errorText: "Required"),'Additional Details'),
                       _titleText('Title'),
-                      _textFormFieldFunctionIcon('Title'),
+                      _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "Required"),'Title'),
                       _titleText('Description'),
                       Container(
                           margin: EdgeInsets.only(left: 10, right: 10),
@@ -208,21 +321,27 @@ class _CreatePostState extends State<CreatePost> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(
-                              'asset/cameraimage.jpeg',
-                              height: 100,
-                              width: 100,
+                            InkWell(
+                              onTap: ()async{
+                                addImage();
+                              },
+                              child: Image.asset(
+                                'asset/cameraimage.jpeg',
+                                height: 100,
+                                width: 100,
+                              ),
                             ),
-                            Image.asset(
+                           imageUrl==null? Image.asset(
                               'asset/motbike.png',
                               height: 100,
                               width: 100,
-                            ),
-                            Image.asset(
-                              'asset/motbike.png',
-                              height: 100,
-                              width: 100,
-                            ),
+                            ):Image.file(imageUrl!,                              height: 100,
+                             width: 100,),
+                            // Image.asset(
+                            //   'asset/motbike.png',
+                            //   height: 100,
+                            //   width: 100,
+                            // ),
                           ],
                         ),
                       ),
@@ -252,10 +371,10 @@ class _CreatePostState extends State<CreatePost> {
                         children: [
                           Expanded(
                               flex: 1,
-                              child: _textFormFieldFunctionIcon('Min')),
+                              child: _textFormFieldFunctionIcon(minPriceController,RequiredValidator(errorText: "Required"),'Min')),
                           Expanded(
                               flex: 1,
-                              child: _textFormFieldFunctionIcon('Max')),
+                              child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "Required"),'Max')),
                         ],
                       ),
                       RangeSlider(
@@ -271,7 +390,7 @@ class _CreatePostState extends State<CreatePost> {
                             });
                           }),
                       _titleText(' Phone Number'),
-                      _textFormFieldFunctionIcon('Phone Number'),
+                      _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "Required"),'Phone Number'),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -316,11 +435,29 @@ class _CreatePostState extends State<CreatePost> {
                     ],
                   ),
                 ),
-              ]),
+              ),
             ),
           ),
         ],
       ),
     );
+  }
+  Future uploadImageToFirebase() async {
+    File? fileName = imageUrl;
+    var uuid = Uuid();
+    firebase_storage.Reference firebaseStorageRef = firebase_storage
+        .FirebaseStorage.instance
+        .ref()
+        .child('cetagories/images+${uuid.v4()}');
+    firebase_storage.UploadTask uploadTask =
+    firebaseStorageRef.putFile(fileName!);
+    firebase_storage.TaskSnapshot taskSnapshot =
+    await uploadTask.whenComplete(() async {
+      print(fileName);
+      String img = await uploadTask.snapshot.ref.getDownloadURL();
+      setState(() {
+        imageLink = img;
+      });
+    });
   }
 }

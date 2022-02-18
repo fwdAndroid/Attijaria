@@ -1,4 +1,3 @@
-
 import 'package:attijaria/screens/Home/homepage.dart';
 import 'package:attijaria/widgets/customdialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import 'constant.dart';
 
 
@@ -102,7 +100,6 @@ Navigator.pop(context);
    socialLoginUser(
        BuildContext context
        )async{
-
      String userName=firebaseAuth.currentUser!.displayName.toString();
          String email=firebaseAuth.currentUser!.email.toString();
      String dob="";
