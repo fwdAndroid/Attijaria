@@ -94,7 +94,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (ctx) => RealStatePost()));
+                                          builder: (ctx) => RealStatePost(
+                                            cetagory: "Real State",
+                                          )));
                                 }),
                           ],
                         ),
@@ -138,7 +140,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (ctx) =>
-                                              StoreshopPremisesPost()));
+                                              StoreshopPremisesPost(
+                                                cetagory: "Store & Shops",
+                                              )));
                                 }),
                           ],
                         ),
@@ -173,7 +177,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (ctx) => HousesAndVilas()));
+                                          builder: (ctx) => HousesAndVilas(
+                                            cetagory: "Houses",
+                                          )));
                                 }),
                           ],
                         ),
@@ -217,7 +223,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (ctx) =>
-                                              OfficesAndTraysAds()));
+                                              OfficesAndTraysAds(
+                                                cetagory: "Offices",
+                                              )));
                                 }),
                           ],
                         ),
@@ -253,7 +261,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (ctx) =>
-                                              PublicationLandAndFormAds()));
+                                              PublicationLandAndFormAds(
+                                                cetagory: "Publication Lands",
+                                              )));
                                 }),
                           ],
                         ),
@@ -298,7 +308,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (ctx) => MotoAds()));
+                                          builder: (ctx) => MotoAds(
+                                            cetagory: "MotoCycle",
+                                          )));
                                 }),
                           ],
                         ),
@@ -335,7 +347,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (ctx) => AdsAgriculture()));
+                                          builder: (ctx) => AdsAgriculture(
+                                            cetagory: "Agriculture Product",
+                                          )));
                                 }),
                           ],
                         ),
@@ -379,7 +393,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (ctx) => AdsHoliday()));
+                                          builder: (ctx) => AdsHoliday(
+                                            cetagory: "Holiday Rental",
+                                          )));
                                 }),
                           ],
                         ),
@@ -416,7 +432,9 @@ class _AdsCategoryState extends State<AdsCategory> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (ctx) => AdsNews()));
+                                          builder: (ctx) => AdsNews(
+                                            cetagory: "Telephone",
+                                          )));
                                 }),
                           ],
                         ),

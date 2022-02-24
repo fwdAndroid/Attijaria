@@ -177,7 +177,10 @@ class _HomeState extends State<Home> {
                   stream: firebaseFirestore.collection("posts").snapshots(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasData) {
-                      return  snapshot.data!.docs.length==0?Center(child: Text("Empty Posts")):ListView.builder(
+                      return  snapshot.data!.docs.length==0?
+                      Center
+                        (child: Text("Empty Posts")):
+                      ListView.builder(
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           var ds=snapshot.data!.docs[index];
@@ -297,26 +300,28 @@ class _HomeState extends State<Home> {
         margin: EdgeInsets.only(top: 10),
         child: SizedBox(
           height: 250,
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (builder) => ProductDetail()));
-            },
-            child: StreamBuilder(
-                stream: firebaseFirestore.collection('posts').snapshots(),
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasData) {
-                    return   snapshot.data!.docs.length==0?Center(child: Text("Empty Posts")):ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        //     crossAxisCount: 2,
-                        //     crossAxisSpacing: 2,
-                        //     mainAxisSpacing: 2,
-                        //     childAspectRatio: 3 / 4),
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (BuildContext ctx, index) {
-                          var ds=snapshot.data!.docs[index];
-                          return Row(
+          child: StreamBuilder(
+              stream: firebaseFirestore.collection('posts').snapshots(),
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  return   snapshot.data!.docs.length==0?Center(child: Text("Empty Posts")):ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      //     crossAxisCount: 2,
+                      //     crossAxisSpacing: 2,
+                      //     mainAxisSpacing: 2,
+                      //     childAspectRatio: 3 / 4),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (BuildContext ctx, index) {
+                        var ds=snapshot.data!.docs[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (builder) => ProductDetail(
+                                  id: ds.id,
+                                )));
+                          },
+                          child: Row(
                             children: [
                               Stack(
                                 children: [
@@ -455,15 +460,15 @@ class _HomeState extends State<Home> {
                                 ],
                               ),
                             ],
-                          );
-                        });
-                  } else if (snapshot.hasError) {
-                    return Icon(Icons.error_outline);
-                  } else {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                }),
-          ),
+                          ),
+                        );
+                      });
+                } else if (snapshot.hasError) {
+                  return Icon(Icons.error_outline);
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              }),
         ),
       );
     } else if (postOrientation == "list") {

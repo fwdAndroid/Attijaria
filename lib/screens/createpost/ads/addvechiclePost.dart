@@ -19,11 +19,14 @@ class CreatePost extends StatefulWidget {
 class _CreatePostState extends State<CreatePost> {
   RangeValues values = RangeValues(1, 100);
 final formkey=GlobalKey<FormState>();
-  Widget _longDescription(String descrop) {
+  Widget _longDescription(
+      TextEditingController controller,
+      String descrop) {
     return Container(
 
         // ignore: prefer_const_constructors
         child: TextField(
+          controller: controller,
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       decoration: InputDecoration(
@@ -122,22 +125,6 @@ final formkey=GlobalKey<FormState>();
     setState(() {
       imageUrl = File(image!.path);
     });
-    // Customdialog.showDialogBox(context);
-    // await uploadImageToFirebase().then((value) {
-    //   uploadImageToFirebase().then((value) {
-    //     firebaseFirestore.collection("messages").add({
-    //       "content": null,
-    //       "senderId": firebaseAuth.currentUser!.uid,
-    //       'receiverId': "aL1UE8ZWMT51IGEhYfmU",
-    //       "Time": DateTime.now(),
-    //       'image': imageLink
-    //     }).then((value) {
-    //       Customdialog.closeDialog(context);
-    //       FocusScope.of(context).unfocus();
-    //       messageController.clear();
-    //     });
-    //   });
-    // });
   }
 
   @override
@@ -188,6 +175,7 @@ final formkey=GlobalKey<FormState>();
                           "maxPrice":maxPriceController.text.trim(),
                           "phoneNumber":phoneNumberController.text.trim(),
                           "time":DateTime.now()
+                     ,"isFav":false,
                         }).whenComplete(() {
                           Navigator.pop(context);
                           Navigator.pop(context);
@@ -315,7 +303,7 @@ final formkey=GlobalKey<FormState>();
                       _titleText('Description'),
                       Container(
                           margin: EdgeInsets.only(left: 10, right: 10),
-                          child: _longDescription('Write Product Description')),
+                          child: _longDescription(descriptionController,'Write Product Description')),
                       Container(
                         margin: EdgeInsets.only(top: 10),
                         child: Row(

@@ -1,24 +1,63 @@
 // ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:attijaria/screens/Filters/holidayfilters.dart';
 import 'package:attijaria/screens/Filters/telephone.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:form_field_validator/form_field_validator.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../../Utils/constant.dart';
+import '../../../widgets/customdialog.dart';
 
 class AdsNews extends StatefulWidget {
-  const AdsNews({Key? key}) : super(key: key);
+  String cetagory;
+   AdsNews({Key? key,required this.cetagory}) : super(key: key);
 
   @override
   _AdsNewsState createState() => _AdsNewsState();
 }
-
 class _AdsNewsState extends State<AdsNews> {
+  TextEditingController locationController=TextEditingController();
+  TextEditingController sectorController=TextEditingController();
+  TextEditingController minController=TextEditingController();
+  TextEditingController maxController=TextEditingController();
+  TextEditingController cetagoryController=TextEditingController();
+  TextEditingController milegaController=TextEditingController();
+  TextEditingController marqueeController=TextEditingController();
+  TextEditingController modelYearController=TextEditingController();
+  TextEditingController storageCapacityCellController=TextEditingController();
+  TextEditingController titleController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
+  TextEditingController minPriceController=TextEditingController();
+  TextEditingController maxPriceController=TextEditingController();
+  TextEditingController phoneNumberController=TextEditingController();
+  final formKey=GlobalKey<FormState>();
+  File? imageUrl;
+
+  String? imageLink;
+
+  final ImagePicker _picker = ImagePicker();
+
+  void addImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageUrl = File(image!.path);
+    });
+  }
   RangeValues values = RangeValues(1, 100);
   String dropdownValueElat = "Nine";
-  Widget _longDescription(String descrop) {
+  Widget _longDescription(
+      TextEditingController controller,
+      String descrop) {
     return Container(
 
         // ignore: prefer_const_constructors
         child: TextField(
+          controller: controller,
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       decoration: InputDecoration(
@@ -55,6 +94,8 @@ class _AdsNewsState extends State<AdsNews> {
 
 //TextFieldws
   Widget _textFormFieldFunctionIcon(
+      TextEditingController controller,
+    String? Function(String?)? validator,
     String Active,
   ) {
     return Container(
@@ -94,7 +135,44 @@ class _AdsNewsState extends State<AdsNews> {
                   primary: Color(0xffF8B800), // background
                   onPrimary: Colors.white, // foreground
                 ),
-                onPressed: () {},
+                onPressed: ()async {
+                  if(formKey.currentState!.validate()){
+                    if(imageUrl==null){
+                      Customdialog().showInSnackBar("Please add image", context);
+                    }
+                    else{
+                      Customdialog.showDialogBox(context);
+                      await    uploadImageToFirebase().then((v) {
+                        firebaseFirestore.collection("posts").add({
+                          "location":locationController.text.trim(),
+                          "Sector":sectorController.text.trim(),
+                          "min":minController,
+                          "max":maxController,
+                          "Category":widget.cetagory,
+                          "cetagories":cetagoryController.text.trim(),
+                          "marqee":marqueeController.text.trim(),
+                          "elat":dropdownValueElat,
+                          "storageCapacity":storageCapacityCellController.text.trim(),
+                          "title":titleController.text.trim(),
+                          "description":descriptionController.text.trim(),
+                          "imageLink":imageLink,
+                          "minPrice":minPriceController.text.trim(),
+                          "maxPrice":maxPriceController.text.trim(),
+                          "phoneNumber":phoneNumberController.text.trim(),
+                          "time":DateTime.now(),
+                          "isFav":false
+                        }).whenComplete(() {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                          Customdialog().showInSnackBar("Create a new post", context);
+                        });
+                      });
+                    }
+                  }
+
+                },
                 child: Text(
                   'Save',
                   style: TextStyle(color: Colors.white),
@@ -127,26 +205,27 @@ class _AdsNewsState extends State<AdsNews> {
           ),
         ),
         height: MediaQuery.of(context).size.height * 1,
-        child: ListView(children: [
-          SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Form(
+            key: formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _titleText('Location'),
-                _textFormFieldFunctionIcon('Set Location'),
+                _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
                 _titleText('Sector'),
-                _textFormFieldFunctionIcon('Sector'),
+                _textFormFieldFunctionIcon(sectorController,RequiredValidator(errorText: "required"),'Sector'),
                 _titleText('Type of Post'),
                 Row(
                   children: [
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Min')),
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Max')),
+                    Expanded(flex: 1, child: _textFormFieldFunctionIcon(minController,RequiredValidator(errorText: "required"),'Min')),
+                    Expanded(flex: 1, child: _textFormFieldFunctionIcon(maxController,RequiredValidator(errorText: "required"),'Max')),
                   ],
                 ),
                 _titleText('Category'),
-                _textFormFieldFunctionIcon('Category'),
+                _textFormFieldFunctionIcon(cetagoryController,RequiredValidator(errorText: "required"),'Category'),
                 _titleText('Marque'),
-                _textFormFieldFunctionIcon('Marque'),
+                _textFormFieldFunctionIcon(marqueeController,RequiredValidator(errorText: "required"),'Marque'),
                 _titleText('Elat'),
                 Container(
                     padding: EdgeInsets.only(left: 10, right: 10, top: 20),
@@ -187,12 +266,12 @@ class _AdsNewsState extends State<AdsNews> {
                       }).toList(),
                     )),
                 _titleText('Storage capacity'),
-                _textFormFieldFunctionIcon('Storage capacity'),
+                _textFormFieldFunctionIcon(storageCapacityCellController,RequiredValidator(errorText: "required"),'Storage capacity'),
                 _titleText('Title'),
-                _textFormFieldFunctionIcon('Title'),
+                _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
                 Container(
                     margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: _longDescription('Product Description')),
+                    child: _longDescription(descriptionController,'Product Description')),
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Row(
@@ -222,8 +301,8 @@ class _AdsNewsState extends State<AdsNews> {
                 _titleText('Prix DH'),
                 Row(
                   children: [
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Min')),
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon('Max')),
+                    Expanded(flex: 1, child: _textFormFieldFunctionIcon(minPriceController,RequiredValidator(errorText: "required"),'Min')),
+                    Expanded(flex: 1, child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "required"),'Max')),
                   ],
                 ),
                 RangeSlider(
@@ -239,7 +318,7 @@ class _AdsNewsState extends State<AdsNews> {
                       });
                     }),
                 _titleText(' Phone Number'),
-                _textFormFieldFunctionIcon('Phone Number'),
+                _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -302,8 +381,26 @@ class _AdsNewsState extends State<AdsNews> {
               ],
             ),
           ),
-        ]),
+        ),
       ),
     );
+  }
+  Future uploadImageToFirebase() async {
+    File? fileName = imageUrl;
+    var uuid = Uuid();
+    firebase_storage.Reference firebaseStorageRef = firebase_storage
+        .FirebaseStorage.instance
+        .ref()
+        .child('cetagories/images+${uuid.v4()}');
+    firebase_storage.UploadTask uploadTask =
+    firebaseStorageRef.putFile(fileName!);
+    firebase_storage.TaskSnapshot taskSnapshot =
+    await uploadTask.whenComplete(() async {
+      print(fileName);
+      String img = await uploadTask.snapshot.ref.getDownloadURL();
+      setState(() {
+        imageLink = img;
+      });
+    });
   }
 }
