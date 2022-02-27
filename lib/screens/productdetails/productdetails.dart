@@ -1,4 +1,5 @@
 import 'package:attijaria/Utils/constant.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -36,7 +37,8 @@ class _ProductDetailState extends State<ProductDetail> {
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   var ds=snapshot.data;
-                  return Column(children: [
+                  return Column(
+                      children: [
                     Stack(children: [
                       Container(
                         height: MediaQuery.of(context).size.height,
@@ -49,9 +51,21 @@ class _ProductDetailState extends State<ProductDetail> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child:Image.network(ds['imageLink'],height: 200,fit: BoxFit.fitWidth,)
-                                // Image.asset('asset/houses.png',
-                                //     height: 200, fit: BoxFit.fitWidth),
+                                child:CachedNetworkImage(
+                                  imageUrl: ds['imageLink'],
+                                  imageBuilder: (context, imageProvider) => Container(
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.fitWidth,
+                                      ),
+                                    ),
+                                  ),
+                                  placeholder: (context, url) => Center(child: Image.asset("asset/infinity.gif")),
+                                  errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                                )
+                                // Image.network(ds['imageLink'],height: 200,fit: BoxFit.fitWidth,)
                               ),
                             ),
                             Positioned(
@@ -128,7 +142,13 @@ class _ProductDetailState extends State<ProductDetail> {
                                           Row(
                                             children: [
                                               Icon(Icons.place),
-                                              Text(ds['cetagories'])
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*0.4,
+                                                child: Text(ds['address'],
+                                                softWrap: true,
+                                                  overflow: TextOverflow.fade,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           SizedBox(
@@ -594,7 +614,10 @@ ds['description'],
                 } else if (snapshot.hasError) {
                   return Center(child: Icon(Icons.error_outline));
                 } else {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: Center(child: CircularProgressIndicator(
+
+                    color: Colors.black,
+                  )));
                 }
               }),
         ));

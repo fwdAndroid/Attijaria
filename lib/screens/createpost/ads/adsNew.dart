@@ -7,10 +7,12 @@ import 'package:attijaria/screens/Filters/telephone.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 
 class AdsNews extends StatefulWidget {
@@ -48,7 +50,7 @@ class _AdsNewsState extends State<AdsNews> {
       imageUrl = File(image!.path);
     });
   }
-  RangeValues values = RangeValues(1, 100);
+
   String dropdownValueElat = "Nine";
   Widget _longDescription(
       TextEditingController controller,
@@ -73,6 +75,10 @@ class _AdsNewsState extends State<AdsNews> {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           borderSide: BorderSide(color: Colors.grey, width: 2),
         ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+        )
       ),
     ));
   }
@@ -101,6 +107,8 @@ class _AdsNewsState extends State<AdsNews> {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextField(
+        enabled: controller.text.isNotEmpty?false:true,
+        controller: controller,
         autocorrect: true,
         decoration: InputDecoration(
           hintText: Active,
@@ -115,11 +123,29 @@ class _AdsNewsState extends State<AdsNews> {
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+            disabledBorder:OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+            )
         ),
       ),
     );
   }
 
+  RangeValues rangevalues = RangeValues(1.0,10.0);
+  String? address;
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cetagoryController.text=widget.cetagory;
+    getLocation();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,8 +172,8 @@ class _AdsNewsState extends State<AdsNews> {
                         firebaseFirestore.collection("posts").add({
                           "location":locationController.text.trim(),
                           "Sector":sectorController.text.trim(),
-                          "min":minController,
-                          "max":maxController,
+                          "min":minController.text.trim(),
+                          "max":maxController.text.trim(),
                           "Category":widget.cetagory,
                           "cetagories":cetagoryController.text.trim(),
                           "marqee":marqueeController.text.trim(),
@@ -159,6 +185,7 @@ class _AdsNewsState extends State<AdsNews> {
                           "minPrice":minPriceController.text.trim(),
                           "maxPrice":maxPriceController.text.trim(),
                           "phoneNumber":phoneNumberController.text.trim(),
+                          "address":address,
                           "time":DateTime.now(),
                           "isFav":false
                         }).whenComplete(() {
@@ -277,18 +304,21 @@ class _AdsNewsState extends State<AdsNews> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        'asset/cameraimage.jpeg',
-                        height: 100,
-                        width: 100,
+                      InkWell(
+                        onTap:addImage,
+                        child: Image.asset(
+                          'asset/cameraimage.jpeg',
+                          height: 100,
+                          width: 100,
+                        ),
                       ),
-                      Image.asset(
+                    imageUrl==null?  Image.asset(
                         'asset/motbike.png',
                         height: 100,
                         width: 100,
-                      ),
-                      Image.asset(
-                        'asset/motbike.png',
+                      ):
+                      Image.file(
+imageUrl!,
                         height: 100,
                         width: 100,
                       ),
@@ -306,15 +336,17 @@ class _AdsNewsState extends State<AdsNews> {
                   ],
                 ),
                 RangeSlider(
-                    values: values,
+                    values: rangevalues,
                     activeColor: Colors.yellow[700],
                     inactiveColor: Colors.black38,
-                    min: 1,
-                    max: 100,
+                    min: 1.0,
+                    max: 9999999.0,
                     // values: values,
                     onChanged: (values) {
                       setState(() {
-                        values = values;
+                        rangevalues = values;
+                        minPriceController.text=rangevalues.start.toInt().toString();
+                        maxPriceController.text=rangevalues.end.toInt().toString();
                       });
                     }),
                 _titleText(' Phone Number'),

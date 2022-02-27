@@ -1,4 +1,5 @@
 import 'package:attijaria/Utils/constant.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
@@ -42,10 +43,14 @@ class _SliderListState extends State<SliderList> {
                             flex: 1,
                             child: Container(
                               margin: EdgeInsets.only(left: 10),
-                              height: 140,
+                              height: 135,
                               width: 100,
-                              child: Image.network(ds['imageUrl']),
-                            ),
+                              child: CachedNetworkImage(
+                                imageUrl: ds['imageUrl'],
+                                fit: BoxFit.fill,
+                                placeholder: (context, url) => Center(child: Image.asset("asset/infinity.gif")),
+                                errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                              ) ),
                           ),
                           Expanded(
                             flex: 2,

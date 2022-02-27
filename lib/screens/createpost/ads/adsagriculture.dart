@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 class AdsAgriculture extends StatefulWidget {
   String cetagory;
@@ -47,7 +49,7 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
       imageUrl = File(image!.path);
     });
   }
-  RangeValues values = RangeValues(1, 100);
+
 
   Widget _longDescription(
       TextEditingController controller,
@@ -100,6 +102,7 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextFormField(
+        enabled: controller.text.isNotEmpty?false:true,
         controller: controller,
         validator: validator,
         autocorrect: true,
@@ -116,11 +119,28 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+          disabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+          ),
         ),
       ),
     );
   }
-
+  RangeValues rangevalues = RangeValues(1.0,10.0);
+  String? address;
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cetagoryController.text=widget.cetagory;
+    getLocation();
+  }
   @override
   Widget build(BuildContext context) {
     String dropdownValueCategory = 'Air Condition';
@@ -151,8 +171,8 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
                           "sell": sellController.text.trim(),
                           "request": requestController.text.trim(),
                           "Category":widget.cetagory,
-                          "cetagories":cetagoryController.text.trim(),
-                        "modelYear":modelYearController.text.trim(),
+                        "address":address,
+                          "modelYear":modelYearController.text.trim(),
                           "fiscalPower":fiscalPowerController.text.trim(),
                           "title":titleController.text.trim(),
                           "description":descriptionController.text.trim(),
@@ -326,15 +346,17 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
                           ],
                         ),
                         RangeSlider(
-                            values: values,
+                            values: rangevalues,
                             activeColor: Colors.yellow[700],
                             inactiveColor: Colors.black38,
-                            min: 1,
-                            max: 100,
+                            min: 1.0,
+                            max: 9999999.0,
                             // values: values,
                             onChanged: (values) {
                               setState(() {
-                                values = values;
+                                rangevalues = values;
+                                minPriceController.text=rangevalues.start.toInt().toString();
+                                maxPriceController.text=rangevalues.end.toInt().toString();
                               });
                             }),
                         _titleText(' Phone Number'),

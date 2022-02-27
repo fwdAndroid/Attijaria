@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:geolocator/geolocator.dart';
 import 'package:uuid/uuid.dart';
 import 'package:attijaria/screens/Filters/filtersappartments.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 
 class RealStatePost extends StatefulWidget {
@@ -22,7 +24,6 @@ class RealStatePost extends StatefulWidget {
 class _RealStatePostState extends State<RealStatePost> {
   TextEditingController rentalController = TextEditingController();
   TextEditingController sentorController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
   TextEditingController tradeFairsController = TextEditingController();
   TextEditingController totalSurfaceController = TextEditingController();
   TextEditingController livingSpaceController = TextEditingController();
@@ -48,7 +49,6 @@ final formKey=GlobalKey<FormState>();
     });
   }
 
-  RangeValues values = RangeValues(1, 100);
   String dropdownValueNews = "Sale";
   String dropdownValueBedrooms = "1";
   String dropdownValueBathrooms = "1";
@@ -106,6 +106,7 @@ final formKey=GlobalKey<FormState>();
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextFormField(
+        enabled: controller.text.isNotEmpty?false:true,
         controller: controller,
         validator: validator,
         autocorrect: true,
@@ -122,11 +123,27 @@ final formKey=GlobalKey<FormState>();
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+            disabledBorder:OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+            )
         ),
       ),
     );
   }
-
+  RangeValues rangevalues = RangeValues(1.0,10.0);
+  String? address;
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  getLocation();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,7 +172,7 @@ final formKey=GlobalKey<FormState>();
                           "Sector":sentorController.text.trim(),
                           "Sale": dropdownValueNews,
                           "cetagories":dropdownValueCategory,
-                          "address":addressController.text,
+                          "address":address??"",
                           "bedrooms": dropdownValueBedrooms,
                           "bathrooms": dropdownValueBathrooms,
                           "Category":widget.cetagory,
@@ -346,9 +363,9 @@ final formKey=GlobalKey<FormState>();
                                 );
                               }).toList(),
                             )),
-                        _titleText('Address'),
-                        _textFormFieldFunctionIcon(addressController,
-                            RequiredValidator(errorText: "Required"), 'Address'),
+                        // _titleText('Address'),
+                        // _textFormFieldFunctionIcon(addressController,
+                        //     RequiredValidator(errorText: "Required"), 'Address'),
                         _titleText('Bedrooms'),
                         //BedRooms
                         Container(
@@ -613,15 +630,17 @@ final formKey=GlobalKey<FormState>();
                           ],
                         ),
                         RangeSlider(
-                            values: values,
+                            values: rangevalues,
                             activeColor: Colors.yellow[700],
                             inactiveColor: Colors.black38,
-                            min: 1,
-                            max: 100,
+                            min: 1.0,
+                            max: 9999999.0,
                             // values: values,
                             onChanged: (values) {
                               setState(() {
-                                values = values;
+                                rangevalues = values;
+                                minPriceController.text=rangevalues.start.toInt().toString();
+                                maxPriceController.text=rangevalues.end.toInt().toString();
                               });
                             }),
                         _titleText(' Phone Number'),

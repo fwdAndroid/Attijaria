@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:geolocator/geolocator.dart';
 import 'package:uuid/uuid.dart';
 import 'package:attijaria/screens/Filters/rental.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 
 class HousesAndVilas extends StatefulWidget {
@@ -25,7 +27,6 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
   TextEditingController sellController = TextEditingController();
   TextEditingController requestController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
   TextEditingController totalSurfaceController = TextEditingController();
   TextEditingController livingSpaceController = TextEditingController();
   TextEditingController noOfFloorsController = TextEditingController();
@@ -47,7 +48,6 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
     });
   }
 
-  RangeValues values = RangeValues(1, 100);
 
   Widget _longDescription(TextEditingController controller, String descrop) {
     return Container(
@@ -97,7 +97,10 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
   ) {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
-      child: TextField(
+      child: TextFormField(
+        controller: controller,
+        enabled: controller.text.isNotEmpty?false:true,
+        validator: validator,
         autocorrect: true,
         decoration: InputDecoration(
           hintText: Active,
@@ -112,30 +115,29 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+          disabledBorder:OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+          ),
         ),
       ),
     );
   }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    locationController.dispose();
-     sectorController.dispose();
-     sellController.dispose();
-     requestController.dispose();
-     categoryController.dispose();
-     addressController.dispose();
-     totalSurfaceController.dispose();
-     livingSpaceController.dispose();
-     noOfFloorsController.dispose();
-     furnitureController.dispose();
-     titleController.dispose();
-     descriptionController.dispose();
-     minPriceController.dispose();
-     maxPriceController.dispose();
-     phoneNumberController.dispose();
-    super.dispose();
+  RangeValues rangevalues = RangeValues(1.0,10.0);
+  String? address;
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
   }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    categoryController.text=widget.cetagory;
+    getLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
     String dropdownValueBedroom = "1";
@@ -171,8 +173,7 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
     "Sell": sellController.text,
     "Request": requestController.text.trim(),
     "Category":widget.cetagory,
-      "cetagories":categoryController.text,
-      "address":addressController.text.trim()
+      "address":address
     ,"bedrooms":dropdownValueBedroom,
     "bathrooms":dropdownValueBathroom,
     "salons":dropdownValueSalons,
@@ -288,8 +289,7 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
                         ),
                         _titleText('Category'),
                         _textFormFieldFunctionIcon(categoryController,RequiredValidator(errorText: "required"),'Category'),
-                        _titleText('Address'),
-                        _textFormFieldFunctionIcon(addressController,RequiredValidator(errorText: "required"),'Address'),
+
                         _titleText('Bedrooms'),
                         Container(
                             padding:
@@ -577,15 +577,17 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
                           ],
                         ),
                         RangeSlider(
-                            values: values,
+                            values: rangevalues,
                             activeColor: Colors.yellow[700],
                             inactiveColor: Colors.black38,
-                            min: 1,
-                            max: 100,
+                            min: 1.0,
+                            max: 9999999.0,
                             // values: values,
                             onChanged: (values) {
                               setState(() {
-                                values = values;
+                                rangevalues = values;
+                                minPriceController.text=rangevalues.start.toInt().toString();
+                                maxPriceController.text=rangevalues.end.toInt().toString();
                               });
                             }),
                         _titleText(' Phone Number'),

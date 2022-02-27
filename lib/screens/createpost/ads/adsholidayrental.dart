@@ -6,10 +6,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 
 class AdsHoliday extends StatefulWidget {
@@ -25,7 +27,6 @@ class _AdsHolidayState extends State<AdsHoliday> {
   TextEditingController locationController=TextEditingController();
   TextEditingController sectorController=TextEditingController();
   TextEditingController cetagoryController=TextEditingController();
-  TextEditingController addressController=TextEditingController();
   TextEditingController totalSurfaceController=TextEditingController();
   TextEditingController surfaceHabitableController=TextEditingController();
   TextEditingController capacityController=TextEditingController();
@@ -50,7 +51,8 @@ class _AdsHolidayState extends State<AdsHoliday> {
   }
   TimeOfDay _starttime = TimeOfDay(hour: 7, minute: 15);
   TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
-
+String departureTime="";
+String arrivalTime="";
    _selectTime(int a) async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
@@ -60,27 +62,27 @@ if(a==0){
   if (newTime != null) {
     setState(() {
       _time = newTime;
-      print(_time);
+     arrivalTime=_time.toString();
+
     });
   }
 }else if(a==1){
   if (newTime != null) {
     setState(() {
       _time = newTime;
-      print(_time);
+departureTime=_time.toString();
     });
   }
 }
   }
 
-  RangeValues values = RangeValues(1, 100);
   String dropDownHolidayMews = "Sale";
   String dropDownHolidayBed = "1";
   String dropDownHolidayBathRoom = "1";
   String dropDownHolidaySalon = "1";
   String dropDownHolidayEtage = "Ground floor";
   String dropDownHolidayCaution = "1 month";
-  String dropDownHolidayAge = "Nine";
+  String dropDownHolidayAge = "None";
   String dropDownHolidayFurniture = "Furniture";
   String dropDownHolidayAdditional = "Elevator";
   Widget _longDescription(
@@ -134,6 +136,7 @@ if(a==0){
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextFormField(
+        enabled: controller.text.isNotEmpty?false:true,
         controller: controller,
         autocorrect: true,
         validator: validator,
@@ -150,11 +153,28 @@ if(a==0){
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+          ),
         ),
       ),
     );
   }
-
+  RangeValues rangevalues = RangeValues(1.0,10.0);
+  String? address;
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  cetagoryController.text=widget.cetagory;
+    getLocation();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,8 +204,7 @@ if(a==0){
                           "Sector":sectorController.text.trim(),
                           "typeOfNews":dropDownHolidayMews,
                           "Category":widget.cetagory,
-                          "cetagories":cetagoryController.text.trim(),
-                          "address":addressController.text.trim(),
+                          "address":address,
                           "bathrooms":dropDownHolidayBathRoom,
                           "bedrooms":dropDownHolidayBed,
                           "saloon":dropDownHolidaySalon
@@ -205,8 +224,8 @@ if(a==0){
                           "maxPrice":maxPriceController.text.trim(),
                           "phoneNumber":phoneNumberController.text.trim(),
                           "time":DateTime.now(),
-                          "arrivalTime":_time,
-                          "departureTime":_starttime,
+                          "arrivalTime":arrivalTime,
+                          "departureTime":departureTime,
                           "isFav":false
                         }).whenComplete(() {
                           Navigator.pop(context);
@@ -329,8 +348,6 @@ if(a==0){
                             )),
                         _titleText('Category'),
                         _textFormFieldFunctionIcon(cetagoryController,RequiredValidator(errorText: "required"),'Category'),
-                        _titleText('Address'),
-                        _textFormFieldFunctionIcon(addressController,RequiredValidator(errorText: "required"),'Address'),
                         _titleText('Bedrooms'),
                         Container(
                             padding:
@@ -591,6 +608,7 @@ if(a==0){
                                 );
                               }).toList(),
                             )),
+
                         _titleText('Furniture'),
                         Container(
                             padding:
@@ -643,7 +661,10 @@ if(a==0){
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                               ),
-                              onPressed: _selectTime(0),
+
+                              onPressed:() async{
+
+                                await _selectTime(0);},
                               child: Text(
                                 'Arrival Time',
                                 textAlign: TextAlign.start,
@@ -663,7 +684,10 @@ if(a==0){
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                               ),
-                              onPressed: _selectTime(1),
+                              // onPressed: (){},
+                              onPressed: ()async{
+                              await  _selectTime(1);
+                              },
                               child: Text(
                                 'Departure Time',
                                 textAlign: TextAlign.start,
@@ -783,17 +807,20 @@ if(a==0){
                           ],
                         ),
                         RangeSlider(
-                            values: values,
+                            values: rangevalues,
                             activeColor: Colors.yellow[700],
                             inactiveColor: Colors.black38,
-                            min: 1,
-                            max: 100,
+                            min: 1.0,
+                            max: 9999999.0,
                             // values: values,
                             onChanged: (values) {
                               setState(() {
-                                values = values;
+                                rangevalues = values;
+                                minPriceController.text=rangevalues.start.toInt().toString();
+                                maxPriceController.text=rangevalues.end.toInt().toString();
                               });
                             }),
+
                         _titleText(' Phone Number'),
                         _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
                         Column(

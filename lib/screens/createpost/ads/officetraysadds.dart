@@ -6,12 +6,14 @@ import 'package:attijaria/screens/Filters/officesandtrayfilters.dart';
 import 'package:attijaria/screens/Filters/rental.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:geolocator/geolocator.dart';
 import 'package:uuid/uuid.dart';
 
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 
 class OfficesAndTraysAds extends StatefulWidget {
@@ -28,7 +30,6 @@ class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
   TextEditingController sellController = TextEditingController();
   TextEditingController requestController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
   TextEditingController noOfPiecesController = TextEditingController();
   TextEditingController floorController = TextEditingController();
   TextEditingController totalSurfaceController = TextEditingController();
@@ -100,6 +101,7 @@ class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextFormField(
+        enabled: controller.text.isNotEmpty?false:true,
    controller: controller,
         validator: validator,
         autocorrect: true,
@@ -116,11 +118,28 @@ class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+          disabledBorder:  OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+          ),
         ),
       ),
     );
   }
-
+  RangeValues rangevalues = RangeValues(1.0,10.0);
+  String? address;
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    categoryController.text=widget.cetagory;
+    getLocation();
+  }
   @override
   Widget build(BuildContext context) {
     String dropdownValueCategory = "Ground floor";
@@ -165,8 +184,7 @@ class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
                           "Sell": sellController.text,
                           "Request": requestController.text,
                           "Category":widget.cetagory,
-                          "cetagories":categoryController.text.trim(),
-                          "address":addressController.text.trim()
+                          "address":address
                           ,"noOfPieces":noOfPiecesController.text.trim(),
                           "floor":floorController.text.trim(),
                           "totalSurface":totalSurfaceController.text.trim(),
@@ -265,8 +283,6 @@ class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
                         ),
                         _titleText('Category'),
                         _textFormFieldFunctionIcon( categoryController,RequiredValidator(errorText: "required"),'Category'),
-                        _titleText('Address'),
-                        _textFormFieldFunctionIcon(addressController,RequiredValidator(errorText: "required"), 'Address'),
                         _titleText('Number of pieces'),
                         _textFormFieldFunctionIcon(noOfPiecesController,RequiredValidator(errorText: "required"), 'Number of pieces'),
                         _titleText('Floor'),
@@ -429,15 +445,17 @@ class _OfficesAndTraysAdsState extends State<OfficesAndTraysAds> {
                           ],
                         ),
                         RangeSlider(
-                            values: values,
+                            values: rangevalues,
                             activeColor: Colors.yellow[700],
                             inactiveColor: Colors.black38,
-                            min: 1,
-                            max: 100,
+                            min: 1.0,
+                            max: 9999999.0,
                             // values: values,
                             onChanged: (values) {
                               setState(() {
-                                values = values;
+                                rangevalues = values;
+                                minPriceController.text=rangevalues.start.toInt().toString();
+                                maxPriceController.text=rangevalues.end.toInt().toString();
                               });
                             }),
                         _titleText(' Phone Number'),

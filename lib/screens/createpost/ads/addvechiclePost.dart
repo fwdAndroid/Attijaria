@@ -2,12 +2,15 @@
 
 import 'dart:io';
 import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/Utils/getlocation.dart';
 import 'package:attijaria/widgets/customdialog.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
 import 'package:uuid/uuid.dart';
+import 'package:geocoding/geocoding.dart';
 class CreatePost extends StatefulWidget {
   String cetagory;
    CreatePost({Key? key,required this.cetagory}) : super(key: key);
@@ -17,7 +20,9 @@ class CreatePost extends StatefulWidget {
 }
 
 class _CreatePostState extends State<CreatePost> {
-  RangeValues values = RangeValues(1, 100);
+
+
+  RangeValues rangevalues = RangeValues(1.0,10.0);
 final formkey=GlobalKey<FormState>();
   Widget _longDescription(
       TextEditingController controller,
@@ -70,6 +75,7 @@ final formkey=GlobalKey<FormState>();
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextFormField(
+        enabled: controller.text.isNotEmpty?false:true,
         controller: controller,
         validator: validator,
         autocorrect: true,
@@ -85,6 +91,10 @@ final formkey=GlobalKey<FormState>();
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),
+            disabledBorder:OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+            )
         ),
       ),
     );
@@ -126,7 +136,20 @@ final formkey=GlobalKey<FormState>();
       imageUrl = File(image!.path);
     });
   }
+String? address;
+@override
+  void initState(){
+    // TODO: implement initState
+    super.initState();
+    cetagoryController.text=widget.cetagory;
+   getLocation();
 
+}
+void getLocation()async{
+Position  position= await  GetLocation().getLocation();
+   address=await  GetLocation().getAddressFormLongitude(position);
+print(address);
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +172,7 @@ final formkey=GlobalKey<FormState>();
                     }
                     else{
                       Customdialog.showDialogBox(context);
-                  await    uploadImageToFirebase().then((v) {
+                await    uploadImageToFirebase().then((v) {
                         firebaseFirestore.collection("posts").add({
                           "setRent":rentalController.text.trim(),
                           "Sector":sentorController.text.trim(),
@@ -174,6 +197,7 @@ final formkey=GlobalKey<FormState>();
                           "minPrice":minPriceController.text.trim(),
                           "maxPrice":maxPriceController.text.trim(),
                           "phoneNumber":phoneNumberController.text.trim(),
+                          "address":address,
                           "time":DateTime.now()
                      ,"isFav":false,
                         }).whenComplete(() {
@@ -186,6 +210,7 @@ final formkey=GlobalKey<FormState>();
                       });
                     }
                   }
+
                 },
                 child: Text(
                   'Save',
@@ -255,7 +280,7 @@ final formkey=GlobalKey<FormState>();
                       _titleText('Rental'),
                       _textFormFieldFunctionIcon(rentalController,RequiredValidator(errorText: "Required"),'Set Rental'),
                       _titleText('Sector'),
-                      _textFormFieldFunctionIcon(sellController,RequiredValidator(errorText: "Required"),'Sector'),
+                      _textFormFieldFunctionIcon(sentorController,RequiredValidator(errorText: "Required"),'Sector'),
                       _titleText('Position Type'),
                       SizedBox(
                         height: 90,
@@ -365,18 +390,23 @@ final formkey=GlobalKey<FormState>();
                               child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "Required"),'Max')),
                         ],
                       ),
-                      RangeSlider(
-                          values: values,
+                     RangeSlider(
+                          values: rangevalues,
                           activeColor: Colors.yellow[700],
                           inactiveColor: Colors.black38,
-                          min: 1,
-                          max: 100,
+                          min: 1.0,
+                          max: 9999999.0,
                           // values: values,
                           onChanged: (values) {
                             setState(() {
-                              values = values;
+                              rangevalues= values;
+                              minPriceController.text=rangevalues.start.toInt().toString();
+                              maxPriceController.text=rangevalues.end.toInt().toString();
+
                             });
-                          }),
+                          },
+                       // value: rangevalues,
+                     ),
                       _titleText(' Phone Number'),
                       _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "Required"),'Phone Number'),
                       Column(

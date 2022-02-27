@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:geolocator/geolocator.dart';
 import 'package:uuid/uuid.dart';
 import 'package:attijaria/screens/Filters/rental.dart';
 import 'package:attijaria/screens/Filters/vehiclefilters.dart';
@@ -10,6 +11,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 
 class PublicationLandAndFormAds extends StatefulWidget {
@@ -26,7 +28,7 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
   TextEditingController sectorController = TextEditingController();
   TextEditingController sellController = TextEditingController();
   TextEditingController requestController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
+
   TextEditingController totalSurfaceController = TextEditingController();
   TextEditingController zoningController = TextEditingController();
   TextEditingController additionalDetailsController = TextEditingController();
@@ -46,7 +48,6 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
     });
   }
 
-  RangeValues values = RangeValues(1, 100);
 
   Widget _longDescription(
       TextEditingController controller,
@@ -99,7 +100,9 @@ class _PublicationLandAndFormAdsState extends State<PublicationLandAndFormAds> {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextFormField(
-validator: validator,
+controller: controller,
+        enabled: controller.text.isNotEmpty?false:true,
+        validator: validator,
         autocorrect: true,
         decoration: InputDecoration(
           hintText: Active,
@@ -114,11 +117,28 @@ validator: validator,
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+          ),
         ),
       ),
     );
   }
+  RangeValues rangevalues = RangeValues(1.0,10.0);
+  String? address;
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
+    getLocation();
+  }
   @override
   Widget build(BuildContext context) {
     String dropdownValueCategory = "House";
@@ -150,8 +170,8 @@ validator: validator,
                           "Request": requestController.text.trim(),
                           "Category":widget.cetagory,
                           "cetagories":dropdownValueCategory,
-                          "address":addressController.text.trim()
-, "totalSurface":totalSurfaceController.text.trim(),
+                          "address":address,
+ "totalSurface":totalSurfaceController.text.trim(),
                           "zoning":zoningController.text.trim(),
                           "additionalDetails":additionalDetailsController.text.trim(),
                           "title":titleController.text.trim(),
@@ -300,8 +320,6 @@ validator: validator,
                                 );
                               }).toList(),
                             )),
-                        _titleText('Address'),
-                        _textFormFieldFunctionIcon(addressController ,RequiredValidator(errorText: "required"),'Address'),
                         _titleText('Total Surface'),
                         _textFormFieldFunctionIcon(totalSurfaceController,RequiredValidator(errorText: "required"),'Total Surface'),
                         _titleText('Zoning'),
@@ -370,15 +388,17 @@ validator: validator,
                           ],
                         ),
                         RangeSlider(
-                            values: values,
+                            values: rangevalues,
                             activeColor: Colors.yellow[700],
                             inactiveColor: Colors.black38,
-                            min: 1,
-                            max: 100,
+                            min: 1.0,
+                            max: 9999999.0,
                             // values: values,
                             onChanged: (values) {
                               setState(() {
-                                values = values;
+                                rangevalues = values;
+                                minPriceController.text=rangevalues.start.toInt().toString();
+                                maxPriceController.text=rangevalues.end.toInt().toString();
                               });
                             }),
                         _titleText(' Phone Number'),

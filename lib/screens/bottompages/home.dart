@@ -5,6 +5,7 @@ import 'package:attijaria/screens/accounments/motoaccouncements.dart';
 import 'package:attijaria/screens/productdetails/productdetails.dart';
 import 'package:attijaria/widgets/drawer.dart';
 import 'package:attijaria/widgets/sliderlist.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -173,6 +174,7 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height *0.4,
+              width: MediaQuery.of(context).size.width,
               child: StreamBuilder(
                   stream: firebaseFirestore.collection("posts").snapshots(),
                   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -198,47 +200,62 @@ class _HomeState extends State<Home> {
                                       margin: EdgeInsets.only(left: 10),
                                       height: 140,
                                       width: 100,
-                                      child: Image.network(ds['imageLink']),
+                                      child: CachedNetworkImage(imageUrl: ds['imageLink'],
+
+                                        placeholder: (context, url) => Center(child: Image.asset("asset/infinity.gif")),
+
+                                        errorWidget: (context, url, error) => Icon(Icons.error),
+                                      ),
                                     ),
-                                    Column(
-                                      children: [
-                                        Container(
-                                            margin: EdgeInsets.only(top: 10, left: 10),
-                                            child: Text(ds['Category'])),
-                                        TextButton.icon(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.location_pin,
-                                            color: Colors.grey,
-                                          ),
-                                          label: Text(
-                                            '${ds['title']} ',
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                        Container(
-                                          child: TextButton.icon(
+                                    SizedBox(
+                                      width:MediaQuery.of(context).size.width*0.4,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              margin: EdgeInsets.only(top: 10, left: 10),
+                                              child: Text(ds['Category'])),
+                                          TextButton.icon(
+
                                             onPressed: () {},
                                             icon: Icon(
-                                              Icons.timer,
+                                              Icons.location_pin,
                                               color: Colors.grey,
                                             ),
                                             label: Text(
-                                              // '2:30 PM ',
+                                              '${ds['address']} ',
+                                              style: TextStyle(
+                                                color: Colors.grey,fontSize: 12,
+
+                                                overflow: TextOverflow.fade,
+                                              ),
+                                              softWrap: true,
+                                              overflow: TextOverflow.fade,
+                                            ),
+                                          ),
+                                          Container(
+                                            child: TextButton.icon(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.timer,
+                                                color: Colors.grey,
+                                              ),
+                                              label: Text(
+                                                // '2:30 PM ',
 
                           DateFormat.jm().format(
                           DateTime.parse(ds['time']
                               .toDate()
                               .toString())),
-                                              style: TextStyle(
-                                                color: Colors.grey,
+                                                style: TextStyle(
+                                                  color: Colors.grey,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                     // Container(
                                     //   margin: EdgeInsets.only(right: 20),
@@ -326,6 +343,10 @@ class _HomeState extends State<Home> {
                               Stack(
                                 children: [
                                   Container(
+                          width: MediaQuery.of(this.context)
+                              .size
+                              .width /
+                              2.4,
                                       padding: EdgeInsets.only(top: 15),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -367,12 +388,23 @@ class _HomeState extends State<Home> {
                                                             )
                                                           ]),
                                                           height: 174,
+
                                                           child: ClipRRect(
                                                             borderRadius:
                                                             BorderRadius.circular(10),
-                                                            child: Image.network(
-                                                                ds['imageLink'],
-                                                                fit: BoxFit.cover),
+                                                            child: CachedNetworkImage(
+                                                              imageUrl: ds['imageLink'],
+                                                              imageBuilder: (context, imageProvider) => Container(
+                                                                decoration: BoxDecoration(
+                                                                  image: DecorationImage(
+                                                                      image: imageProvider,
+                                                                      fit: BoxFit.fill,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              placeholder: (context, url) => Center(child: Image.asset("asset/infinity.gif")),
+                                                              errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                                                            ),
                                                           ),
                                                         ),
                                                         Positioned(
@@ -387,6 +419,10 @@ class _HomeState extends State<Home> {
                                                     ),
                                                   ),
                                                   Container(
+                        width: MediaQuery.of(this.context)
+                            .size
+                            .width /
+                        2.4,
                                                     margin: EdgeInsets.only(left: 10),
                                                     child: Text(
                                                       '${ds['maxPrice']} DH',
@@ -394,49 +430,60 @@ class _HomeState extends State<Home> {
                                                         fontWeight: FontWeight.bold,
                                                         fontSize: 16,
                                                       ),
+softWrap: true,
+                                                      overflow: TextOverflow.fade,
                                                     ),
                                                   ),
-                                                  Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          Container(
-                                                            margin:
-                                                            EdgeInsets.only(left: 5),
-                                                            child: Icon(
-                                                              Icons.location_pin,
+                                                  SizedBox(
+                                                    width: MediaQuery.of(this.context)
+                                                        .size
+                                                        .width /
+                                                        2.4,
+                                                    child: Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Container(
+
+                                                              margin:
+                                                              EdgeInsets.only(left: 5),
+                                                              child: Icon(
+                                                                Icons.location_pin,
+                                                                size: 14,
+                                                                color: HexColor('#9098B1'),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: Text(
+                                                                ds['address'],
+                                                                style: TextStyle(
+                                                                  color: HexColor('#9098B1'),
+                                                                  fontSize: 5,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 5,
+                                                            ),
+                                                            Icon(
+                                                              Icons.lock_clock,
                                                               size: 14,
                                                               color: HexColor('#9098B1'),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            ds['Category'],
-                                                            style: TextStyle(
-                                                              color: HexColor('#9098B1'),
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-                                                          Icon(
-                                                            Icons.lock_clock,
-                                                            size: 14,
-                                                            color: HexColor('#9098B1'),
-                                                          ),
-                                                          Text(
+                                                            Text(
                           DateFormat.jm().format(
                           DateTime.parse(ds['time']
                               .toDate()
                               .toString())),
-                                                            style: TextStyle(
-                                                              color: HexColor('#9098B1'),
-                                                              fontSize: 14,
+                                                              style: TextStyle(
+                                                                color: HexColor('#9098B1'),
+                                                                fontSize: 14,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                   Container(
                                                     margin: EdgeInsets.only(

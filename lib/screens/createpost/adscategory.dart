@@ -18,6 +18,7 @@ class AdsCategory extends StatefulWidget {
 }
 
 class _AdsCategoryState extends State<AdsCategory> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -178,7 +179,7 @@ class _AdsCategoryState extends State<AdsCategory> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (ctx) => HousesAndVilas(
-                                            cetagory: "Houses",
+                                            cetagory: "Houses & Villas",
                                           )));
                                 }),
                           ],

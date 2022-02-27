@@ -6,11 +6,13 @@ import 'package:attijaria/screens/Filters/storeshoppremisespostfilter.dart';
 import 'package:attijaria/screens/Filters/vehiclefilters.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
 import 'package:uuid/uuid.dart';
 
 import '../../../Utils/constant.dart';
+import '../../../Utils/getlocation.dart';
 import '../../../widgets/customdialog.dart';
 
 class StoreshopPremisesPost extends StatefulWidget {
@@ -27,7 +29,6 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
   TextEditingController sellController = TextEditingController();
   TextEditingController requestController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
   TextEditingController bathRoomsController = TextEditingController();
   TextEditingController loftSurfaceController = TextEditingController();
   TextEditingController totalSurfaceController = TextEditingController();
@@ -47,7 +48,7 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
     });
   }
 
-  RangeValues values = RangeValues(1, 100);
+  RangeValues rangevalues = RangeValues(1.0,10.0);
   Widget _longDescription(TextEditingController controller,String descrop) {
     return Container(
         // ignore: prefer_const_constructors
@@ -96,6 +97,7 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextFormField(
+        enabled: controller.text.isNotEmpty?false:true,
         controller: controller,
         validator: validator,
         autocorrect: true,
@@ -112,11 +114,27 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
             borderSide: BorderSide(color: Colors.grey, width: 2),
           ),
+          disabledBorder:OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+          )
         ),
       ),
     );
   }
-
+  String address="";
+  void getLocation()async{
+    Position  position= await  GetLocation().getLocation();
+    address=await  GetLocation().getAddressFormLongitude(position);
+    print(address);
+  }
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    categoryController.text=widget.cetagory;
+    getLocation();
+  }
   @override
   Widget build(BuildContext context) {
     String dropdownValueCategory = 'Air Condition';
@@ -148,7 +166,7 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
                           "Request": requestController.text,
                           "Category":widget.cetagory,
                           "cetagories":categoryController.text.trim(),
-                          "address":addressController.text.trim()
+                          "address":address
                           ,"bathrooms":bathRoomsController.text.trim(),
                           "totalSurface":totalSurfaceController.text.trim(),
                           "loftSurface":totalSurfaceController.text.trim(),
@@ -263,9 +281,9 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
                         _titleText('Category'),
                         _textFormFieldFunctionIcon(categoryController,
                             RequiredValidator(errorText: "Required"),'Category'),
-                        _titleText('Address'),
-                        _textFormFieldFunctionIcon(addressController,
-                            RequiredValidator(errorText: "Required"),'Address'),
+                        // _titleText('Address'),
+                        // _textFormFieldFunctionIcon(addressController,
+                        //     RequiredValidator(errorText: "Required"),'Address'),
                         _titleText('BathRooms'),
                         _textFormFieldFunctionIcon(bathRoomsController,
                             RequiredValidator(errorText: "Required"),'BathRooms'),
@@ -389,18 +407,20 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
                           ],
                         ),
                         RangeSlider(
-                            values: values,
+                            values: rangevalues,
                             activeColor: Colors.yellow[700],
                             inactiveColor: Colors.black38,
-                            min: 1,
-                            max: 100,
-                            // values: values,
-                            onChanged: (values) {
-                              setState(() {
-                                values = values;
-                              });
-                            }),
-                        _titleText(' Phone Number'),
+    min: 1.0,
+    max: 9999999.0,
+    // values: values,
+    onChanged: (values) {
+      setState(() {
+        rangevalues = values;
+        minPriceController.text = rangevalues.start.toInt().toString();
+        maxPriceController.text = rangevalues.end.toInt().toString();
+      });
+    }),
+    _titleText(' Phone Number'),
                         _textFormFieldFunctionIcon(phoneNumberController,
                             RequiredValidator(errorText: "Required"),'Phone Number'),
                         Column(
