@@ -63,6 +63,7 @@ dependencies:
   geolocator: ^8.2.0
   geocoding: ^2.0.2
   cached_network_image: ^3.2.0
+  flutter_dropdown: ^1.0.0+hotfix.1
 
 dev_dependencies:
   flutter_test:
