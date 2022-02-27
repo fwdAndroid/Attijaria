@@ -1,4 +1,5 @@
 import 'package:attijaria/Utils/constant.dart';
+import 'package:attijaria/chatnew.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,10 @@ class _ProductDetailState extends State<ProductDetail> {
                 color: Colors.white,
               ),
               onPressed: () {},
-            )
+            ),
+            IconButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (builder) =>Chat()));
+            }, icon: Icon(Icons.message))
           ],
           backgroundColor: Colors.black,
         ),
