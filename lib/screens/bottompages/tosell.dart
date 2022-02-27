@@ -1,4 +1,5 @@
 import 'package:attijaria/screens/chats/chatlist.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -144,7 +145,7 @@ class _ToSellState extends State<ToSell> {
                         ),
                       ),
                       Container(
-                        height: 150,
+                        height: 130,
                         child: ListView.builder(
                           // controller: _controller,
                           scrollDirection: Axis.horizontal,
@@ -191,7 +192,7 @@ class _ToSellState extends State<ToSell> {
                       Center(
                         child: Container(
                           margin: EdgeInsets.only(top: 15),
-                          child: Image.asset('asset/dots.png'),
+                          child:DotsIndicator(dotsCount: 5)
                         ),
                       ),
                     ],

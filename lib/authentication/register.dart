@@ -67,6 +67,11 @@ class _RegisterState extends State<Register> {
                               ),
                               textAlign: TextAlign.center,
                             ),
+                            //adding Profile Pic
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundImage: AssetImage("asset/profilepic.png"),
+                            ),
                             Container(
                               margin: EdgeInsets.symmetric(
                                 horizontal: 20,
@@ -230,7 +235,7 @@ class _RegisterState extends State<Register> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    fixedSize: Size(343, 50),
+                                    fixedSize: Size(310, 50),
                                     primary: Colors.white, // background
                                     onPrimary: Colors.black, // foreground
                                     shape: RoundedRectangleBorder(
