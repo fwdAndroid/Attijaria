@@ -158,7 +158,7 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
                     }
                     else{
                       Customdialog.showDialogBox(context);
-                      await    uploadImageToFirebase().then((v) {
+                      await    uploadImageToFirebase().whenComplete(() {
                         firebaseFirestore.collection("posts").add({
                           "setRent":rentalController.text.trim(),
                           "Sector":sectorController.text.trim(),
@@ -179,6 +179,7 @@ class _StoreshopPremisesPostState extends State<StoreshopPremisesPost> {
                           "phoneNumber":phoneNumberController.text.trim(),
                           "time":DateTime.now()
                    ,"isFav":false
+                        , "userId":firebaseAuth.currentUser!.uid
                         }).whenComplete(() {
                           Navigator.pop(context);
                           Navigator.pop(context);

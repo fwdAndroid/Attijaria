@@ -190,7 +190,8 @@ final formKey=GlobalKey<FormState>();
                           "maxPrice":maxPriceController.text.trim(),
                           "phoneNumber":phoneNumberController.text.trim(),
                           "time":DateTime.now()
-                   ,"isFav":false     }).whenComplete(() {
+                   ,"isFav":false
+                          , "userId":firebaseAuth.currentUser!.uid}).whenComplete(() {
                           Navigator.pop(context);
                           Navigator.pop(context);
                           Navigator.pop(context);

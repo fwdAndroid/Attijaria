@@ -410,9 +410,16 @@ crossAxisAlignment: CrossAxisAlignment.start,
                                                         Positioned(
                                                           top: 10,
                                                           right: 10,
-                                                          child: Icon(
-                                                            Icons.favorite_border,
-                                                            color: Colors.red,
+                                                          child: InkWell(
+                                                            onTap: ()async{
+                                                           await  ds['isFav']==false? firebaseFirestore.collection("posts").doc(ds.id).update(
+                                                                  {"isFav":true}):firebaseFirestore.collection("posts").doc(ds.id).update(
+                                                               {"isFav":false});
+                                                            },
+                                                            child:ds['isFav']==false? Icon(
+                                                              Icons.favorite_border,
+                                                              color: Colors.red,
+                                                            ):Icon(Icons.favorite,color: Colors.red,),
                                                           ),
                                                         ),
                                                       ],

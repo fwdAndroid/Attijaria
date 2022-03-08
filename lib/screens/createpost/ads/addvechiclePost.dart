@@ -199,7 +199,8 @@ print(address);
                           "phoneNumber":phoneNumberController.text.trim(),
                           "address":address,
                           "time":DateTime.now()
-                     ,"isFav":false,
+                     ,"isFav":false
+                          , "userId":firebaseAuth.currentUser!.uid
                         }).whenComplete(() {
                           Navigator.pop(context);
                           Navigator.pop(context);

@@ -166,7 +166,7 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
     }
     else{
     Customdialog.showDialogBox(context);
-    await    uploadImageToFirebase().then((v) {
+    await    uploadImageToFirebase().whenComplete(() {
     firebaseFirestore.collection("posts").add({
     "location":locationController.text.trim(),
     "Sector":sectorController.text.trim(),
@@ -190,7 +190,8 @@ class _HousesAndVilasState extends State<HousesAndVilas> {
     "maxPrice":maxPriceController.text.trim(),
     "phoneNumber":phoneNumberController.text.trim(),
     "time":DateTime.now(),
-      "isFav":false,
+      "isFav":false
+    , "userId":firebaseAuth.currentUser!.uid
     }).whenComplete(() {
     Navigator.pop(context);
     Navigator.pop(context);

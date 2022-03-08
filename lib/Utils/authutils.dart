@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'constant.dart';
 
 
@@ -17,17 +18,20 @@ class AuthUtils{
        String dob,
        String gender,
        String phoneNumber,
+       String imageLink,
        BuildContext context
       )async{
   try{
     await firebaseAuth.createUserWithEmailAndPassword(email: email, password: password).then((value) {
       firebaseFirestore.collection('users').doc(firebaseAuth.currentUser!.uid).set({
+        "id":firebaseAuth.currentUser!.uid,
         'UserName':userName,
         'Email':email,
         "DOB":dob,
         "Gender":gender,
         "Phone Number":phoneNumber
-        // 'Password':password
+,"imageLink":imageLink,
+      "status":"offline"  // 'Password':password
       }).then((value) {
         Customdialog().showInSnackBar("Logged in", context);
         // Provider.of<CircularProgressProvider>(context,listen: false).setValue(false);
@@ -105,15 +109,19 @@ Navigator.pop(context);
      String dob="";
      String gender="";
      String phoneNumber=firebaseAuth.currentUser!.phoneNumber.toString();
+     String imageLink=firebaseAuth.currentUser!.photoURL.toString();
      try{
 
        await firebaseFirestore.collection('users').doc(firebaseAuth.currentUser!.uid).set({
-           'UserName':userName,
+         "id":firebaseAuth.currentUser!.uid,
+         'UserName':userName,
            'Email':email,
            "DOB":dob,
            "Gender":gender,
-           "Phone Number":phoneNumber
-           // 'Password':password
+           "Phone Number":phoneNumber,
+         "imageLink":imageLink
+,
+         "status":"offline"// 'Password':password
          }).then((value) {
            Customdialog().showInSnackBar("Logged in", context);
            // Provider.of<CircularProgressProvider>(context,listen: false).setValue(false);

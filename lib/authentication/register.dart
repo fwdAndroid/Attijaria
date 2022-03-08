@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:attijaria/Utils/authutils.dart';
 import 'package:attijaria/authentication/login.dart';
 import 'package:attijaria/config/config.dart';
@@ -10,6 +12,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_storage/firebase_storage.dart'as firebase_storage;
+import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -19,14 +24,25 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passController = TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  final formKey=GlobalKey<FormState>();
+  File? imageUrl;
 
+  String? imageLink;
+
+  final ImagePicker _picker = ImagePicker();
+
+  void addImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      imageUrl = File(image!.path);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     String dropdownvalue = 'Male';
@@ -68,9 +84,15 @@ class _RegisterState extends State<Register> {
                               textAlign: TextAlign.center,
                             ),
                             //adding Profile Pic
-                            CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage("asset/profilepic.png"),
+                            InkWell(
+                              onTap: addImage,
+                              child:imageUrl==null? CircleAvatar(
+                                radius: 50,
+                                backgroundImage: AssetImage("asset/profilepic.png"),
+                              ):CircleAvatar(
+                                radius: 50,
+                                backgroundImage: FileImage(imageUrl!),
+                              ),
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(
@@ -189,16 +211,7 @@ class _RegisterState extends State<Register> {
                                     Customdialog().showInSnackBar(
                                         "required password", context);
                                   }
-                                  else if(nameController.text.isNotEmpty&&passController.text.isNotEmpty&&emailController.text.isNotEmpty){
-                                    Customdialog.showDialogBox(context);
-                                    AuthUtils().registerUser(nameController.text.trim(),
-                                        emailController.text.trim(),
-                                        passController.text.trim(), dobController.text.trim(),
-                                        dropdownvalue,phoneController.text.trim(),
-                                        context
-                                    );
-                                    }
-                                  if (phoneController.text.isEmpty &&
+                                 else if (phoneController.text.isEmpty &&
                                       dobController.text.isEmpty &&
                                       nameController.text.isEmpty &&
                                       passController.text.isEmpty &&
@@ -220,18 +233,27 @@ class _RegisterState extends State<Register> {
                                   } else if (passController.text.isEmpty) {
                                     Customdialog().showInSnackBar(
                                         "required password", context);
-                                  } else if (nameController.text.isNotEmpty &&
+                                  }
+                                  else if(imageUrl==null){
+                                    Customdialog().showInSnackBar(
+                                        "Please add Image", context);
+
+                                  }
+                                  else if (nameController.text.isNotEmpty &&
                                       passController.text.isNotEmpty &&
-                                      emailController.text.isNotEmpty) {
+                                      emailController.text.isNotEmpty&&imageUrl!=null) {
                                     Customdialog.showDialogBox(context);
-                                    AuthUtils().registerUser(
-                                        nameController.text.trim(),
-                                        emailController.text.trim(),
-                                        passController.text.trim(),
-                                        dobController.text.trim(),
-                                       dropdownvalue.trim(),
-                                        phoneController.text.trim(),
-                                        context);
+                                    uploadImageToFirebase().whenComplete(() {
+                                      AuthUtils().registerUser(
+                                          nameController.text.trim(),
+                                          emailController.text.trim(),
+                                          passController.text.trim(),
+                                          dobController.text.trim(),
+                                          dropdownvalue.trim(),
+                                          phoneController.text.trim(),
+                                          imageLink!,
+                                          context);
+                                    });
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -474,5 +496,23 @@ class _RegisterState extends State<Register> {
       return user;
       // ignore: empty_catches
     } catch (e) {}
+  }
+  Future uploadImageToFirebase() async {
+    File? fileName = imageUrl;
+    var uuid = Uuid();
+    firebase_storage.Reference firebaseStorageRef = firebase_storage
+        .FirebaseStorage.instance
+        .ref()
+        .child('cetagories/images+${uuid.v4()}');
+    firebase_storage.UploadTask uploadTask =
+    firebaseStorageRef.putFile(fileName!);
+    firebase_storage.TaskSnapshot taskSnapshot =
+    await uploadTask.whenComplete(() async {
+      print(fileName);
+      String img = await uploadTask.snapshot.ref.getDownloadURL();
+      setState(() {
+        imageLink = img;
+      });
+    });
   }
 }

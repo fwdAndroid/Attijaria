@@ -188,6 +188,7 @@ class _AdsNewsState extends State<AdsNews> {
                           "address":address,
                           "time":DateTime.now(),
                           "isFav":false
+                          , "userId":firebaseAuth.currentUser!.uid
                         }).whenComplete(() {
                           Navigator.pop(context);
                           Navigator.pop(context);

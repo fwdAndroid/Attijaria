@@ -4,6 +4,7 @@ import 'package:attijaria/screens/accounts/ChangePassword/changepassword.dart';
 import 'package:attijaria/screens/accounts/ChangePhone/changephone.dart';
 import 'package:attijaria/screens/accounts/DOB/dob.dart';
 import 'package:attijaria/screens/accounts/Gender/selectgender.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -69,8 +70,34 @@ class _AccountPageState extends State<AccountPage> {
                       // ignore: prefer_const_constructors
                       child: CircleAvatar(
                         radius: 40,
-                        backgroundImage: AssetImage('asset/profilepic.png'),
-                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: snapshot.data['imageLink'],
+                        imageBuilder: (context,
+                            imageProvider) =>
+                            Container(
+                              decoration:
+                              BoxDecoration(
+                                shape:
+                                BoxShape.circle,
+                                image:
+                                DecorationImage(
+                                  image:
+                                  imageProvider,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                        placeholder: (context,
+                            url) =>
+                            Center(
+                                child: Image.asset(
+                                    "asset/infinity.gif")),
+                        errorWidget: (context,
+                            url, error) =>
+                            Center(
+                                child: Icon(
+                                    Icons.error)),
+                      )),
                     ),
                     // ignore: prefer_const_constructors
                     SizedBox(

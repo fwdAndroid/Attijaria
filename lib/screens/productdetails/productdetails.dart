@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:intl/intl.dart';
 
+import '../chats/chatlist.dart';
+
 class ProductDetail extends StatefulWidget {
   String? id;
   ProductDetail({Key? key, this.id}) : super(key: key);
@@ -582,7 +584,7 @@ ds['description'],
                               SizedBox(
                                 width: 20,
                               ),
-                              ElevatedButton(
+                            firebaseAuth.currentUser!.uid==ds['userId']? Container(): ElevatedButton(
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all<Color>(
                                       Colors.amberAccent,
@@ -593,7 +595,17 @@ ds['description'],
                                         borderRadius: BorderRadius.circular(18.0),
                                       ),
                                     )),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (ctx) =>
+                                              ChatList(
+                                                receiverId:
+                                                ds['userId'],
+                                                // receiverId: ds.id,
+                                              )));
+                                },
                                 child: Text('Chat with the seller'),
                               )
                             ],

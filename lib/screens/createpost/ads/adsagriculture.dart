@@ -164,7 +164,7 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
                     }
                     else{
                       Customdialog.showDialogBox(context);
-                      await    uploadImageToFirebase().then((v) {
+                      await    uploadImageToFirebase().whenComplete(() {
                         firebaseFirestore.collection("posts").add({
                           "setRent":locationController.text.trim(),
                           "Sector":sectorController.text.trim(),
@@ -182,6 +182,7 @@ class _AdsAgricultureState extends State<AdsAgriculture> {
                           "phoneNumber":phoneNumberController.text.trim(),
                           "time":DateTime.now()
                           ,"isFav":false
+                        , "userId":firebaseAuth.currentUser!.uid
                         }).whenComplete(() {
                           Navigator.pop(context);
                           Navigator.pop(context);

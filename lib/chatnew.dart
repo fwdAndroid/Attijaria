@@ -379,7 +379,7 @@ class _ChatState extends State<Chat> {
                       height: MediaQuery.of(context).size.height * 1,
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
-                        itemCount: 4,
+                        itemCount: 2,
                         itemBuilder: (_, i) => InkWell(
                           focusColor: Colors.grey,
                           hoverColor: Colors.grey,

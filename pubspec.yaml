@@ -64,6 +64,8 @@ dependencies:
   geocoding: ^2.0.2
   cached_network_image: ^3.2.0
   flutter_dropdown: ^1.0.0+hotfix.1
+  photo_view: ^0.13.0
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:

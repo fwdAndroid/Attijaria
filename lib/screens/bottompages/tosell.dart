@@ -1,7 +1,11 @@
 import 'package:attijaria/screens/chats/chatlist.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+
+import '../../Utils/constant.dart';
 
 class ToSell extends StatefulWidget {
   const ToSell({Key? key}) : super(key: key);
@@ -10,39 +14,38 @@ class ToSell extends StatefulWidget {
   _ToSellState createState() => _ToSellState();
 }
 
-class _ToSellState extends State<ToSell> {
-  // final ScrollController _controller = ScrollController();
-  // @override
-  // void initState() {
-  //   _controller.addListener(_scrollListener);
-
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   // TODO: implement dispose
-  //   super.dispose();
-  //   _controller.dispose();
-  // }
-
-  // void _scrollListener() {
-  //   if (_controller.offset >= _controller.position.maxScrollExtent &&
-  //       !_controller.position.outOfRange) {
-  //     setState(() {
-  //       String message = "reach the bottom";
-  //       print(message);
-  //     });
-  //   }
-  //   if (_controller.offset <= _controller.position.minScrollExtent &&
-  //       !_controller.position.outOfRange) {
-  //     setState(() {
-  //       String message = "reach the top";
-  //       print(message);
-  //     });
-  //   }
-  // }
-
+class _ToSellState extends State<ToSell> with WidgetsBindingObserver {
+  String myName="";
+  String imageLink="";
+  @override
+  void initState() {
+    // TODO: implement initState
+  firebaseFirestore.collection("users").doc(firebaseAuth.currentUser!.uid).get().then((value) {
+   setState(() {
+     imageLink= value.get("imageLink");
+     myName=value.get("UserName");
+   });
+  });
+  WidgetsBinding.instance!.addObserver(this);
+  setStatus("online");
+    super.initState();
+  }
+  void setStatus(String status )async{
+    await firebaseFirestore.collection("users").doc(firebaseAuth.currentUser!.uid).update({
+      "status":status
+    });
+  }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+  if(state==AppLifecycleState.resumed){
+    setStatus("online");
+  }
+  else{
+    setStatus("offline");
+  }
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,12 +55,39 @@ class _ToSellState extends State<ToSell> {
                 width: 60,
                 child: CircleAvatar(
                   radius: 40,
-                  backgroundImage: AssetImage("asset/profilepic.png"),
                   backgroundColor: Colors.red,
+             child: CachedNetworkImage(
+               imageUrl: imageLink,
+               imageBuilder: (context,
+                   imageProvider) =>
+                   Container(
+                     decoration:
+                     BoxDecoration(
+                       shape:
+                       BoxShape.circle,
+                       image:
+                       DecorationImage(
+                         image:
+                         imageProvider,
+                         fit: BoxFit.fill,
+                       ),
+                     ),
+                   ),
+               placeholder: (context,
+                   url) =>
+                   Center(
+                       child: Image.asset(
+                           "asset/infinity.gif")),
+               errorWidget: (context,
+                   url, error) =>
+                   Center(
+                       child: Icon(
+                           Icons.error)),
+             ),
                 ),
               ),
               title: Text(
-                'Fawad Kaleem',
+                myName,
                 style: TextStyle(color: Colors.white),
               ),
               toolbarHeight: 90,
@@ -146,54 +176,90 @@ class _ToSellState extends State<ToSell> {
                       ),
                       Container(
                         height: 130,
-                        child: ListView.builder(
-                          // controller: _controller,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 4,
-                          itemBuilder: (_, i) => Row(
-                            children: [
-                              Container(
-                                height: 200,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      height: 175,
-                                      width: 100,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                            'https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                                            fit: BoxFit.fitHeight),
-                                      ),
-                                    ),
-                                    Positioned(
-                                        top: 10,
-                                        right: 10,
-                                        child: Image.asset('asset/green.png')),
-                                    Positioned(
-                                        bottom: 50,
-                                        left: 5,
-                                        child: Text(
-                                          'Fawad Kaleem',
-                                          style: TextStyle(color: Colors.white),
-                                        )),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                            ],
-                          ),
-                        ),
+                        child: StreamBuilder(
+                            stream: firebaseFirestore.collection("users").where("id",isNotEqualTo: firebaseAuth.currentUser!.uid).where("status",isEqualTo: "online").snapshots(),
+                            builder:
+                                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasData) {
+                                return snapshot.data!.docs==0?Center(child: Text("No AnyOne Online",style: TextStyle(color: Colors.white),)): ListView.builder(
+                                  // controller: _controller,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (_, i) {
+var ds=snapshot.data!.docs[i];
+                                    return Row(
+                                      children: [
+                                        Container(
+                                          height: 200,
+                                          width: 100,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                height: 175,
+                                                width: 100,
+                                                child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(10),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: ds['imageLink'],
+                                                    imageBuilder: (context,
+                                                        imageProvider) =>
+                                                        Container(
+                                                          decoration:
+                                                          BoxDecoration(
+                                                            image:
+                                                            DecorationImage(
+                                                              image:
+                                                              imageProvider,
+                                                              fit: BoxFit.fill,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                    placeholder: (context,
+                                                        url) =>
+                                                        Center(
+                                                            child: Image.asset(
+                                                                "asset/infinity.gif")),
+                                                    errorWidget: (context,
+                                                        url, error) =>
+                                                        Center(
+                                                            child: Icon(
+                                                                Icons.error)),
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                  top: 10,
+                                                  right: 10,
+                                                  child: Image.asset('asset/green.png')),
+                                              Positioned(
+                                                  bottom: 50,
+                                                  left: 5,
+                                                  child: Text(
+                                                    ds['UserName'],
+                                                    style: TextStyle(color: Colors.white),
+                                                  )),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(width: 10),
+                                      ],
+                                    );
+                                  } ,
+                                );
+                              } else if (snapshot.hasError) {
+                                return Center(child: Icon(Icons.error_outline));
+                              } else {
+                                return Center(child: CircularProgressIndicator());
+                              }
+                            }),
                       ),
                       Center(
                         child: Container(
-                          margin: EdgeInsets.only(top: 15),
-                          child:DotsIndicator(dotsCount: 5)
-                        ),
+                            margin: EdgeInsets.only(top: 15),
+                            child: DotsIndicator(dotsCount: 5)),
                       ),
                     ],
                   ),
@@ -208,33 +274,99 @@ class _ToSellState extends State<ToSell> {
                     ),
                     child: SizedBox(
                       height: 300,
-                      child: ListView.builder(
-                        itemCount: 4,
-                        itemBuilder: (_, i) => InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (xtx) => ChatList()));
-                          },
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 30,
-                              backgroundImage:
-                                  AssetImage('asset/profilepic.png'),
-                            ),
-                            title: Text(
-                              'Fawad',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            subtitle: Text(
-                              'Hi How Are You',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            trailing: Text('Monday'),
-                          ),
-                        ),
-                      ),
+                      child: StreamBuilder(
+                          stream: firebaseFirestore
+                              .collection("users")
+                              .where("id",
+                                  isNotEqualTo: firebaseAuth.currentUser!.uid)
+                              .snapshots(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<QuerySnapshot> snapshot) {
+                            if (snapshot.hasData) {
+                              return snapshot.data!.size == 0
+                                  ? Center(child: Text("Empty"))
+                                  : ListView.builder(
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: snapshot.data!.docs.length,
+                                      itemBuilder: (_, i) {
+                                        var ds = snapshot.data!.docs[i];
+                                        return InkWell(
+                                          focusColor: Colors.grey,
+                                          hoverColor: Colors.grey,
+                                          onTap: () {
+                                            // Navigator.push(context,
+                                            //     MaterialPageRoute(builder: (xtx) => Favoris()));
+                                          },
+                                          child: ListTile(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (ctx) =>
+                                                          ChatList(
+                                                            receiverId: ds.id,
+                                                          )));
+                                            },
+                                            leading: ds['imageLink'] == null
+                                                ? CircleAvatar(
+                                                    radius: 30,
+                                                    backgroundImage: AssetImage(
+                                                        'assets/images/logo.png'),
+                                                  )
+                                                : CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                    radius: 30,
+                                                    // backgroundImage:
+                                                    // NetworkImage(ds['imageLink']),
+                                                    child: CachedNetworkImage(
+                                                      imageUrl: ds['imageLink'],
+                                                      imageBuilder: (context,
+                                                              imageProvider) =>
+                                                          Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          image:
+                                                              DecorationImage(
+                                                            image:
+                                                                imageProvider,
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      placeholder: (context,
+                                                              url) =>
+                                                          Center(
+                                                              child: Image.asset(
+                                                                  "asset/infinity.gif")),
+                                                      errorWidget: (context,
+                                                              url, error) =>
+                                                          Center(
+                                                              child: Icon(
+                                                                  Icons.error)),
+                                                    )),
+                                            title: Text(
+                                              ds['UserName'],
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                            subtitle: Text(
+                                              lastMessage,
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
+                                            trailing: Text('Monday'),
+                                          ),
+                                        );
+                                      });
+                            } else if (snapshot.hasError) {
+                              return Center(child: Icon(Icons.error_outline));
+                            } else {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                          }),
                     ))
               ]);
             })));
