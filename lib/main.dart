@@ -1,4 +1,5 @@
 import 'package:attijaria/screens/introscreens/welcome.dart';
+import 'package:attijaria/separaterpages/imageselector.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
