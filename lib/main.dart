@@ -1,4 +1,5 @@
 import 'package:attijaria/screens/introscreens/welcome.dart';
+import 'package:attijaria/separaterpages/categoriesselector.dart';
 import 'package:attijaria/separaterpages/imageselector.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: Welcome(),
+      home: CategoriesSelector(),
     );
   }
 }

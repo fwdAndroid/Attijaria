@@ -1,3 +1,4 @@
+import 'package:attijaria/separaterpages/categoriesselector.dart';
 import 'package:flutter/material.dart';
 
 class ImageSelector extends StatefulWidget {
@@ -46,7 +47,9 @@ class _ImageSelectorState extends State<ImageSelector> {
                     Spacer(),
                     Container(
                       margin: EdgeInsets.all(10),
-                      child: ElevatedButton(onPressed: (){}, child: Text('Continue'),style: ElevatedButton.styleFrom(primary: Colors.amber,fixedSize: Size(300, 70)),))
+                      child: ElevatedButton(onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (builder) => CategoriesSelector()));
+                      }, child: Text('Continue'),style: ElevatedButton.styleFrom(primary: Colors.amber,fixedSize: Size(300, 70)),))
                   ],
                 ),
               ),
