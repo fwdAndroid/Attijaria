@@ -10,6 +10,8 @@ import 'package:attijaria/screens/payment/payments.dart';
 import 'package:attijaria/screens/profilesection/profilesection.dart';
 import 'package:attijaria/screens/tabs/favourite.dart';
 import 'package:attijaria/screens/tabs/search.dart';
+import 'package:attijaria/separaterpages/categoriesselector.dart';
+import 'package:attijaria/separaterpages/imageselector.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -110,7 +112,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       ),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (ctx) => AdsCategory()));
+                            MaterialPageRoute(builder: (ctx) => ImageSelector()));
                       },
                     ),
                   ),

@@ -31,9 +31,9 @@ class _ProductDetailState extends State<ProductDetail> {
               ),
               onPressed: () {},
             ),
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (builder) =>Chat()));
-            }, icon: Icon(Icons.message))
+            // IconButton(onPressed: (){
+            //   Navigator.push(context, MaterialPageRoute(builder: (builder) =>Chat()));
+            // }, icon: Icon(Icons.message))
           ],
           backgroundColor: Colors.black,
         ),
@@ -58,7 +58,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child:CachedNetworkImage(
-                                  imageUrl: ds['imageLink'],
+                                  imageUrl: ds['imageLink'][0],
                                   imageBuilder: (context, imageProvider) => Container(
                                     height: 200,
                                     decoration: BoxDecoration(

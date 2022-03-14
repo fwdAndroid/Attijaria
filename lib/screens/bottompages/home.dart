@@ -1,6 +1,7 @@
 import 'package:animated_search_bar/animated_search_bar.dart';
 import 'package:attijaria/Utils/constant.dart';
 import 'package:attijaria/screens/Filters/filteration.dart';
+import 'package:attijaria/screens/Filters/filterscreen.dart';
 import 'package:attijaria/screens/accounments/motoaccouncements.dart';
 import 'package:attijaria/screens/productdetails/productdetails.dart';
 import 'package:attijaria/widgets/drawer.dart';
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> {
 
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => Filteration()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => FiltersScreen()));
               }, icon: Icon(Icons.search,color: Colors.white), )
             //    AnimatedSearchBar(
 
@@ -186,6 +187,7 @@ class _HomeState extends State<Home> {
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           var ds=snapshot.data!.docs[index];
+
                           return  Card(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.0),
@@ -200,7 +202,7 @@ class _HomeState extends State<Home> {
                                       margin: EdgeInsets.only(left: 10),
                                       height: 140,
                                       width: 100,
-                                      child: CachedNetworkImage(imageUrl: ds['imageLink'],
+                                      child: CachedNetworkImage(imageUrl: ds["imageLink"][0],
 
                                         placeholder: (context, url) => Center(child: Image.asset("asset/infinity.gif")),
 
@@ -393,7 +395,7 @@ crossAxisAlignment: CrossAxisAlignment.start,
                                                             borderRadius:
                                                             BorderRadius.circular(10),
                                                             child: CachedNetworkImage(
-                                                              imageUrl: ds['imageLink'],
+                                                              imageUrl: ds['imageLink'][0],
                                                               imageBuilder: (context, imageProvider) => Container(
                                                                 decoration: BoxDecoration(
                                                                   image: DecorationImage(
