@@ -19,8 +19,7 @@ import '../../../widgets/customdialog.dart';
 import '../Providers/allproviders.dart';
 
 class AddNewsPosts extends StatefulWidget {
-  String cetagory;
-  AddNewsPosts({Key? key,required this.cetagory}) : super(key: key);
+  AddNewsPosts({Key? key}) : super(key: key);
 
   @override
   _AddNewsPostsState createState() => _AddNewsPostsState();
@@ -156,8 +155,8 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
                           // "Sector":sectorController.text.trim(),
                           // "min":minController.text.trim(),
                           // "max":maxController.text.trim(),
-                          "Category":Provider.of<AllpProviders>(context,listen: false).cetagory,
-                          "Subcategory":Provider.of<AllpProviders>(context,listen: false).subcetagory,
+                          "Category":Provider.of<AllpProviders>(context,listen: false).subcetagory,
+                          // "Subcategory":Provider.of<AllpProviders>(context,listen: false).subcetagory,
                           // "cetagories":cetagoryController.text.trim(),
                           // "marqee":marqueeController.text.trim(),
                           "elat":dropdownValueElat,

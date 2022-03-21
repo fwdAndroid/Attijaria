@@ -24,9 +24,12 @@ class _FiltersScreenState extends State<FiltersScreen> {
       ),
       backgroundColor: Colors.white,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Spacer(),
+
+
           InkWell(
             onTap: () {
               showDialog(
@@ -37,146 +40,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     content: SingleChildScrollView(
                       child: Column(
                         children: [
-                          InkWell(
-                            onTap: (){
-                              Provider.of<AllpProviders>(context,listen: false).setCetagory("Computing and Multimedia");
-                              Navigator.pop(context);
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.laptop),
-                                SizedBox(width: 20),
-                                Text(
-                                  'Computing and Multimedia',
-                                  style: TextStyle(fontSize: 12),
-                                )
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Image.asset('asset/gg.png',height: 30,width: 30,),
+                              SizedBox(width: 20),
+                              Text(
+                                'Computing and Multimedia',
+                                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                              )
+                            ],
                           ),
-                          Divider(),
-                          // Text('Telephones'),
-                          // Text('Tablet'),
-                          // Text('Computers portables'),
-                          // Text('Computers Accessorie'),
-                          // Text('Video Game Console'),
-                          // Text('Cameras and Cameras'),
-                          // Text('Television'),
-                          // Text('Image & Sons'),
-                          // Divider(),
-                          InkWell(
-                            onTap: (){
-                              Provider.of<AllpProviders>(context,listen: false).setCetagory("Vehicles");
-                              Navigator.pop(context);
-                            },
-
-                            child: Row(
-                              children: [
-                                Icon(Icons.car_rental),
-                                SizedBox(width: 20),
-                                Text(
-                                  'Vehicles',
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                              ],
-                            ),
-                          ),
-                          // Divider(),
-                          // Text('Cars'),
-                          // Text('Car rental'),
-                          // Text('Parts and Accessories'),
-                          // Text('Motors'),
-                          // Text('Velos'),
-                          // Text('Arrow'),
-                          // Text('Engins BTP'),
-                          // Text('Engine Agircole'),
-                          // Text('Trucks'),
-                          // Text('Others'),
-                          Divider(),
-                          InkWell(
-                            onTap: (){
-                              Provider.of<AllpProviders>(context,listen: false).setCetagory('Real Estate');
-                              Navigator.pop(context);
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.home),
-                                SizedBox(width: 20),
-                                Text(
-                                  'Real Estate',
-                                  style: TextStyle(fontSize: 12),
-                                )
-                              ],
-                            ),
-                          ),
-                          // Divider(),
-                          // Text('Appartments'),
-                          // Text('Maisons and Villas'),
-                          // Text('Desks and Trays'),
-                          // Text('Magsins'),
-                          // Text('Lands and Farms'),
-                          // Text('Other Real Estate'),
-                          //
-                          Divider(),
-                          InkWell(
-                            onTap: (){
-                              Provider.of<AllpProviders>(context,listen: false).setCetagory("FOR HOME AND GARDEN");
-                              Navigator.pop(context);
-                            },
-                            child: Row(
-                              children: [
-                                Icon(Icons.gradient),
-                                SizedBox(width: 20),
-                                Text(
-                                  'FOR HOME AND GARDEN',
-                                  style: TextStyle(fontSize: 12),
-                                )
-                              ],
-                            ),
-                          ),
-                          // Divider(),
-                          // Text('Appliances and Tableware'),
-                          // Text('Furniture and Decoration'),
-                          // Text('Garden and DIY Tools')
-                          //
-                        ],
-                      ),
-                    ),
-
-                  );
-                },
-              );
-            },
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              height: 60,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(width: 1, color: Colors.grey.shade100)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(Provider.of<AllpProviders>(context).cetagory??'Choose Category'),
-                  Icon(Icons.arrow_drop_down)
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 20,),
-          InkWell(
-            onTap: () {
-              showDialog(
-                barrierDismissible: false,
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-
-                    content: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Provider.of<AllpProviders>(context).cetagory ==
-                              "Computing and Multimedia"
-                              ? Column(
+                          Column(
                             children: [
                               Divider(),
                               Padding(
@@ -254,24 +128,20 @@ class _FiltersScreenState extends State<FiltersScreen> {
                                     child: Text("Image & Sons")),
                               ),
                             ],
-                          )
-                              : Container(),
-                          // Divider(),
-                          // Row(
-                          //   children: [
-                          //     Icon(Icons.car_rental),
-                          //     SizedBox(width: 20),
-                          //     Text(
-                          //       'Vehicles',
-                          //       style: TextStyle(fontSize: 12),
-                          //     ),
-                          //   ],
-                          // ),
-                          // Divider(),
-
-                          Provider.of<AllpProviders>(context).cetagory ==
-                              'Vehicles'
-                              ? Column(
+                          ),
+                          Divider(),
+                          Row(
+                            children: [
+                              Image.asset('asset/vw.png',height: 30,width: 30,),
+                              SizedBox(width: 20),
+                              Text(
+                                'Vehicles',
+                                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          Divider(),
+                          Column(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -369,22 +239,19 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
                               Divider(),
                             ],
-                          )
-                              : Container(),
-                          // Row(
-                          //   children: [
-                          //     Icon(Icons.home),
-                          //     SizedBox(width: 20),
-                          //     Text(
-                          //       'Real Estate',
-                          //       style: TextStyle(fontSize: 12),
-                          //     )
-                          //   ],
-                          // ),
-                          // Divider(),
-                          Provider.of<AllpProviders>(context).cetagory ==
-                              'Real Estate'
-                              ? Column(
+                          ),
+                          Row(
+                            children: [
+                              Image.asset('asset/hw.png',height: 30,width: 30,),
+                              SizedBox(width: 20),
+                              Text(
+                                'Real Estate',
+                                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          Divider(),
+                          Column(
                             children: [
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -442,21 +309,19 @@ class _FiltersScreenState extends State<FiltersScreen> {
                               ),
                               Divider(),
                             ],
-                          )
-                              : Container(), //  Row(
-                          //   children: [
-                          //     Icon(Icons.gradient),
-                          //     SizedBox(width: 20),
-                          //     Text(
-                          //       'FOR HOME AND GARDEN',
-                          //       style: TextStyle(fontSize: 12),
-                          //     )
-                          //   ],
-                          // ),
-                          // Divider(),
-                          Provider.of<AllpProviders>(context).cetagory ==
-                              'FOR HOME AND GARDEN'
-                              ? Column(
+                          ),
+                          Row(
+                            children: [
+                              Image.asset('asset/vila.png',height: 30,width: 30,),
+                              SizedBox(width: 20),
+                              Text(
+                                'FOR HOME AND GARDEN',
+                                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                          Divider(),
+                          Column(
                             children: [
                               Container(
                                   padding:EdgeInsets.symmetric(vertical: 10),
@@ -485,10 +350,10 @@ class _FiltersScreenState extends State<FiltersScreen> {
                               )
                             ],
                           )
-                              : Container()
                         ],
                       ),
                     ),
+
                   );
                 },
               );
@@ -503,17 +368,21 @@ class _FiltersScreenState extends State<FiltersScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(Provider.of<AllpProviders>(context).subcetagory??'Choose SubCategory'),
+                  Text(Provider.of<AllpProviders>(context).subcetagory??'Choose Category'),
                   Icon(Icons.arrow_drop_down)
                 ],
               ),
             ),
           ),
           Spacer(),
+
           Container(
               margin: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
               child: ElevatedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => FiltersScreen2()));
+                if(Provider.of<AllpProviders>(context,listen: false).subcetagory!.isEmpty){}
+                else if(Provider.of<AllpProviders>(context,listen: false).subcetagory!.isNotEmpty){
+                  Navigator.push(context, MaterialPageRoute(builder: (builder) => FiltersScreen2()));
+                }
               }, child: Text('Continue'),style: ElevatedButton.styleFrom(fixedSize: Size(300, 50),primary: Color(0xffF8B800)),))
         ],
       ),

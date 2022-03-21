@@ -25,8 +25,7 @@ class _FiltersScreen2State extends State<FiltersScreen2> {
           width: MediaQuery.of(context).size.width / 1,
           height: MediaQuery.of(context).size.height,
           child: StreamBuilder(
-              stream: firebaseFirestore.collection("posts").where("Category",isEqualTo: Provider.of<AllpProviders>(context,listen: true).cetagory)
-                  .where("Subcategory",isEqualTo: Provider.of<AllpProviders>(context,listen: true).subcetagory)
+              stream: firebaseFirestore.collection("posts").where("Category",isEqualTo: Provider.of<AllpProviders>(context,listen: true).subcetagory)
                   .snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
