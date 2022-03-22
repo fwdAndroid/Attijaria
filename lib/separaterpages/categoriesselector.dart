@@ -55,10 +55,10 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Telephones");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("('SmartPhones'),");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Telephones')),
+                                    child: Text('SmartPhones')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -73,58 +73,39 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Computers portables");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Desktop Computers");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Computers portables')),
+                                    child: Text('Desktop Computers')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Computers Accessorie");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("('Laptops'),");
                                       Navigator.pop(context);
                                     },
-                                    child: Text("Computers Accessorie")),
+                                    child: Text("('Laptops'),")),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Video Game Console");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Computer Accessories and gadgets");
                                       Navigator.pop(context);
                                     },
-                                    child: Text("Video Game Console")),
+                                    child: Text("Computer Accessories and gadgets")),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Cameras and Cameras");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("('Pictures'),");
                                       Navigator.pop(context);
                                     },
-                                    child: Text("Cameras and Cameras")),
+                                    child: Text("('Pictures'),")),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: InkWell(
-                                    onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory(
-                                          "Television");
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Television")),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: InkWell(
-                                    onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory(
-                                          "Image & Sons");
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text("Image & Sons")),
-                              ),
+                             
                             ],
                           ),
                           Divider(),
@@ -154,67 +135,67 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Car Rental");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Motarcycles");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Car Rental')),
+                                    child: Text('Motarcycles')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Parts and Accessories");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("bikes");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Parts and Accessories')),
+                                    child: Text('bikes')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
                                       Provider.of<AllpProviders>(context,listen: false).setSubCetagory(
-                                          "Motors");
+                                          "Professional Vehicles");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Motors')),
+                                    child: Text('Professional Vehicles')),
                               ),
 
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Velos");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Construction Machinery");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Velos')),
+                                    child: Text('Construction Machinery')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
                                       Provider.of<AllpProviders>(context,listen: false).setSubCetagory(
-                                          "Arrow");
+                                          "Agriculure Machinery");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Arrow')),
+                                    child: Text('Agriculure Machinery')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Engins BTP");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Trailer and carvan");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Engins BTP')),
+                                    child: Text('Trailer and carvan')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Engine Agircole");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Boats");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Engine Agircole')),
+                                    child: Text('Boats')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -229,10 +210,10 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Others");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Part and accessories for vehicles");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Others')),
+                                    child: Text('Part and accessories for vehicles')),
                               ),
 
                               Divider(),
@@ -264,28 +245,37 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Maisons and Villas");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Houses and Villas");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Maisons and Villas')),
+                                    child: Text('Houses and Villas')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Desks and Trays");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Store,bussiness and Industrial premises");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Desks and Trays')),
+                                    child: Text('Store,bussiness and Industrial premises')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Magsins");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Offices and Trays");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Magsins')),
+                                    child: Text('Offices and Trays')),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Vacation");
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Vacation')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -296,14 +286,23 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                     },
                                     child: Text('Lands and Farms')),
                               ),
-                              Padding(
+                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Other Real Estate");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Roommates");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Other Real Estate')),
+                                    child: Text('Roommates')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Garden and DIY tools");
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Garden and DIY tools')),
                               ),
                               Divider(),
                             ],
@@ -325,10 +324,10 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                   padding:EdgeInsets.symmetric(vertical: 10),
                                   child: InkWell(
                                       onTap: (){
-                                        Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Appliances and Tableware");
+                                        Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Appliances and dishes");
                                         Navigator.pop(context);
                                       },
-                                      child: Text('Appliances and Tableware'))),
+                                      child: Text('Appliances and dishes'))),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),child: InkWell(
                                   onTap: (){
@@ -345,7 +344,397 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                       Navigator.pop(context);
                                     },
                                     child: Text('Garden and DIY Tools')),
-                              )
+                              ),
+                              Divider(),
+                          InkWell(
+                            onTap: () {
+                              Provider.of<AllpProviders>(context, listen: false)
+                                  .setCetagory("Clothing and well-being");
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/shirt.png',
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  'Clothing and well-being',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          Divider(),
+                           Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Clothing');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Clothing')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Clothing');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Clothing')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Watches and Jewellery');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Watches and Jewellery')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bags and accessories');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Bags and accessories')),
+                              ),
+                                Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Clothing for childern and babies');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Clothing for childern and babies')),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Beauty Products');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Beauty Products')),
+                              ),
+                              Divider(),
+                              InkWell(
+                            onTap: () {
+                              Provider.of<AllpProviders>(context, listen: false)
+                                  .setCetagory("Liesure and entertainment");
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/game.png',
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  'Liesure and entertainment',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                           Divider(),
+                           Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Supports and leisures');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Supports and leisures')),
+                              ),
+                                Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Animals');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Animals')),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Musical Instruements');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Musical Instruements')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Art and Collections');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Art and Collections')),
+                              ),
+                                Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Travels and ticketing');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Travels and ticketing')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Movies,Books,Magzines');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Movies,Books,Magzines')),
+                              ),
+                              Divider(),
+                               InkWell(
+                            onTap: () {
+                              Provider.of<AllpProviders>(context, listen: false)
+                                  .setCetagory("Employment and Services");
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/employment.png',
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  'Employment and Services',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          Divider(),
+                           Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Jobs');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Jobs')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Internship Offers');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Internship Offers')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Call Center');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Call Center')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Frames');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Frames')),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('IT Professions');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('IT Professions')),
+                              ),
+                                Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('House Keepers,Nany Drivers');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('House Keepers,Nany Drivers')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('House Works');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('House Works')),
+                              ),
+                                Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Job Applications');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Job Applications')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Services');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Services')),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bussiness and commercials affairs');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Bussiness and commercials affairs')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bussiness and commercials affairs');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Bussiness and commercials affairs')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bussiness and commercials affairs');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Bussiness and commercials affairs')),
+                              ),
+                              Divider(),
+                              
+                          InkWell(
+                            onTap: () {
+                              Provider.of<AllpProviders>(context, listen: false)
+                                  .setCetagory("Companies");
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/sdq.png',
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  'Companies',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          Divider(),
+                           Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bussiness and commercials affairs');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Bussiness and commercials affairs')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Professional Equipment');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Professional Equipment')),
+                              ),
+                               Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Professional Equipment');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Professional Equipment')),
+                              ),
+                             
+                              Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory(' Stock and wholesales');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(' Stock and wholesales')),
+
+                              ),
+                              Divider(),
+                              InkWell(
+                            onTap: () {
+                              Provider.of<AllpProviders>(context, listen: false)
+                                  .setCetagory("Others");
+                              Navigator.pop(context);
+                            },
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/others.png',
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  'Others',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          Divider(),
+                           Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: InkWell(
+                                    onTap: (){
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory(' Stock and wholesales');
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(' Stock and wholesales')),
+
+                              ),
                             ],
                           )
                         ],
