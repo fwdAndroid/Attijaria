@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
 
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (builder) => FiltersScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (builder) => FitersScreen()));
               }, icon: Icon(Icons.search,color: Colors.white), )
             //    AnimatedSearchBar(
 

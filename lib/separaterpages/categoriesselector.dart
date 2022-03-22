@@ -49,13 +49,15 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             ],
                           ),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Divider(),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("('SmartPhones'),");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("SmartPhones");
                                       Navigator.pop(context);
                                     },
                                     child: Text('SmartPhones')),
@@ -82,10 +84,10 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("('Laptops'),");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Laptops");
                                       Navigator.pop(context);
                                     },
-                                    child: Text("('Laptops'),")),
+                                    child: Text("Laptops")),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -100,10 +102,10 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("('Pictures'),");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Pictures");
                                       Navigator.pop(context);
                                     },
-                                    child: Text("('Pictures'),")),
+                                    child: Text("Pictures")),
                               ),
                              
                             ],
@@ -121,6 +123,8 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                           ),
                           Divider(),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -135,10 +139,10 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
                                     onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Motarcycles");
+                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory("Motorcycles");
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Motarcycles')),
+                                    child: Text('Motorcycles')),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -231,6 +235,8 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                           ),
                           Divider(),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -319,6 +325,8 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                           ),
                           Divider(),
                           Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                   padding:EdgeInsets.symmetric(vertical: 10),
@@ -370,15 +378,6 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             ),
                           ),
                           Divider(),
-                           Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: InkWell(
-                                    onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Clothing');
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Clothing')),
-                              ),
                                Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
@@ -609,24 +608,7 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                     },
                                     child: Text('Services')),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: InkWell(
-                                    onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bussiness and commercials affairs');
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Bussiness and commercials affairs')),
-                              ),
-                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: InkWell(
-                                    onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bussiness and commercials affairs');
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Bussiness and commercials affairs')),
-                              ),
+
                                Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
@@ -662,24 +644,7 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             ),
                           ),
                           Divider(),
-                           Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: InkWell(
-                                    onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Bussiness and commercials affairs');
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Bussiness and commercials affairs')),
-                              ),
-                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: InkWell(
-                                    onTap: (){
-                                      Provider.of<AllpProviders>(context,listen: false).setSubCetagory('Professional Equipment');
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text('Professional Equipment')),
-                              ),
+
                                Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
                                 child: InkWell(
