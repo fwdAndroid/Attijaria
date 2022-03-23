@@ -10,8 +10,7 @@ class AppartmentsFilters extends StatefulWidget {
   _AppartmentsFiltersState createState() => _AppartmentsFiltersState();
 }
 
-enum SingingCharacter { Sale, Request }
-
+enum SingingCharacter { Sale, Request}
 class _AppartmentsFiltersState extends State<AppartmentsFilters> {
   RangeValues _currentRangeValues = RangeValues(0, 100);
   String dropdownValueCategory = "Appartments";

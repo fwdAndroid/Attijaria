@@ -363,7 +363,7 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/shirt.png',
+                                  'asset/shirt.png',
                                   height: 30,
                                   width: 30,
                                 ),
@@ -433,7 +433,7 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/game.png',
+                                  'asset/game.png',
                                   height: 30,
                                   width: 30,
                                 ),
@@ -512,7 +512,7 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/employment.png',
+                                  'asset/employment.png',
                                   height: 30,
                                   width: 30,
                                 ),
@@ -629,12 +629,12 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/sdq.png',
+                                  'asset/sdq.png',
                                   height: 30,
                                   width: 30,
                                 ),
                                 SizedBox(width: 20),
-                                Text(
+                                const Text(
                                   'Companies',
                                   style: TextStyle(
                                       fontSize: 12,
@@ -643,7 +643,7 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                               ],
                             ),
                           ),
-                          Divider(),
+                          const Divider(),
 
                                Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -675,12 +675,12 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/others.png',
+                                  'asset/others.png',
                                   height: 30,
                                   width: 30,
                                 ),
                                 SizedBox(width: 20),
-                                Text(
+                                const Text(
                                   'Others',
                                   style: TextStyle(
                                       fontSize: 12,
@@ -697,7 +697,7 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                                       Provider.of<AllpProviders>(context,listen: false).setSubCetagory(' Stock and wholesales');
                                       Navigator.pop(context);
                                     },
-                                    child: Text(' Stock and wholesales')),
+                                    child: const Text(' Stock and wholesales')),
 
                               ),
                             ],
