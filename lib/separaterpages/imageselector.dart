@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:attijaria/Providers/allproviders.dart';
 import 'package:attijaria/separaterpages/categoriesselector.dart';
 import 'package:attijaria/widgets/customdialog.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +28,7 @@ class _ImageSelectorState extends State<ImageSelector> {
 
   @override
   Widget build(BuildContext context) {
+  var appSize=MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -71,40 +74,30 @@ class _ImageSelectorState extends State<ImageSelector> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   )),
-           
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 20,top: 20),
-                    child: InkWell(
-                      onTap: addImage,
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                          margin: EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.amber,
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                          child: Icon(
-                            Icons.add_a_photo,
-                            color: Colors.white,
-                            size: 30,
-                          )),
-                    ),
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.only(left: 20,top: 0),
+                child: InkWell(
+                  onTap: addImage,
+                  child: Container(
+                      height: 100,
+                      width: 100,
+                      margin: EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.amber,
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      child: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.white,
+                        size: 30,
+                      )),
+                ),
               ),
               Container(
-                width: 100,
-                height: 100,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: Colors.amber
-                    )
-                  ),
+                margin: EdgeInsets.only(left: 20,right: 20,top: 5),
+              height: appSize.height*0.44,
+               width: appSize.width,
                 child: GridView.builder(
                     physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
@@ -115,14 +108,21 @@ class _ImageSelectorState extends State<ImageSelector> {
                         crossAxisCount: 3),
                     itemBuilder: (context, index) {
                       return Container(
+
                           margin: EdgeInsets.all(3),
-                          child: Image.file(  
-                            File(        
-                              Provider.of<AllpProviders>(context)
-                                  .imageUrls?[index]
-                                  .path,),fit: BoxFit.cover,),height: 100,width: 100,);
+                          child: DottedBorder(
+                            color: Colors.amber,
+                            strokeWidth: 1,
+
+                            child: Image.file(
+                              File(
+                                Provider.of<AllpProviders>(context)
+                                    .imageUrls?[index]
+                                    .path,),fit: BoxFit.cover,),
+                          ),height: 100,width: 100,);
                     }),
               ),
+
               Spacer(),
               Center(
                 child: Container(

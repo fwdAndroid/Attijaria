@@ -225,74 +225,7 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
                 _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
                 _titleText('Location'),
                 _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
-                // _titleText('Sector'),
-                // _textFormFieldFunctionIcon(sectorController,RequiredValidator(errorText: "required"),'Sector'),
-                _titleText('Condition'),
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      GroupButton(
-                   selectedColor: Color(0xffF8B800),     
-         //   controller: controller,
-         selectedBorderColor: Colors.yellow,
-         unselectedBorderColor: Colors.black,
-            isRadio: false,
-            buttons: ['New','Old'],
-            onSelected: (i, selected) => debugPrint('Button #$i $selected'),
-          ),
-                      ]  ),
-                ),
-      
-    
-                  
-                // _titleText('Category'),
-                // _textFormFieldFunctionIcon(cetagoryController,RequiredValidator(errorText: "required"),'Category'),
-                // _titleText('Marque'),
-                // _textFormFieldFunctionIcon(marqueeController,RequiredValidator(errorText: "required"),'Marque'),
-                // _titleText('Elat'),
-                // Container(
-                //     padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-                //     child: DropdownButtonFormField<String>(
-                //       value: dropdownValueElat,
-                //       icon: const Icon(Icons.arrow_downward),
-                //       iconSize: 24,
-                //       elevation: 16,
-                //       style: const TextStyle(color: Colors.black),
-                //       decoration: InputDecoration(
-                //           enabledBorder: new OutlineInputBorder(
-                //             borderRadius: new BorderRadius.circular(15.0),
-                //             borderSide: BorderSide(color: Colors.grey),
-                //           ),
-                //           focusedBorder: new OutlineInputBorder(
-                //             borderRadius: new BorderRadius.circular(25.0),
-                //             borderSide: BorderSide(color: Colors.pinkAccent),
-                //           ),
-                //           filled: true,
-                //           hintStyle: TextStyle(color: Colors.grey[800]),
-                //           hintText: "Additional Details",
-                //           fillColor: Colors.white),
-                //       onChanged: (String? newValue) {
-                //         setState(() {
-                //           dropdownValueElat = newValue!;
-                //         });
-                //       },
-                //       items: <String>[
-                //         'Nine',
-                //         'Reconditioned',
-                //         'Good condition',
-                //         "For Piece",
-                //       ].map<DropdownMenuItem<String>>((String value) {
-                //         return DropdownMenuItem<String>(
-                //           value: value,
-                //           child: Text(value),
-                //         );
-                //       }).toList(),
-                //     )),
-                // _titleText('Storage capacity'),
-              //  _textFormFieldFunctionIcon(storageCapacityCellController,RequiredValidator(errorText: "required"),'Storage capacity'),
-               
+                _titleText('Description'),
                 Container(
                     margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                     child: _longDescription(descriptionController,'Product Description')),
