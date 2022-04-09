@@ -42,30 +42,30 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
       String descrop) {
     return Container(
 
-        // ignore: prefer_const_constructors
+      // ignore: prefer_const_constructors
         child: TextField(
           controller: controller,
-      keyboardType: TextInputType.multiline,
-      maxLines: 5,
-      decoration: InputDecoration(
-        hintText: 'Write A Product Description',
-        hintStyle: TextStyle(color: Colors.grey),
-        filled: true,
-        fillColor: Colors.white70,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          borderSide: BorderSide(color: Colors.grey, width: 2),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          borderSide: BorderSide(color: Colors.grey, width: 2),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-        )
-      ),
-    ));
+          keyboardType: TextInputType.multiline,
+          maxLines: 5,
+          decoration: InputDecoration(
+              hintText: 'Write A Product Description',
+              hintStyle: TextStyle(color: Colors.grey),
+              filled: true,
+              fillColor: Colors.white70,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                borderSide: BorderSide(color: Colors.grey, width: 2),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                borderSide: BorderSide(color: Colors.grey, width: 2),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+              )
+          ),
+        ));
   }
 
 //Text Field Title
@@ -86,9 +86,9 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
 //TextFieldws
   Widget _textFormFieldFunctionIcon(
       TextEditingController controller,
-    String? Function(String?)? validator,
-    String Active,
-  ) {
+      String? Function(String?)? validator,
+      String Active,
+      ) {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
       child: TextField(
@@ -96,18 +96,18 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
         controller: controller,
         autocorrect: true,
         decoration: InputDecoration(
-          hintText: Active,
-          hintStyle: TextStyle(color: Colors.grey),
-          filled: true,
-          fillColor: Colors.white70,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            borderSide: BorderSide(color: Colors.grey, width: 2),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
-            borderSide: BorderSide(color: Colors.grey, width: 2),
-          ),
+            hintText: Active,
+            hintStyle: TextStyle(color: Colors.grey),
+            filled: true,
+            fillColor: Colors.white70,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderSide: BorderSide(color: Colors.grey, width: 2),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderSide: BorderSide(color: Colors.grey, width: 2),
+            ),
             disabledBorder:OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
               borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
@@ -122,7 +122,7 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
   void getLocation()async{
     Position  position= await  GetLocation().getLocation();
     address=await  GetLocation().getAddressFormLongitude(position);
-   locationController.text=address!;
+    locationController.text=address!;
     print(address);
   }
   @override
@@ -147,41 +147,47 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
                   onPrimary: Colors.white, // foreground
                 ),
                 onPressed: ()async {
-                  if(formKey.currentState!.validate()){
-                     Customdialog.showDialogBox(context);
-                      await    uploadImageToFirebase().then((v) {
+                  if(titleController.text.isNotEmpty&&minPriceController.text.isNotEmpty&&maxPriceController.text.isNotEmpty
+                  &&phoneNumberController.text.isNotEmpty) {
+                    if (formKey.currentState!.validate()) {
+                      Customdialog.showDialogBox(context);
+                      await uploadImageToFirebase().then((v) {
                         firebaseFirestore.collection("posts").add({
-                          "location":locationController.text.trim(),
+                          "location": locationController.text.trim(),
                           // "Sector":sectorController.text.trim(),
                           // "min":minController.text.trim(),
                           // "max":maxController.text.trim(),
-                          "Category":Provider.of<AllpProviders>(context,listen: false).subcetagory,
+                          "Category": Provider
+                              .of<AllpProviders>(context, listen: false)
+                              .subcetagory,
                           // "Subcategory":Provider.of<AllpProviders>(context,listen: false).subcetagory,
                           // "cetagories":cetagoryController.text.trim(),
                           // "marqee":marqueeController.text.trim(),
-                          "elat":dropdownValueElat,
+                          "elat": dropdownValueElat,
                           // "storageCapacity":storageCapacityCellController.text.trim(),
-                          "title":titleController.text.trim(),
-                          "description":descriptionController.text.trim(),
-                          "imageLink":imageLink,
-                          "minPrice":minPriceController.text.trim(),
-                          "maxPrice":maxPriceController.text.trim(),
-                          "phoneNumber":phoneNumberController.text.trim(),
-                          "address":address,
-                          "time":DateTime.now(),
-                          "isFav":false
-                          , "userId":firebaseAuth.currentUser!.uid
+                          "title": titleController.text.trim(),
+                          "description": descriptionController.text.trim(),
+                          "imageLink": imageLink,
+                          "minPrice": minPriceController.text.trim(),
+                          "maxPrice": maxPriceController.text.trim(),
+                          "phoneNumber": phoneNumberController.text.trim(),
+                          "address": address,
+                          "time": DateTime.now(),
+                          "isFav": false
+                          ,
+                          "userId": firebaseAuth.currentUser!.uid
                         }).whenComplete(() {
                           Navigator.pop(context);
                           Navigator.pop(context);
                           Navigator.pop(context);
                           Navigator.pop(context);
                           Navigator.pop(context);
-                          Customdialog().showInSnackBar("Create a new post", context);
+                          Customdialog().showInSnackBar(
+                              "Create a new post", context);
                         });
                       });
                     }
-
+                  }
                 },
                 child: Text(
                   'Save',
@@ -221,111 +227,160 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 _titleText('Title'),
-                _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
-                _titleText('Location'),
-                _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
-                _titleText('Description'),
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                    child: _longDescription(descriptionController,'Product Description')),
+
+                //  _titleText('Title'),
+                ExpansionTile(title:  _titleText('Title'),
+                  children: [
+                    _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
+                  ],),
+                // _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
+                ExpansionTile(title:  _titleText('Location'),
+                  children: [
+                    _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
+                  ],),
+                // _titleText('Location'),
+                // _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
+                ExpansionTile(title:   _titleText('Description'),
+                  children: [
+                    Container(
+                        margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                        child: _longDescription(descriptionController,'Product Description')),
+                  ],),
+                // _titleText('Description'),
+                // Container(
+                //     margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                //     child: _longDescription(descriptionController,'Product Description')),
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child:SizedBox(
                     height: 120,
                     width: double.infinity,
                     child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
+                        scrollDirection: Axis.horizontal,
                         itemCount: Provider.of<AllpProviders>(context).imageUrls!.length,
                         itemBuilder: (context,index){
-                      return Image.file(File(Provider.of<AllpProviders>(context).imageUrls?[index].path),height: 100,width: 100,);
-                    }),
+                          return Provider.of<AllpProviders>(context).imageUrls?[index].path==null?Container():Image.file(File(Provider.of<AllpProviders>(context).imageUrls?[index].path),height: 100,width: 100,);
+                        }),
                   ),
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                _titleText('Prix DH'),
-                Row(
-                  children: [
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon(minPriceController,RequiredValidator(errorText: "required"),'Min')),
-                    Expanded(flex: 1, child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "required"),'Max')),
-                  ],
-                ),
-                RangeSlider(
-                    values: rangevalues,
-                    activeColor: Colors.yellow[700],
-                    inactiveColor: Colors.black38,
-                    min: 1.0,
-                    max: 9999999.0,
-                    // values: values,
-                    onChanged: (values) {
-                      setState(() {
-                        rangevalues = values;
-                        minPriceController.text=rangevalues.start.toInt().toString();
-                        maxPriceController.text=rangevalues.end.toInt().toString();
-                      });
-                    }),
-                _titleText(' Phone Number'),
-                _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                ExpansionTile(title:  _titleText('Prix DH'),
                   children: [
                     Row(
                       children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Do not Display Ads',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
+                        Expanded(flex: 1, child: _textFormFieldFunctionIcon(minPriceController,RequiredValidator(errorText: "required"),'Min')),
+                        Expanded(flex: 1, child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "required"),'Max')),
                       ],
                     ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Boost the ads',
-                          style: TextStyle(
-                            color: Colors.black,
+                    RangeSlider(
+                        values: rangevalues,
+                        activeColor: Colors.yellow[700],
+                        inactiveColor: Colors.black38,
+                        min: 1.0,
+                        max: 9999999.0,
+                        // values: values,
+                        onChanged: (values) {
+                          setState(() {
+                            rangevalues = values;
+                            minPriceController.text=rangevalues.start.toInt().toString();
+                            maxPriceController.text=rangevalues.end.toInt().toString();
+                          });
+                        }),
+                  ],),
+                // _titleText('Prix DH'),
+                // Row(
+                //   children: [
+                //     Expanded(flex: 1, child: _textFormFieldFunctionIcon(minPriceController,RequiredValidator(errorText: "required"),'Min')),
+                //     Expanded(flex: 1, child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "required"),'Max')),
+                //   ],
+                // ),
+                // RangeSlider(
+                //     values: rangevalues,
+                //     activeColor: Colors.yellow[700],
+                //     inactiveColor: Colors.black38,
+                //     min: 1.0,
+                //     max: 9999999.0,
+                //     // values: values,
+                //     onChanged: (values) {
+                //       setState(() {
+                //         rangevalues = values;
+                //         minPriceController.text=rangevalues.start.toInt().toString();
+                //         maxPriceController.text=rangevalues.end.toInt().toString();
+                //       });
+                //     }),
+                ExpansionTile(title: _titleText(' Phone Number'),
+
+                  children: [
+                    _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
+                  ],),
+                // _titleText(' Phone Number'),
+                // _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
+                Container(
+                  margin: EdgeInsets.only(left: 20,right: 20),
+                  child: ExpansionTile(
+                      title: Text("Types of Ads"),
+                      children:[ Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Do not Display Ads',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          value: 1,
-                          groupValue: 2,
-                          activeColor: Color(0xffF8B800),
-                          onChanged: (val) {
-                            //  setSelectedRadio(val);
-                          },
-                        ),
-                        Text(
-                          'Official Store',
-                          style: TextStyle(
-                            color: Colors.black,
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Boost the ads',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: 2,
+                                activeColor: Color(0xffF8B800),
+                                onChanged: (val) {
+                                  //  setSelectedRadio(val);
+                                },
+                              ),
+                              Text(
+                                'Official Store',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      ] ),
                 ),
               ],
             ),
@@ -336,41 +391,41 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
   }
   Future uploadImageToFirebase() async {
     // File? fileName = imageUrl;
-   for(XFile image in Provider.of<AllpProviders>(context,listen: false).imageUrls!){
-     var uuid = Uuid();
-     firebase_storage.Reference firebaseStorageRef = firebase_storage
-         .FirebaseStorage.instance
-         .ref()
-         .child('cetagories/images+${uuid.v4()}');
-     firebase_storage.UploadTask uploadTask =
-     firebaseStorageRef.putFile(File(image.path));
-     firebase_storage.TaskSnapshot taskSnapshot =
-     await uploadTask.whenComplete(() async {
-       print(image);
-       String img = await uploadTask.snapshot.ref.getDownloadURL();
-       setState(() {
-         imageLink.add(img);
-       });
-     });
-   }
+    for(XFile image in Provider.of<AllpProviders>(context,listen: false).imageUrls!){
+      var uuid = Uuid();
+      firebase_storage.Reference firebaseStorageRef = firebase_storage
+          .FirebaseStorage.instance
+          .ref()
+          .child('cetagories/images+${uuid.v4()}');
+      firebase_storage.UploadTask uploadTask =
+      firebaseStorageRef.putFile(File(image.path));
+      firebase_storage.TaskSnapshot taskSnapshot =
+      await uploadTask.whenComplete(() async {
+        print(image);
+        String img = await uploadTask.snapshot.ref.getDownloadURL();
+        setState(() {
+          imageLink.add(img);
+        });
+      });
+    }
   }
   Future uploadFile() async {
     int i = 1;
 
-  //   for (var img in _image) {
-  //     setState(() {
-  //       val = i / _image.length;
-  //     });
-  //     ref = firebase_storage.FirebaseStorage.instance
-  //         .ref()
-  //         .child('images/${Path.basename(img.path)}');
-  //     await ref.putFile(img).whenComplete(() async {
-  //       await ref.getDownloadURL().then((value) {
-  //         imgRef.add({'url': value});
-  //         i++;
-  //       });
-  //     });
-  //   }
-   }
+    //   for (var img in _image) {
+    //     setState(() {
+    //       val = i / _image.length;
+    //     });
+    //     ref = firebase_storage.FirebaseStorage.instance
+    //         .ref()
+    //         .child('images/${Path.basename(img.path)}');
+    //     await ref.putFile(img).whenComplete(() async {
+    //       await ref.getDownloadURL().then((value) {
+    //         imgRef.add({'url': value});
+    //         i++;
+    //       });
+    //     });
+    //   }
+  }
 
 }

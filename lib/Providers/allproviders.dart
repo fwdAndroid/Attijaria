@@ -2,11 +2,11 @@
 import 'package:image_picker/image_picker.dart';
 
 class AllpProviders extends ChangeNotifier{
-  List? imageUrls=<XFile>[];
+  List? imageUrls=List.filled(8, null,growable: true);
   String? cetagory;
   String? subcetagory;
-void setImages(List? images){
-  imageUrls=images;
+void setImages(int index, XFile? images){
+  imageUrls![index]=images;
   notifyListeners();
 }
 void setCetagory(String value){

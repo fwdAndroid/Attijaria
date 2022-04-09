@@ -30,83 +30,45 @@ class _SliderListState extends State<SliderList> {
                   var ds=snapshot.data!.docs[index];
                   return SizedBox(
                     height: 500,
-                    width: MediaQuery.of(context).size.width,
+                    width: 150,
                     child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                      elevation: 4,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              margin: EdgeInsets.only(left: 10),
-                              height: 135,
-                              width: 100,
-                              child: CachedNetworkImage(
-                                imageUrl: ds['imageUrl'],
-                                fit: BoxFit.fill,
-                                placeholder: (context, url) => Center(child: Image.asset("asset/infinity.gif")),
-                                errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
-                              ) ),
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: ListTile(
-                              title: Column(
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(top: 30, left: 10),
-                                    child: Text(ds['price'],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                            fontSize: 30)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        elevation: 4,
+                        child: Stack(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: ds['imageUrl'],
+                              fit: BoxFit.fill,
+                              placeholder: (context, url) => Center(child: Image.asset("asset/infinity.gif")),
+                              errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                            ) ,
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 5, left: 10),child: Text(
+                                  ds['cetagory'],
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black,
+                                      fontSize: 15
+
                                   ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      TextButton.icon(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.location_pin,
-                                          color: Colors.grey,
-                                        ),
-                                        label: Text(
-                                          ds['cetagory'],
-                                          style: TextStyle(
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        child: TextButton.icon(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.timer,
-                                            color: Colors.grey,
-                                          ),
-                                          label: Text(
-                                            '2:30 PM ',
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(ds['description'],
-                                      style:
-                                      TextStyle(color: Colors.black, fontSize: 15)),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                                ),),
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 4, left: 10),
+                                  child: Text(ds['price'],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                          fontSize: 15)),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
                     ),
                   );
                 },

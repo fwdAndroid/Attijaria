@@ -23,7 +23,10 @@ class _ImageSelectorState extends State<ImageSelector> {
 
   void addImage() async {
     final List<XFile>? image = await _picker.pickMultiImage();
-    Provider.of<AllpProviders>(context, listen: false).setImages(image);
+ for(var i=0;i<=image!.length;i++){
+   Provider.of<AllpProviders>(context, listen: false).setImages(i,image[i]);
+ }
+
   }
 
   @override
@@ -107,19 +110,33 @@ class _ImageSelectorState extends State<ImageSelector> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3),
                     itemBuilder: (context, index) {
-                      return Container(
-
+                    var ds=Provider.of<AllpProviders>(context, listen: true)
+                        .imageUrls!;
+                      return ds[index]==null? Container(
+decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
                           margin: EdgeInsets.all(3),
                           child: DottedBorder(
                             color: Colors.amber,
                             strokeWidth: 1,
+radius: Radius.circular(5),
+                            borderType: BorderType.RRect,
+                            child: Text(""),
 
-                            child: Image.file(
-                              File(
-                                Provider.of<AllpProviders>(context)
-                                    .imageUrls?[index]
-                                    .path,),fit: BoxFit.cover,),
-                          ),height: 100,width: 100,);
+                          ),height: 100,width: 100,
+                      ):Container(
+                        height: 100,
+width: 100,
+decoration: BoxDecoration(borderRadius: BorderRadius.circular(5),
+image: DecorationImage(image: FileImage(File(
+  Provider.of<AllpProviders>(context)
+      .imageUrls?[index]
+      .path,),
+),
+  fit: BoxFit.cover,
+)
+),
+                        margin: EdgeInsets.all(3),
+                      );
                     }),
               ),
 
@@ -134,7 +151,7 @@ class _ImageSelectorState extends State<ImageSelector> {
                             .imageUrls);
                         if (Provider.of<AllpProviders>(context, listen: false)
                             .imageUrls!
-                            .isEmpty) {
+                            .first==null) {
                           Customdialog().showInSnackBar("Please Images", context);
                         } else if (Provider.of<AllpProviders>(context,
                                 listen: false)
