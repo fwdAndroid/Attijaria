@@ -53,15 +53,15 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
               filled: true,
               fillColor: Colors.white70,
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                // borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 borderSide: BorderSide(color: Colors.grey, width: 2),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                // borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 borderSide: BorderSide(color: Colors.grey, width: 2),
               ),
               disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                // borderRadius: BorderRadius.all(Radius.circular(8.0)),
                 borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
               )
           ),
@@ -91,27 +91,30 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
       ) {
     return Container(
       margin: EdgeInsets.only(left: 20, bottom: 10, right: 20, top: 10),
-      child: TextField(
-        enabled: controller.text.isNotEmpty?false:true,
-        controller: controller,
-        autocorrect: true,
-        decoration: InputDecoration(
-            hintText: Active,
-            hintStyle: TextStyle(color: Colors.grey),
-            filled: true,
-            fillColor: Colors.white70,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              borderSide: BorderSide(color: Colors.grey, width: 2),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              borderSide: BorderSide(color: Colors.grey, width: 2),
-            ),
-            disabledBorder:OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
-              borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
-            )
+      child: Card(
+        elevation: 0,
+        child: TextField(
+          enabled: controller.text.isNotEmpty?false:true,
+          controller: controller,
+          autocorrect: true,
+          decoration: InputDecoration(
+              hintText: Active,
+              hintStyle: TextStyle(color: Colors.grey),
+              filled: true,
+              fillColor: Colors.white70,
+              enabledBorder: OutlineInputBorder(
+                // borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                borderSide: BorderSide(color: Colors.grey, width: 2),
+              ),
+              focusedBorder: OutlineInputBorder(
+                // borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                borderSide: BorderSide(color: Colors.grey, width: 2),
+              ),
+              disabledBorder:OutlineInputBorder(
+                // borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                borderSide: BorderSide(color: Colors.grey.shade100, width: 2),
+              )
+          ),
         ),
       ),
     );
@@ -227,29 +230,15 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                //  _titleText('Title'),
-                ExpansionTile(title:  _titleText('Title'),
-                  children: [
-                    _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
-                  ],),
-                // _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
-                ExpansionTile(title:  _titleText('Location'),
-                  children: [
-                    _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
-                  ],),
-                // _titleText('Location'),
-                // _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
-                ExpansionTile(title:   _titleText('Description'),
-                  children: [
-                    Container(
-                        margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+_titleText('Title'),
+                _textFormFieldFunctionIcon(titleController,RequiredValidator(errorText: "required"),'Title'),
+                _titleText('Location'),
+                  _textFormFieldFunctionIcon(locationController,RequiredValidator(errorText: "required"),'Set Location'),
+               
+                _titleText('Description'),
+                Container(
+                        margin: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
                         child: _longDescription(descriptionController,'Product Description')),
-                  ],),
-                // _titleText('Description'),
-                // Container(
-                //     margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                //     child: _longDescription(descriptionController,'Product Description')),
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child:SizedBox(
@@ -266,62 +255,96 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
                 SizedBox(
                   height: 10,
                 ),
-                ExpansionTile(title:  _titleText('Prix DH'),
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(flex: 1, child: _textFormFieldFunctionIcon(minPriceController,RequiredValidator(errorText: "required"),'Min')),
-                        Expanded(flex: 1, child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "required"),'Max')),
+                   InkWell(
+                     onTap: (){
+                       showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+              
+                child:SingleChildScrollView(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('500DHR - 1000DHR '),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('1000DHR - 1500DHR '),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('1500DHR - 2000DHR '),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('2000DHR - 2500DHR '),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('2500DHR - 3000DHR '),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('3000DHR - 3500DHR '),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text('500DHR - 1000DHR '),
+                        ),
+                        
                       ],
-                    ),
-                    RangeSlider(
-                        values: rangevalues,
-                        activeColor: Colors.yellow[700],
-                        inactiveColor: Colors.black38,
-                        min: 1.0,
-                        max: 9999999.0,
-                        // values: values,
-                        onChanged: (values) {
-                          setState(() {
-                            rangevalues = values;
-                            minPriceController.text=rangevalues.start.toInt().toString();
-                            maxPriceController.text=rangevalues.end.toInt().toString();
-                          });
-                        }),
-                  ],),
-                // _titleText('Prix DH'),
-                // Row(
-                //   children: [
-                //     Expanded(flex: 1, child: _textFormFieldFunctionIcon(minPriceController,RequiredValidator(errorText: "required"),'Min')),
-                //     Expanded(flex: 1, child: _textFormFieldFunctionIcon(maxPriceController,RequiredValidator(errorText: "required"),'Max')),
-                //   ],
-                // ),
-                // RangeSlider(
-                //     values: rangevalues,
-                //     activeColor: Colors.yellow[700],
-                //     inactiveColor: Colors.black38,
-                //     min: 1.0,
-                //     max: 9999999.0,
-                //     // values: values,
-                //     onChanged: (values) {
-                //       setState(() {
-                //         rangevalues = values;
-                //         minPriceController.text=rangevalues.start.toInt().toString();
-                //         maxPriceController.text=rangevalues.end.toInt().toString();
-                //       });
-                //     }),
-                ExpansionTile(title: _titleText(' Phone Number'),
-
-                  children: [
-                    _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
-                  ],),
-                // _titleText(' Phone Number'),
-                // _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
-                Container(
-                  margin: EdgeInsets.only(left: 20,right: 20),
-                  child: ExpansionTile(
-                      title: Text("Types of Ads"),
-                      children:[ Column(
+                    
+                  ),
+                ),
+              );
+            },
+          );
+                     },
+                     child: Container(
+                       height: 50,
+                                   // alignment: Alignment.center,
+                                   decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      // border: Border.all(width: 1, color: Colors.white
+                      // )
+                      ),
+                                   child: Card(
+                                     elevation: 1,
+                                     margin: EdgeInsets.symmetric(horizontal: 10),
+                   
+                                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                         padding: const EdgeInsets.only(left:5.0,bottom: 12),
+                        child:  _titleText(' Price DX'),
+                        ),
+                       
+                        Padding(
+                         padding: const EdgeInsets.only(left:5.0),
+                          child:  Text('')
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right:5.0),
+                          child: Icon(Icons.keyboard_arrow_down_rounded),
+                        )
+                      ],
+                                     ),
+                                   ),
+                                 ),
+                   ),
+                 
+                 
+              
+                _titleText(' Phone Number'),
+                _textFormFieldFunctionIcon(phoneNumberController,RequiredValidator(errorText: "required"),'Phone Number'),
+         _titleText("Types of Ads"),
+              Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
@@ -382,9 +405,7 @@ class _AddNewsPostsState extends State<AddNewsPosts> {
                       ),
                       ] ),
                 ),
-              ],
-            ),
-          ),
+               
         ),
       ),
     );

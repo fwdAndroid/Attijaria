@@ -34,6 +34,11 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
               child: Text(
                   'Please choose from the list below the category that corresponds to the object you are selling')),
           Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white54,
+            ),
+            
             margin: EdgeInsets.only(top: 20, left: 20, right: 20),
             child: InkWell(
               onTap: () {
@@ -923,64 +928,39 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
                   },
                 );
               },
-              child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                height: 60,
-                alignment: Alignment.center,
+              child:
+               Container(
+                 height: 50,
+                // alignment: Alignment.center,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 1, color: Colors.grey.shade100)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(Provider.of<AllpProviders>(context).subcetagory ??
-                        'Choose Category'),
-                    Icon(Icons.arrow_drop_down)
-                  ],
+                    borderRadius: BorderRadius.circular(10),
+                    // border: Border.all(width: 1, color: Colors.white
+                    // )
+                    ),
+                child: Card(
+                  elevation: 1,
+                                   margin: EdgeInsets.symmetric(horizontal: 10),
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(''),
+                      Padding(
+                       padding: const EdgeInsets.only(left:5.0),
+                        child: Text(Provider.of<AllpProviders>(context).subcetagory ??
+                            'Choose Category'),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right:5.0),
+                        child: Icon(Icons.keyboard_arrow_down_rounded),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-          Container(
-              margin: EdgeInsets.only(top: 20, left: 20),
-              child: Text('Type of News')) ,
-            
-          Container(
-            child: Row(
-              children: [
-                   Expanded(
-                     child: ListTile(  
-                             title: const Text('OLD'),  
-                             leading: Radio(  
-                               value: BestTutorSite.Old,  
-                               groupValue: _site,  
-                               onChanged: (BestTutorSite? value) {  
-                                 setState(() {  
-                                   _site = value!;  
-                                 });  
-                               },  
-                             ),  
-                           ),
-                   ),  
-           Expanded(
-             child: ListTile(  
-                     title: const Text('NEW'),  
-                     leading: Radio(  
-              value: BestTutorSite.New,  
-              groupValue: _site,  
-              onChanged: (BestTutorSite? value) {  
-                setState(() {  
-                  _site = value!;  
-                });  
-              },  
-                     ),  
-                   ),
-           ),  
-              ],
-            ),
-          ),  
-
- 
+         
           Spacer(),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
