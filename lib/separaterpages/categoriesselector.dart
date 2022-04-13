@@ -13,10 +13,15 @@ class CategoriesSelector extends StatefulWidget {
 }
 
 class _CategoriesSelectorState extends State<CategoriesSelector> {
-    BestTutorSite _site = BestTutorSite.Old;  
+    BestTutorSite _site = BestTutorSite.New;  
 
   @override
   Widget build(BuildContext context) {
+    String radioButtonItem = 'New';
+  BestTutorSite? _character = BestTutorSite.New;
+
+  // Group Value for Radio Button.
+  int id = 1;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -962,6 +967,46 @@ class _CategoriesSelectorState extends State<CategoriesSelector> {
           ),
          
           Spacer(),
+          Container(
+              margin: EdgeInsets.only(top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: ListTile(
+                      title: Text("New"),
+                      leading: Radio<BestTutorSite>(
+                        value: BestTutorSite.New,
+                        groupValue: _character,
+                        onChanged: (BestTutorSite ? val) {
+                          setState(() {
+                            _character = val;
+                           
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                 Expanded(
+                    child: ListTile(
+                      title: Text("Old"),
+                      leading: Radio<BestTutorSite>(
+                        value: BestTutorSite.Old,
+                        groupValue: _character,
+                        onChanged: (BestTutorSite ? vals) {
+                          setState(() {
+                            _character = vals!;
+                           
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                 
+                  
+                ],
+              ),
+            ),
           Container(
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: ElevatedButton(
